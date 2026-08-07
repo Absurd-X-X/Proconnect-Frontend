@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Set up your profile · ProConnect</title>
+  <link rel="stylesheet" href="Styles/choose-account-type.css" />
+  <link rel="stylesheet" href="Styles/professional-profile-setup.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <main class="auth-page">
+    <div class="auth-card auth-card--wide auth-card--wizard">
+
+      <section class="auth-panel">
+        <div class="auth-brand">
+          <span class="auth-brand__mark"><i class="ti ti-affiliate" aria-hidden="true"></i></span>
+          <span class="auth-brand__name">Pro<span class="accent">Connect</span></span>
+        </div>
+
+        <h1 class="auth-panel__title">Set up your <span class="accent">profile</span></h1>
+        <p class="auth-panel__subtitle">
+          Tell employers who you are. You can always edit this later from your settings.
+        </p>
+
+        <div class="auth-illustration">
+          <img src="Image/Professional Registeration Side bar Image.png" alt="Professional profile illustration" />
+        </div>
+
+        <p class="auth-panel__footer">Your account security is important to us.</p>
+      </section>
+
+      <section class="auth-form-panel">
+
+        <!-- Step progress -->
+        <div class="step-progress" id="step-progress">
+          <div class="step-progress__item is-active" data-step="1">
+            <span class="step-progress__circle">1</span>
+            <span class="step-progress__label">Info</span>
+          </div>
+          <span class="step-progress__line"></span>
+          <div class="step-progress__item" data-step="2">
+            <span class="step-progress__circle">2</span>
+            <span class="step-progress__label">Links</span>
+          </div>
+          <span class="step-progress__line"></span>
+          <div class="step-progress__item" data-step="3">
+            <span class="step-progress__circle">3</span>
+            <span class="step-progress__label">Experience</span>
+          </div>
+          <span class="step-progress__line"></span>
+          <div class="step-progress__item" data-step="4">
+            <span class="step-progress__circle">4</span>
+            <span class="step-progress__label">Education</span>
+          </div>
+          <span class="step-progress__line"></span>
+          <div class="step-progress__item" data-step="5">
+            <span class="step-progress__circle">5</span>
+            <span class="step-progress__label">Certificates</span>
+          </div>
+          <span class="step-progress__line"></span>
+          <div class="step-progress__item" data-step="6">
+            <span class="step-progress__circle">6</span>
+            <span class="step-progress__label">Skills</span>
+          </div>
+          <span class="step-progress__line"></span>
+          <div class="step-progress__item" data-step="7">
+            <span class="step-progress__circle">7</span>
+            <span class="step-progress__label">Projects</span>
+          </div>
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <!-- ===================== STEP 1 — Professional Info ===================== -->
+        <form class="form-step is-active" data-step="1" id="form-step-1" novalidate>
+          <div class="field">
+            <label for="headLine">Headline</label>
+            <div class="input-with-icon">
+              <i class="ti ti-briefcase field-icon" aria-hidden="true"></i>
+              <input type="text" id="headLine" list="headline-suggestions" placeholder="e.g. Senior Frontend Developer" maxlength="120" autocomplete="off" />
+            </div>
+            <datalist id="headline-suggestions">
+              <option value="Full-Stack Software Engineer | React &amp; Node.js"></option>
+              <option value="Backend Developer | Java &amp; Spring Boot"></option>
+              <option value="Frontend Developer | React, TypeScript &amp; Tailwind"></option>
+              <option value="Data Analyst | SQL, Python &amp; Data Visualization"></option>
+              <option value="Data Scientist | Machine Learning &amp; Python"></option>
+              <option value="UI/UX Designer | Figma &amp; User Research"></option>
+              <option value="Product Manager | Agile &amp; Roadmap Strategy"></option>
+              <option value="Project Manager | Agile &amp; Scrum Certified"></option>
+              <option value="DevOps Engineer | AWS, Docker &amp; CI/CD"></option>
+              <option value="Mobile Developer | React Native &amp; Flutter"></option>
+              <option value="Digital Marketing Specialist | SEO &amp; Content Strategy"></option>
+              <option value="Business Analyst | Data-Driven Insights"></option>
+              <option value="Graphic Designer | Branding &amp; Illustration"></option>
+              <option value="Recent Graduate | Aspiring Software Developer"></option>
+              <option value="Freelance Web Developer | WordPress &amp; Shopify"></option>
+            </datalist>
+            <span class="field-error" id="err-headLine"></span>
+          </div>
+
+          <div class="field">
+            <label for="summary">Summary</label>
+            <textarea id="summary" rows="4" placeholder="A short summary about your experience and goals..." maxlength="600"></textarea>
+            <span class="field-error" id="err-summary"></span>
+            <button type="button" class="suggestion-toggle" id="btn-toggle-summary-suggestions">
+              <i class="ti ti-bulb" aria-hidden="true"></i> Need inspiration?
+            </button>
+            <div class="suggestion-panel" id="summary-suggestions" hidden>
+              <button type="button" class="suggestion-chip" data-summary="Motivated software developer with hands-on experience building web applications. Passionate about writing clean code, solving real-world problems, and continuously learning new technologies.">
+                Software developer, early career
+              </button>
+              <button type="button" class="suggestion-chip" data-summary="Results-driven professional with proven experience delivering projects on time and exceeding expectations. Skilled at collaborating across teams and turning ideas into working solutions.">
+                Experienced professional
+              </button>
+              <button type="button" class="suggestion-chip" data-summary="Detail-oriented designer focused on creating intuitive, user-centered experiences. Enjoys turning complex problems into simple, elegant designs backed by research and testing.">
+                Designer
+              </button>
+              <button type="button" class="suggestion-chip" data-summary="Data-driven analyst with a strong foundation in statistics and problem-solving. Experienced in turning raw data into actionable insights that support better business decisions.">
+                Data / analytics
+              </button>
+              <button type="button" class="suggestion-chip" data-summary="Recent graduate eager to apply academic knowledge to real-world challenges. A fast learner who thrives in collaborative environments and is looking to grow within a forward-thinking team.">
+                Recent graduate
+              </button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="portfolioUrl">Portfolio URL</label>
+            <div class="input-with-icon">
+              <i class="ti ti-link field-icon" aria-hidden="true"></i>
+              <input type="url" id="portfolioUrl" placeholder="https://yourportfolio.com" />
+            </div>
+            <span class="field-error" id="err-portfolioUrl"></span>
+          </div>
+
+          <div class="field">
+            <label for="gitHubUrl">GitHub URL</label>
+            <div class="input-with-icon">
+              <i class="ti ti-brand-github field-icon" aria-hidden="true"></i>
+              <input type="url" id="gitHubUrl" placeholder="https://github.com/yourusername" />
+            </div>
+            <span class="field-error" id="err-gitHubUrl"></span>
+          </div>
+
+          <div class="form-step__nav form-step__nav--end">
+            <button type="button" class="btn-primary" data-action="next">
+              Next <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </form>
+
+        <!-- ===================== STEP 2 — Links & Resume ===================== -->
+        <form class="form-step" data-step="2" id="form-step-2" novalidate>
+          <div class="field">
+            <label for="linkedInUrl">LinkedIn URL</label>
+            <div class="input-with-icon">
+              <i class="ti ti-brand-linkedin field-icon" aria-hidden="true"></i>
+              <input type="url" id="linkedInUrl" placeholder="https://linkedin.com/in/yourusername" />
+            </div>
+            <span class="field-error" id="err-linkedInUrl"></span>
+          </div>
+
+          <div class="field">
+            <label for="resumeUrl">Resume URL</label>
+            <div class="input-with-icon">
+              <i class="ti ti-file-text field-icon" aria-hidden="true"></i>
+              <input type="url" id="resumeUrl" placeholder="Link to your uploaded resume" />
+            </div>
+            <span class="field-error" id="err-resumeUrl"></span>
+          </div>
+
+          <div class="form-step__nav">
+            <button type="button" class="btn-outline btn-outline--inline" data-action="back">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i> Back
+            </button>
+            <button type="button" class="btn-primary" id="btn-save-profile" data-action="save-profile">
+              <span id="save-profile-label">Save &amp; continue</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- ===================== STEP 3 — Experience ===================== -->
+        <div class="form-step" data-step="3">
+          <div class="entry-list" id="list-experience"></div>
+
+          <div class="entry-form">
+            <div class="field">
+              <label for="exp-company">Company name</label>
+              <input type="text" id="exp-company" placeholder="e.g. Acme Inc." />
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="exp-position">Position</label>
+                <input type="text" id="exp-position" placeholder="e.g. Product Designer" />
+              </div>
+              <div class="field">
+                <label for="exp-current">Currently working here?</label>
+                <label class="toggle-field" for="exp-current" id="exp-current-wrap">
+                  <span class="toggle-field__text">
+                    <i class="ti ti-calendar-check toggle-field__icon" aria-hidden="true"></i>
+                    I currently work here
+                  </span>
+                  <span class="toggle">
+                    <input type="checkbox" id="exp-current" />
+                    <span class="toggle__track"><span class="toggle__thumb"></span></span>
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="exp-start">Start date</label>
+                <input type="date" id="exp-start" />
+              </div>
+              <div class="field">
+                <label for="exp-end">End date</label>
+                <input type="date" id="exp-end" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="exp-description">Description</label>
+              <textarea id="exp-description" rows="3" placeholder="What did you work on?"></textarea>
+            </div>
+            <button type="button" class="btn-add" data-action="add-experience">
+              <i class="ti ti-plus" aria-hidden="true"></i> Add experience
+            </button>
+          </div>
+
+          <div class="form-step__nav">
+            <button type="button" class="btn-outline btn-outline--inline" data-action="back">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i> Back
+            </button>
+            <button type="button" class="btn-primary" data-action="next">
+              Next <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ===================== STEP 4 — Education ===================== -->
+        <div class="form-step" data-step="4">
+          <div class="entry-list" id="list-education"></div>
+
+          <div class="entry-form">
+            <div class="field">
+              <label for="edu-institution">Institution</label>
+              <select id="edu-institution">
+                <option value="">Select institution</option>
+                <option value="University of Lagos (UNILAG)">University of Lagos (UNILAG)</option>
+                <option value="University of Ibadan (UI)">University of Ibadan (UI)</option>
+                <option value="Obafemi Awolowo University (OAU)">Obafemi Awolowo University (OAU)</option>
+                <option value="Ahmadu Bello University (ABU)">Ahmadu Bello University (ABU)</option>
+                <option value="University of Nigeria, Nsukka (UNN)">University of Nigeria, Nsukka (UNN)</option>
+                <option value="Covenant University">Covenant University</option>
+                <option value="Babcock University">Babcock University</option>
+                <option value="Lagos State University (LASU)">Lagos State University (LASU)</option>
+                <option value="Federal University of Technology, Akure (FUTA)">Federal University of Technology, Akure (FUTA)</option>
+                <option value="University of Benin (UNIBEN)">University of Benin (UNIBEN)</option>
+                <option value="University of Port Harcourt (UNIPORT)">University of Port Harcourt (UNIPORT)</option>
+                <option value="Bayero University Kano (BUK)">Bayero University Kano (BUK)</option>
+                <option value="Nnamdi Azikiwe University (UNIZIK)">Nnamdi Azikiwe University (UNIZIK)</option>
+                <option value="Yaba College of Technology (YABATECH)">Yaba College of Technology (YABATECH)</option>
+                <option value="Federal Polytechnic, Ilaro">Federal Polytechnic, Ilaro</option>
+                <option value="Harvard University">Harvard University</option>
+                <option value="Stanford University">Stanford University</option>
+                <option value="Massachusetts Institute of Technology (MIT)">Massachusetts Institute of Technology (MIT)</option>
+                <option value="University of Oxford">University of Oxford</option>
+                <option value="University of Cambridge">University of Cambridge</option>
+                <option value="__other__">Other (type manually)</option>
+              </select>
+              <input type="text" id="edu-institution-other" class="other-input" placeholder="Enter institution name" hidden />
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="edu-degree">Degree</label>
+                <select id="edu-degree">
+                  <option value="">Select degree</option>
+                  <option value="OND (Ordinary National Diploma)">OND (Ordinary National Diploma)</option>
+                  <option value="HND (Higher National Diploma)">HND (Higher National Diploma)</option>
+                  <option value="B.Sc. (Bachelor of Science)">B.Sc. (Bachelor of Science)</option>
+                  <option value="B.A. (Bachelor of Arts)">B.A. (Bachelor of Arts)</option>
+                  <option value="B.Eng. (Bachelor of Engineering)">B.Eng. (Bachelor of Engineering)</option>
+                  <option value="B.Tech. (Bachelor of Technology)">B.Tech. (Bachelor of Technology)</option>
+                  <option value="LLB (Bachelor of Laws)">LLB (Bachelor of Laws)</option>
+                  <option value="MBBS">MBBS</option>
+                  <option value="M.Sc. (Master of Science)">M.Sc. (Master of Science)</option>
+                  <option value="M.A. (Master of Arts)">M.A. (Master of Arts)</option>
+                  <option value="M.Eng. (Master of Engineering)">M.Eng. (Master of Engineering)</option>
+                  <option value="MBA (Master of Business Administration)">MBA (Master of Business Administration)</option>
+                  <option value="Ph.D. (Doctor of Philosophy)">Ph.D. (Doctor of Philosophy)</option>
+                  <option value="Postgraduate Diploma (PGD)">Postgraduate Diploma (PGD)</option>
+                  <option value="Certificate">Certificate</option>
+                  <option value="__other__">Other (type manually)</option>
+                </select>
+                <input type="text" id="edu-degree-other" class="other-input" placeholder="Enter degree" hidden />
+              </div>
+              <div class="field">
+                <label for="edu-field">Field of study</label>
+                <select id="edu-field">
+                  <option value="">Select field of study</option>
+                  <option value="Computer Science">Computer Science</option>
+                  <option value="Software Engineering">Software Engineering</option>
+                  <option value="Information Technology">Information Technology</option>
+                  <option value="Electrical/Electronics Engineering">Electrical/Electronics Engineering</option>
+                  <option value="Mechanical Engineering">Mechanical Engineering</option>
+                  <option value="Civil Engineering">Civil Engineering</option>
+                  <option value="Data Science">Data Science</option>
+                  <option value="Business Administration">Business Administration</option>
+                  <option value="Accounting">Accounting</option>
+                  <option value="Economics">Economics</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Law">Law</option>
+                  <option value="Medicine &amp; Surgery">Medicine &amp; Surgery</option>
+                  <option value="Nursing Science">Nursing Science</option>
+                  <option value="Mass Communication">Mass Communication</option>
+                  <option value="Psychology">Psychology</option>
+                  <option value="Architecture">Architecture</option>
+                  <option value="English Language">English Language</option>
+                  <option value="Political Science">Political Science</option>
+                  <option value="Biochemistry">Biochemistry</option>
+                  <option value="__other__">Other (type manually)</option>
+                </select>
+                <input type="text" id="edu-field-other" class="other-input" placeholder="Enter field of study" hidden />
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="edu-start">Start date</label>
+                <input type="date" id="edu-start" />
+              </div>
+              <div class="field">
+                <label for="edu-end">End date</label>
+                <input type="date" id="edu-end" />
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="edu-grade">Grade</label>
+                <select id="edu-grade">
+                  <option value="">Select grade</option>
+                  <option value="First Class">First Class</option>
+                  <option value="Second Class Upper (2:1)">Second Class Upper (2:1)</option>
+                  <option value="Second Class Lower (2:2)">Second Class Lower (2:2)</option>
+                  <option value="Third Class">Third Class</option>
+                  <option value="Pass">Pass</option>
+                  <option value="Distinction">Distinction</option>
+                  <option value="Merit">Merit</option>
+                  <option value="GPA 3.5 - 4.0">GPA 3.5 - 4.0</option>
+                  <option value="GPA 3.0 - 3.49">GPA 3.0 - 3.49</option>
+                  <option value="GPA below 3.0">GPA below 3.0</option>
+                  <option value="__other__">Other (type manually)</option>
+                </select>
+                <input type="text" id="edu-grade-other" class="other-input" placeholder="Enter grade" hidden />
+              </div>
+            </div>
+            <div class="field">
+              <label for="edu-description">Description</label>
+              <textarea id="edu-description" rows="3" placeholder="Anything worth mentioning"></textarea>
+            </div>
+            <button type="button" class="btn-add" data-action="add-education">
+              <i class="ti ti-plus" aria-hidden="true"></i> Add education
+            </button>
+          </div>
+
+          <div class="form-step__nav">
+            <button type="button" class="btn-outline btn-outline--inline" data-action="back">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i> Back
+            </button>
+            <button type="button" class="btn-primary" data-action="next">
+              Next <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ===================== STEP 5 — Certificates ===================== -->
+        <div class="form-step" data-step="5">
+          <div class="entry-list" id="list-certificate"></div>
+
+          <div class="entry-form">
+            <div class="field">
+              <label for="cert-name">Certificate name</label>
+              <input type="text" id="cert-name" placeholder="e.g. AWS Certified Developer" />
+            </div>
+            <div class="field">
+              <label for="cert-org">Issuing organization</label>
+              <select id="cert-org">
+                <option value="">Select issuing organization</option>
+                <option value="Amazon Web Services (AWS)">Amazon Web Services (AWS)</option>
+                <option value="Google">Google</option>
+                <option value="Microsoft">Microsoft</option>
+                <option value="Cisco">Cisco</option>
+                <option value="CompTIA">CompTIA</option>
+                <option value="Coursera">Coursera</option>
+                <option value="Udemy">Udemy</option>
+                <option value="edX">edX</option>
+                <option value="LinkedIn Learning">LinkedIn Learning</option>
+                <option value="Project Management Institute (PMI)">Project Management Institute (PMI)</option>
+                <option value="Scrum Alliance">Scrum Alliance</option>
+                <option value="Meta">Meta</option>
+                <option value="IBM">IBM</option>
+                <option value="Oracle">Oracle</option>
+                <option value="Salesforce">Salesforce</option>
+                <option value="freeCodeCamp">freeCodeCamp</option>
+                <option value="__other__">Other (type manually)</option>
+              </select>
+              <input type="text" id="cert-org-other" class="other-input" placeholder="Enter issuing organization" hidden />
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="cert-issue">Issue date</label>
+                <input type="date" id="cert-issue" />
+              </div>
+              <div class="field">
+                <label for="cert-expire">Expire date (optional)</label>
+                <input type="date" id="cert-expire" />
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="cert-credential-id">Credential ID</label>
+                <input type="text" id="cert-credential-id" placeholder="Optional" />
+              </div>
+              <div class="field">
+                <label for="cert-credential-url">Credential URL</label>
+                <input type="url" id="cert-credential-url" placeholder="Optional" />
+              </div>
+            </div>
+            <button type="button" class="btn-add" data-action="add-certificate">
+              <i class="ti ti-plus" aria-hidden="true"></i> Add certificate
+            </button>
+          </div>
+
+          <div class="form-step__nav">
+            <button type="button" class="btn-outline btn-outline--inline" data-action="back">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i> Back
+            </button>
+            <button type="button" class="btn-primary" data-action="next">
+              Next <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ===================== STEP 6 — Skills ===================== -->
+        <div class="form-step" data-step="6">
+          <div class="entry-list" id="list-skill"></div>
+
+          <div class="entry-form">
+            <div class="field">
+              <label for="skill-select">Skill</label>
+              <select id="skill-select">
+                <option value="">Loading skills...</option>
+              </select>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="skill-level">Level</label>
+                <select id="skill-level">
+                  <option value="Beginner">Beginner</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                  <option value="Expert">Expert</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="skill-years">Years of experience</label>
+                <input type="number" id="skill-years" min="0" max="50" placeholder="e.g. 3" />
+              </div>
+            </div>
+            <button type="button" class="btn-add" data-action="add-skill">
+              <i class="ti ti-plus" aria-hidden="true"></i> Add skill
+            </button>
+          </div>
+
+          <div class="form-step__nav">
+            <button type="button" class="btn-outline btn-outline--inline" data-action="back">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i> Back
+            </button>
+            <button type="button" class="btn-primary" data-action="next">
+              Next <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- ===================== STEP 7 — Projects ===================== -->
+        <div class="form-step" data-step="7">
+          <div class="entry-list" id="list-project"></div>
+
+          <div class="entry-form">
+            <div class="field">
+              <label for="proj-title">Project title</label>
+              <input type="text" id="proj-title" placeholder="e.g. Expense Tracker App" />
+            </div>
+            <div class="field">
+              <label for="proj-description">Description</label>
+              <textarea id="proj-description" rows="3" placeholder="What does it do?"></textarea>
+            </div>
+            <div class="field">
+              <label for="proj-url">Project URL</label>
+              <input type="url" id="proj-url" placeholder="https://github.com/you/project" />
+            </div>
+            <button type="button" class="btn-add" data-action="add-project">
+              <i class="ti ti-plus" aria-hidden="true"></i> Add project
+            </button>
+          </div>
+
+          <div class="form-step__nav">
+            <button type="button" class="btn-outline btn-outline--inline" data-action="back">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i> Back
+            </button>
+            <button type="button" class="btn-primary" id="btn-finish" data-action="finish">
+              <span id="finish-label">Finish setup</span>
+            </button>
+          </div>
+        </div>
+
+        <p class="skip-link">
+          <button type="button" id="btn-skip">Skip for now</button>
+        </p>
+
+      </section>
+
+    </div>
+  </main>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/professionalProfileSetup.js"></script>
+</body>
+</html>

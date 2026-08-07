@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose your account type · ProConnect</title>
+  <link rel="stylesheet" href="Styles/choose-account-type.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <main class="auth-page">
+    <div class="auth-card auth-card--wide">
+
+      <section class="auth-panel">
+        <div class="auth-brand">
+          <span class="auth-brand__mark"><i class="ti ti-affiliate" aria-hidden="true"></i></span>
+          <span class="auth-brand__name">Pro<span class="accent">Connect</span></span>
+        </div>
+
+        <h1 class="auth-panel__title">Choose your <span class="accent">account type</span></h1>
+        <p class="auth-panel__subtitle">
+          Select the option that best describes you. You can change this later in your settings.
+        </p>
+
+        <div class="auth-illustration">
+            <img src="Image/Account Type Image.png" alt="Account Type Illustration Image">
+        </div>
+
+        <p class="auth-panel__footer">Your account security is important to us.</p>
+      </section>
+
+      <section class="auth-form-panel auth-form-panel--centered">
+
+        <div class="role-heading">
+          <span>I am a...</span>
+          <span class="role-heading__underline"></span>
+        </div>
+
+        <div class="role-options">
+
+          <button type="button" class="role-card" id="role-professional" data-role="Professional">
+            <span class="role-card__icon"><i class="ti ti-user" aria-hidden="true"></i></span>
+            <span class="role-card__text">
+              <span class="role-card__title">Professional</span>
+              <span class="role-card__desc">I'm looking for job opportunities and want to showcase my skills.</span>
+            </span>
+            <span class="role-card__chevron"><i class="ti ti-chevron-right" aria-hidden="true"></i></span>
+          </button>
+
+          <button type="button" class="role-card" id="role-recruiter" data-role="Recruiter">
+            <span class="role-card__icon"><i class="ti ti-building-skyscraper" aria-hidden="true"></i></span>
+            <span class="role-card__text">
+              <span class="role-card__title">Recruiter</span>
+              <span class="role-card__desc">I'm hiring for my company and want to find the best talent.</span>
+            </span>
+            <span class="role-card__chevron"><i class="ti ti-chevron-right" aria-hidden="true"></i></span>
+          </button>
+
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="role-note">
+          <i class="ti ti-shield-lock" aria-hidden="true"></i>
+          <span>You can change this later in your settings.</span>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/chooseAccountType.js"></script>
+</body>
+</html>

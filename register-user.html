@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create your account - ProConnect</title>
+  <link rel="stylesheet" href="/Styles/register-user.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <main class="auth-page">
+    <div class="auth-card">
+
+      <section class="auth-panel">
+        <div class="auth-brand">
+          <span class="auth-brand__mark"><i class="ti ti-affiliate" aria-hidden="true"></i></span>
+          <span class="auth-brand__name">Pro<span class="accent">Connect</span></span>
+        </div>
+
+        <h1 class="auth-panel__title">Join <span class="accent">ProConnect</span> today!</h1>
+        <p class="auth-panel__subtitle">
+          Create your account and take the first step towards your dream career.
+        </p>
+
+        <div class="auth-illustration">
+            <img src="Image/RegisterImage.png" alt="Regiter Illustration Image">
+        </div>
+
+        <p class="auth-panel__footer">Trusted by early-career professionals and recruiters</p>
+      </section>
+
+      <section class="auth-form-panel">
+        <h1 class="auth-form-panel__title">Create your account</h1>
+        <p class="auth-form-panel__subtitle">Join thousands of professionals and recruiters today</p>
+
+        <form id="register-form" novalidate>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="firstName">First name</label>
+              <div class="input-with-icon">
+                <i class="ti ti-user field-icon" aria-hidden="true"></i>
+                <input type="text" id="firstName" name="firstName" placeholder="Amara" required autocomplete="given-name" />
+              </div>
+              <span class="field-error" data-error-for="firstName"></span>
+            </div>
+            <div class="field">
+              <label for="lastName">Last name</label>
+              <div class="input-with-icon">
+                <i class="ti ti-user field-icon" aria-hidden="true"></i>
+                <input type="text" id="lastName" name="lastName" placeholder="Okafor" required autocomplete="family-name" />
+              </div>
+              <span class="field-error" data-error-for="lastName"></span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="username">Username</label>
+              <div class="input-with-icon">
+                <i class="ti ti-at field-icon" aria-hidden="true"></i>
+                <input type="text" id="username" name="username" placeholder="amara.okafor" required autocomplete="username" />
+              </div>
+              <span class="field-error" data-error-for="username"></span>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <div class="input-with-icon">
+                <i class="ti ti-mail field-icon" aria-hidden="true"></i>
+                <input type="email" id="email" name="email" placeholder="amara@school.edu" required autocomplete="email" />
+              </div>
+              <span class="field-error" data-error-for="email"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="phoneNumber">Phone number</label>
+            <div class="input-with-icon">
+              <i class="ti ti-phone field-icon" aria-hidden="true"></i>
+              <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="+234 801 234 5678" required autocomplete="tel" />
+            </div>
+            <span class="field-error" data-error-for="phoneNumber"></span>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="password">Password</label>
+              <div class="input-with-icon">
+                <i class="ti ti-lock field-icon" aria-hidden="true"></i>
+                <input type="password" id="password" name="password" placeholder="Create a password" required autocomplete="new-password" minlength="8" />
+                <button type="button" class="icon-toggle" data-toggle-for="password" aria-label="Show password">
+                  <i class="ti ti-eye" aria-hidden="true"></i>
+                </button>
+              </div>
+              <span class="field-error" data-error-for="password"></span>
+            </div>
+            <div class="field">
+              <label for="confirmPassword">Confirm password</label>
+              <div class="input-with-icon">
+                <i class="ti ti-lock field-icon" aria-hidden="true"></i>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required autocomplete="new-password" />
+                <button type="button" class="icon-toggle" data-toggle-for="confirmPassword" aria-label="Show password">
+                  <i class="ti ti-eye" aria-hidden="true"></i>
+                </button>
+              </div>
+              <span class="field-error" data-error-for="confirmPassword"></span>
+            </div>
+          </div>
+
+          <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+          <button type="submit" class="btn-primary" id="submit-btn">
+            <span class="btn-label">Register</span>
+          </button>
+
+          <div class="auth-form-panel__login">
+            Already have an account? <a href="login.html">Login</a>
+          </div>
+
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/registerUser.js"></script>
+</body>
+</html>

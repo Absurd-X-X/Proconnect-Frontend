@@ -1,0 +1,434 @@
+/* ---------- Wizard card width ---------- */
+
+.auth-card--wizard {
+  max-width: 1100px;
+}
+
+.auth-card--wizard .auth-form-panel {
+  padding: 2.25rem 2.75rem;
+  max-height: 640px;
+  overflow-y: auto;
+}
+
+/* ---------- Step progress (7 steps) ---------- */
+
+.step-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  gap: 6px;
+  margin-bottom: 1.75rem;
+}
+
+.step-progress__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+
+.step-progress__item.is-active,
+.step-progress__item.is-complete {
+  opacity: 1;
+}
+
+.step-progress__circle {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--pc-border);
+  background: var(--pc-surface);
+  color: var(--pc-text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-progress__item.is-active .step-progress__circle {
+  border-color: var(--pc-purple);
+  background: var(--pc-purple);
+  color: #fff;
+}
+
+.step-progress__item.is-complete .step-progress__circle {
+  border-color: var(--pc-purple);
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+}
+
+.step-progress__label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--pc-text-primary);
+  white-space: nowrap;
+}
+
+.step-progress__line {
+  width: 16px;
+  height: 1.5px;
+  background: var(--pc-border);
+}
+
+/* ---------- Steps ---------- */
+
+.form-step {
+  display: none;
+}
+
+.form-step.is-active {
+  display: block;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateX(6px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  font-size: 13.5px;
+  font-family: var(--pc-font);
+  color: var(--pc-text-primary);
+  background: var(--pc-surface);
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field textarea::placeholder {
+  color: var(--pc-text-muted);
+}
+
+.field textarea:focus,
+.field select:focus,
+.field input[type="date"]:focus,
+.field input[type="number"]:focus {
+  outline: none;
+  border-color: var(--pc-purple);
+  box-shadow: 0 0 0 3px var(--pc-purple-light);
+}
+
+.field textarea.is-invalid {
+  border-color: var(--pc-danger);
+}
+
+.field select,
+.field input[type="date"],
+.field input[type="number"] {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  font-size: 13.5px;
+  font-family: var(--pc-font);
+  color: var(--pc-text-primary);
+  background: var(--pc-surface);
+}
+
+.form-step__nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.form-step__nav--end {
+  justify-content: flex-end;
+}
+
+.btn-outline--inline {
+  width: auto;
+  flex: 0 0 auto;
+  padding: 0 18px;
+  margin-bottom: 0;
+}
+
+.form-step__nav .btn-primary {
+  flex: 1;
+  margin-top: 0;
+}
+
+/* ---------- Summary suggestions ---------- */
+
+.suggestion-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background: none;
+  font-family: var(--pc-font);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--pc-purple);
+  cursor: pointer;
+  padding: 6px 0 0;
+}
+
+.suggestion-toggle:hover {
+  text-decoration: underline;
+}
+
+.suggestion-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px dashed var(--pc-border);
+  border-radius: var(--pc-radius);
+  background: var(--pc-panel-bg);
+}
+
+.suggestion-chip {
+  border: 1px solid var(--pc-border);
+  background: var(--pc-surface);
+  color: var(--pc-text-primary);
+  font-family: var(--pc-font);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.suggestion-chip:hover {
+  border-color: var(--pc-purple);
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+}
+
+.field .other-input {
+  margin-top: 8px;
+}
+
+/* ---------- Toggle field (Currently working here) ---------- */
+
+.toggle-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  background: var(--pc-surface);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.toggle-field:hover {
+  border-color: #C9C7DE;
+}
+
+.toggle-field.is-checked {
+  border-color: var(--pc-purple);
+  background: var(--pc-purple-light);
+}
+
+.toggle-field__text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pc-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.toggle-field__icon {
+  font-size: 15px;
+  color: var(--pc-text-muted);
+  min-width: 15px;
+}
+
+.toggle-field.is-checked .toggle-field__icon {
+  color: var(--pc-purple);
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.toggle input {
+  display: none;
+}
+
+.toggle__track {
+  width: 38px;
+  height: 21px;
+  min-width: 38px;
+  border-radius: 999px;
+  background: var(--pc-border);
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.toggle__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  transition: transform 0.15s ease;
+}
+
+.toggle input:checked + .toggle__track {
+  background: var(--pc-purple);
+}
+
+.toggle input:checked + .toggle__track .toggle__thumb {
+  transform: translateX(17px);
+}
+
+/* ---------- Repeatable entry list + add-form ---------- */
+
+.entry-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.entry-list:empty {
+  display: none;
+}
+
+.entry-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  background: var(--pc-panel-bg);
+}
+
+.entry-card__title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--pc-text-primary);
+  margin: 0 0 2px;
+}
+
+.entry-card__subtitle {
+  font-size: 12.5px;
+  color: var(--pc-text-secondary);
+  margin: 0;
+}
+
+.entry-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #1E9E4C;
+  background: #E8F7EE;
+  border-radius: 999px;
+  padding: 2px 8px;
+  margin-top: 4px;
+}
+
+.entry-card__icon {
+  color: var(--pc-purple);
+  font-size: 18px;
+  min-width: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.entry-form {
+  border: 1px dashed var(--pc-border);
+  border-radius: var(--pc-radius-lg);
+  padding: 16px;
+  margin-bottom: 1.25rem;
+  background: var(--pc-surface);
+}
+
+.btn-add {
+  width: 100%;
+  height: 40px;
+  border: 1.5px dashed var(--pc-purple);
+  border-radius: var(--pc-radius);
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  font-size: 13.5px;
+  font-weight: 700;
+  font-family: var(--pc-font);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.15s ease;
+}
+
+.btn-add:hover {
+  background: rgba(91, 63, 224, 0.14); /* derived from --pc-purple, not a new color */
+  border-color: var(--pc-purple-dark);
+}
+
+.btn-add:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Skip link ---------- */
+
+.skip-link {
+  text-align: center;
+  margin: 14px 0 0;
+}
+
+.skip-link button {
+  border: none;
+  background: none;
+  font-family: var(--pc-font);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pc-text-secondary);
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.skip-link button:hover {
+  color: var(--pc-purple);
+  text-decoration: underline;
+}
+
+.skip-link button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 760px) {
+  .auth-card--wizard .auth-form-panel {
+    max-height: none;
+  }
+
+  .step-progress__label {
+    display: none;
+  }
+}

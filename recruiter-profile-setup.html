@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Set up your recruiter account · ProConnect</title>
+  <link rel="stylesheet" href="Styles/choose-account-type.css" />
+  <link rel="stylesheet" href="Styles/professional-profile-setup.css" />
+  <link rel="stylesheet" href="Styles/recruiter-profile-setup.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <main class="auth-page">
+    <div class="auth-card auth-card--wide auth-card--wizard">
+
+      <section class="auth-panel">
+        <div class="auth-brand">
+          <span class="auth-brand__mark"><i class="ti ti-affiliate" aria-hidden="true"></i></span>
+          <span class="auth-brand__name">Pro<span class="accent">Connect</span></span>
+        </div>
+
+        <h1 class="auth-panel__title">Set up your <span class="accent">recruiter account</span></h1>
+        <p class="auth-panel__subtitle">
+          Tell us about your company and your role. Company details can always be added later.
+        </p>
+
+        <div class="auth-illustration">
+          <img src="Image/Recruiter Setup Page.png" alt="Recruiter setup illustration" />
+        </div>
+
+        <p class="auth-panel__footer">Your account security is important to us.</p>
+      </section>
+
+      <section class="auth-form-panel">
+
+        <!-- Step progress -->
+        <div class="step-progress" id="step-progress">
+          <div class="step-progress__item is-active" data-step="1">
+            <span class="step-progress__circle">1</span>
+            <span class="step-progress__label">Company</span>
+          </div>
+          <span class="step-progress__line"></span>
+          <div class="step-progress__item" data-step="2">
+            <span class="step-progress__circle">2</span>
+            <span class="step-progress__label">Recruiter Details</span>
+          </div>
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <!-- ===================== STEP 1 — Company (optional, skippable) ===================== -->
+        <div class="form-step is-active" data-step="1">
+
+          <div class="field">
+            <label for="company-name">Company name</label>
+            <div class="input-with-icon">
+              <i class="ti ti-building-skyscraper field-icon" aria-hidden="true"></i>
+              <input type="text" id="company-name" placeholder="e.g. Acme Inc." maxlength="150" />
+            </div>
+            <span class="field-error" id="err-company-name"></span>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="company-industry">Industry</label>
+              <select id="company-industry">
+                <option value="">Select industry</option>
+                <option value="Technology">Technology</option>
+                <option value="Finance &amp; Banking">Finance &amp; Banking</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Education">Education</option>
+                <option value="Retail &amp; E-commerce">Retail &amp; E-commerce</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Oil &amp; Gas">Oil &amp; Gas</option>
+                <option value="Telecommunications">Telecommunications</option>
+                <option value="Media &amp; Entertainment">Media &amp; Entertainment</option>
+                <option value="Real Estate">Real Estate</option>
+                <option value="Construction">Construction</option>
+                <option value="Hospitality &amp; Tourism">Hospitality &amp; Tourism</option>
+                <option value="Transportation &amp; Logistics">Transportation &amp; Logistics</option>
+                <option value="Agriculture">Agriculture</option>
+                <option value="Non-Profit">Non-Profit</option>
+                <option value="Government">Government</option>
+                <option value="Consulting">Consulting</option>
+                <option value="__other__">Other (type manually)</option>
+              </select>
+              <input type="text" id="company-industry-other" class="other-input" placeholder="Enter industry" hidden />
+            </div>
+            <div class="field">
+              <label for="company-email">Company email</label>
+              <div class="input-with-icon">
+                <i class="ti ti-mail field-icon" aria-hidden="true"></i>
+                <input type="email" id="company-email" placeholder="hr@company.com" />
+              </div>
+              <span class="field-error" id="err-company-email"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="company-description">Description</label>
+            <textarea id="company-description" rows="3" placeholder="What does your company do?" maxlength="600"></textarea>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="company-website">Website</label>
+              <div class="input-with-icon">
+                <i class="ti ti-world field-icon" aria-hidden="true"></i>
+                <input type="url" id="company-website" placeholder="https://company.com" />
+              </div>
+              <span class="field-error" id="err-company-website"></span>
+            </div>
+            <div class="field">
+              <label for="company-phone">Phone number</label>
+              <div class="input-with-icon">
+                <i class="ti ti-phone field-icon" aria-hidden="true"></i>
+                <input type="tel" id="company-phone" placeholder="+234 800 000 0000" />
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="company-logo">Logo URL</label>
+            <div class="input-with-icon">
+              <i class="ti ti-photo field-icon" aria-hidden="true"></i>
+              <input type="url" id="company-logo" placeholder="Link to your company logo" />
+            </div>
+            <span class="field-error" id="err-company-logo"></span>
+          </div>
+
+          <div class="form-step__nav">
+            <button type="button" class="btn-outline btn-outline--inline" id="btn-skip-company">
+              Skip this step
+            </button>
+            <button type="button" class="btn-primary" id="btn-save-company">
+              <span id="save-company-label">Save &amp; continue</span>
+            </button>
+          </div>
+
+          <p class="step-note">
+            <i class="ti ti-info-circle" aria-hidden="true"></i>
+            Company details are optional — you can link or update your company later from settings.
+          </p>
+        </div>
+
+        <!-- ===================== STEP 2 — Recruiter Details (required, not skippable) ===================== -->
+        <div class="form-step" data-step="2">
+
+          <div class="field">
+            <label for="recruiter-job-title">Job title <span class="required-mark">*</span></label>
+            <div class="input-with-icon">
+              <i class="ti ti-id-badge-2 field-icon" aria-hidden="true"></i>
+              <input type="text" id="recruiter-job-title" placeholder="e.g. Talent Acquisition Manager" maxlength="120" />
+            </div>
+            <span class="field-error" id="err-recruiter-job-title"></span>
+          </div>
+
+          <div class="field">
+            <label for="recruiter-department">Department <span class="required-mark">*</span></label>
+            <select id="recruiter-department">
+              <option value="">Select department</option>
+              <option value="Human Resources">Human Resources</option>
+              <option value="Talent Acquisition">Talent Acquisition</option>
+              <option value="People Operations">People Operations</option>
+              <option value="Engineering">Engineering</option>
+              <option value="Product">Product</option>
+              <option value="Sales">Sales</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Finance">Finance</option>
+              <option value="Operations">Operations</option>
+              <option value="Customer Success">Customer Success</option>
+              <option value="Executive / Leadership">Executive / Leadership</option>
+              <option value="__other__">Other (type manually)</option>
+            </select>
+            <input type="text" id="recruiter-department-other" class="other-input" placeholder="Enter department" hidden />
+            <span class="field-error" id="err-recruiter-department"></span>
+          </div>
+
+          <div class="field">
+            <label for="recruiter-admin">Company admin</label>
+            <label class="toggle-field" for="recruiter-admin" id="recruiter-admin-wrap">
+              <span class="toggle-field__text">
+                <i class="ti ti-shield-star toggle-field__icon" aria-hidden="true"></i>
+                This account manages company settings &amp; team
+              </span>
+              <span class="toggle">
+                <input type="checkbox" id="recruiter-admin" />
+                <span class="toggle__track"><span class="toggle__thumb"></span></span>
+              </span>
+            </label>
+          </div>
+
+          <div class="form-step__nav">
+            <button type="button" class="btn-outline btn-outline--inline" data-action="back-to-company">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i> Back
+            </button>
+            <button type="button" class="btn-primary" id="btn-finish-recruiter">
+              <span id="finish-recruiter-label">Finish setup</span>
+            </button>
+          </div>
+
+          <p class="step-note step-note--required">
+            <i class="ti ti-lock" aria-hidden="true"></i>
+            This step is required to activate your recruiter account.
+          </p>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/RecruiterProfileSetup.js"></script>
+</body>
+</html>
