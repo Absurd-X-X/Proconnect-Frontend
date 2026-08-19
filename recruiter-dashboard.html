@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recruiter Dashboard - ProConnect</title>
+  <link rel="stylesheet" href="/Styles/company-layout.css" />
+  <link rel="stylesheet" href="/Styles/recruiter-dashboard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <div class="app-main">
+
+      <header class="app-topbar" id="app-topbar"></header>
+
+      <main class="app-content">
+
+        <div class="page-header">
+          <div>
+            <h1>Recruiter Dashboard</h1>
+            <p id="welcome-message">Welcome back! Here's what's happening with your hiring.</p>
+          </div>
+          <div class="page-header__actions">
+            <button type="button" class="btn-secondary btn-inline">
+              <i class="ti ti-calendar" aria-hidden="true"></i>
+              <span id="date-range-label">This Week</span>
+              <i class="ti ti-chevron-down" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn-secondary btn-inline">
+              <i class="ti ti-adjustments" aria-hidden="true"></i> Customize
+            </button>
+          </div>
+        </div>
+
+        <div class="loading-state" id="loading-state">Loading dashboard...</div>
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div id="dashboard-content" hidden>
+
+          <!-- Stat cards -->
+          <div class="stat-cards" id="stat-cards"></div>
+
+          <!-- Row: Hiring Pipeline + Applications Overview -->
+          <div class="dashboard-row">
+            <div class="content-card">
+              <div class="content-card__header">
+                <h3>Hiring Pipeline</h3>
+                <select class="inline-select">
+                  <option>All Jobs</option>
+                </select>
+              </div>
+              <div class="pipeline-funnel" id="pipeline-funnel"></div>
+              <a href="applications.html" class="link-arrow">View full pipeline <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+            </div>
+
+            <div class="content-card">
+              <div class="content-card__header">
+                <h3>Applications Overview</h3>
+                <select class="inline-select">
+                  <option>This Week</option>
+                </select>
+              </div>
+              <div class="chart-legend">
+                <span><i class="legend-dot legend-dot--solid"></i> This Week</span>
+                <span><i class="legend-dot legend-dot--dashed"></i> Last Week</span>
+              </div>
+              <div class="applications-chart" id="applications-chart"></div>
+              <div class="chart-stats" id="chart-stats"></div>
+            </div>
+          </div>
+
+          <!-- Row: Applications by Source + Interviews This Week -->
+          <div class="dashboard-row">
+            <div class="content-card">
+              <div class="content-card__header">
+                <h3>Applications by Source</h3>
+                <select class="inline-select">
+                  <option>This Week</option>
+                </select>
+              </div>
+              <div class="donut-layout">
+                <div class="donut-chart" id="donut-chart"></div>
+                <ul class="donut-legend" id="donut-legend"></ul>
+              </div>
+              <a href="analytics.html" class="link-arrow">View full report <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+            </div>
+
+            <div class="content-card">
+              <div class="content-card__header">
+                <h3>Interviews This Week</h3>
+                <a href="interviews.html" class="link-arrow">View all interviews <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+              </div>
+              <div class="interviews-list" id="interviews-list"></div>
+              <p class="empty-hint" id="interviews-empty-hint" hidden>No interviews scheduled this week.</p>
+            </div>
+          </div>
+
+          <!-- My Open Jobs -->
+          <div class="content-card">
+            <div class="content-card__header">
+              <h3>My Open Jobs</h3>
+              <a href="jobs.html" class="link-arrow">View all jobs <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+            </div>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Job Title</th>
+                    <th>Applications</th>
+                    <th>Interviews</th>
+                    <th>Next Interview</th>
+                    <th>Status</th>
+                    <th>Posted</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="open-jobs-table-body"></tbody>
+              </table>
+            </div>
+            <p class="empty-hint" id="jobs-empty-hint" hidden>You don't have any open jobs yet.</p>
+          </div>
+
+          <!-- Row: Top Open Jobs + Recent Activity + Quick Actions -->
+          <div class="dashboard-row dashboard-row--three">
+            <div class="content-card">
+              <div class="content-card__header">
+                <h3>Top Open Jobs</h3>
+                <a href="jobs.html" class="link-arrow">View all <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+              </div>
+              <div class="top-jobs-list" id="top-jobs-list"></div>
+            </div>
+
+            <div class="content-card">
+              <div class="content-card__header">
+                <h3>Recent Activity</h3>
+                <a href="activity.html" class="link-arrow">View all <i class="ti ti-arrow-right" aria-hidden="true"></i></a>
+              </div>
+              <div class="activity-list" id="activity-list"></div>
+            </div>
+
+            <div class="content-card">
+              <h3>Quick Actions</h3>
+              <div class="quick-actions-grid">
+                <a href="create-job.html" class="quick-action">
+                  <span class="quick-action__icon"><i class="ti ti-briefcase" aria-hidden="true"></i></span>
+                  Create New Job
+                </a>
+                <a href="talent-search.html" class="quick-action">
+                  <span class="quick-action__icon"><i class="ti ti-search" aria-hidden="true"></i></span>
+                  Search Candidates
+                </a>
+                <a href="team-recruiters.html" class="quick-action">
+                  <span class="quick-action__icon"><i class="ti ti-user-plus" aria-hidden="true"></i></span>
+                  Invite Team Member
+                </a>
+                <a href="analytics.html" class="quick-action">
+                  <span class="quick-action__icon"><i class="ti ti-chart-bar" aria-hidden="true"></i></span>
+                  View Analytics
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/cnmpanyLayout.js"></script>
+  <script src="Scripts/recruiterDashboard.js"></script>
+</body>
+</html>

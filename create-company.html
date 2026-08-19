@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create a New Company - ProConnect</title>
+  <link rel="stylesheet" href="/Styles/create-company.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <main class="wizard-page wizard-page--wide">
+    <div class="wizard-card wizard-card--wide">
+
+      <a href="company-onboarding.html" class="wizard-back">
+        <i class="ti ti-arrow-left" aria-hidden="true"></i> Back
+      </a>
+
+      <div class="wizard-header">
+        <h1>Create a New Company</h1>
+      </div>
+
+      <ol class="wizard-steps" id="wizard-steps">
+        <li class="wizard-step is-active" data-step="1">
+          <span class="wizard-step__circle">1</span>
+          <span class="wizard-step__label">Company Details</span>
+        </li>
+        <li class="wizard-step" data-step="2">
+          <span class="wizard-step__circle">2</span>
+          <span class="wizard-step__label">Additional Info</span>
+        </li>
+        <li class="wizard-step" data-step="3">
+          <span class="wizard-step__circle">3</span>
+          <span class="wizard-step__label">Team &amp; Admin</span>
+        </li>
+        <li class="wizard-step" data-step="4">
+          <span class="wizard-step__circle">4</span>
+          <span class="wizard-step__label">Review &amp; Create</span>
+        </li>
+      </ol>
+
+      <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+      <form id="create-company-form" novalidate>
+
+        <!-- Step 1: Company Details -->
+        <section class="wizard-panel is-active" data-panel="1">
+          <p class="wizard-panel__hint">Add basic information about your company.</p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="companyName">Company Name <span class="req">*</span></label>
+              <input type="text" id="companyName" name="companyName" placeholder="Enter company name" required />
+              <span class="field-error" data-error-for="companyName"></span>
+            </div>
+            <div class="field">
+              <label for="industry">Industry <span class="req">*</span></label>
+              <select id="industry" name="industry" required>
+                <option value="" disabled selected>Select industry</option>
+                <option value="Software Development">Software Development</option>
+                <option value="Finance">Finance</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Education">Education</option>
+                <option value="Retail">Retail</option>
+                <option value="Manufacturing">Manufacturing</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="field-error" data-error-for="industry"></span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="companySize">Company Size <span class="req">*</span></label>
+              <select id="companySize" name="companySize" required>
+                <option value="" disabled selected>Select company size</option>
+                <option value="1-10 employees">1 - 10 employees</option>
+                <option value="11-50 employees">11 - 50 employees</option>
+                <option value="51-200 employees">51 - 200 employees</option>
+                <option value="201-500 employees">201 - 500 employees</option>
+                <option value="500+ employees">500+ employees</option>
+              </select>
+              <span class="field-error" data-error-for="companySize"></span>
+            </div>
+            <div class="field">
+              <label for="companyType">Company Type <span class="req">*</span></label>
+              <select id="companyType" name="companyType" required>
+                <option value="" disabled selected>Select company type</option>
+                <option value="Private">Private</option>
+                <option value="Public">Public</option>
+                <option value="Nonprofit">Nonprofit</option>
+                <option value="Government">Government</option>
+              </select>
+              <span class="field-error" data-error-for="companyType"></span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="website">Website (Optional)</label>
+              <input type="url" id="website" name="website" placeholder="https://www.yourcompany.com" />
+              <span class="field-error" data-error-for="website"></span>
+            </div>
+            <div class="field">
+              <label for="companyEmail">Company Email <span class="req">*</span></label>
+              <input type="email" id="companyEmail" name="companyEmail" placeholder="hr@yourcompany.com" required />
+              <span class="field-error" data-error-for="companyEmail"></span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="phoneNumber">Company Phone <span class="req">*</span></label>
+              <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="+234 801 234 5678" required />
+              <span class="field-error" data-error-for="phoneNumber"></span>
+            </div>
+            <div class="field">
+              <label for="foundedYear">Founded Year (Optional)</label>
+              <input type="number" id="foundedYear" name="foundedYear" placeholder="e.g. 2018" min="1800" max="2026" />
+              <span class="field-error" data-error-for="foundedYear"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="companyLogo">Company Logo (Optional)</label>
+            <p class="field-hint">This will be displayed on your company profile and job postings.</p>
+            <div class="logo-dropzone" id="logo-dropzone">
+              <i class="ti ti-upload" aria-hidden="true"></i>
+              <span class="logo-dropzone__label">Upload logo</span>
+              <span class="logo-dropzone__hint">PNG, JPG or SVG (Max 2MB)</span>
+              <input type="file" id="companyLogo" name="companyLogo" accept=".png,.jpg,.jpeg,.svg" hidden />
+            </div>
+            <span class="field-error" data-error-for="companyLogo"></span>
+          </div>
+
+          <div class="wizard-actions">
+            <span></span>
+            <button type="button" class="btn-primary btn-inline" data-next="2">
+              Next <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 2: Additional Info -->
+        <section class="wizard-panel" data-panel="2">
+          <p class="wizard-panel__hint">Tell candidates more about your company.</p>
+
+          <div class="field">
+            <label for="description">Company Description <span class="req">*</span></label>
+            <textarea id="description" name="description" rows="4" placeholder="What does your company do?" required></textarea>
+            <span class="field-error" data-error-for="description"></span>
+          </div>
+
+          <div class="field">
+            <label>Headquarters &amp; Office Locations</label>
+            <p class="field-hint">Add your headquarters and any other office locations.</p>
+            <div id="locations-list" class="locations-list"></div>
+            <button type="button" class="btn-secondary btn-inline" id="add-location-btn">
+              <i class="ti ti-plus" aria-hidden="true"></i> Add Location
+            </button>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="linkedInUrl">LinkedIn (Optional)</label>
+              <input type="url" id="linkedInUrl" name="linkedInUrl" placeholder="https://linkedin.com/company/..." />
+            </div>
+            <div class="field">
+              <label for="twitterUrl">Twitter / X (Optional)</label>
+              <input type="url" id="twitterUrl" name="twitterUrl" placeholder="https://x.com/..." />
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="facebookUrl">Facebook (Optional)</label>
+              <input type="url" id="facebookUrl" name="facebookUrl" placeholder="https://facebook.com/..." />
+            </div>
+            <div class="field">
+              <label for="instagramUrl">Instagram (Optional)</label>
+              <input type="url" id="instagramUrl" name="instagramUrl" placeholder="https://instagram.com/..." />
+            </div>
+          </div>
+
+          <div class="wizard-actions">
+            <button type="button" class="btn-secondary btn-inline" data-back="1">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i> Back
+            </button>
+            <button type="button" class="btn-primary btn-inline" data-next="3">
+              Next <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 3: Team & Admin -->
+        <section class="wizard-panel" data-panel="3">
+          <p class="wizard-panel__hint">You'll be added as the company admin automatically. You can invite more recruiters after your company is created.</p>
+
+          <div class="admin-preview" id="admin-preview">
+            <div class="admin-preview__avatar" id="admin-avatar">Y</div>
+            <div class="admin-preview__info">
+              <h3 id="admin-name">You</h3>
+              <span class="admin-preview__badge">Company Admin</span>
+            </div>
+          </div>
+
+          <div class="wizard-actions">
+            <button type="button" class="btn-secondary btn-inline" data-back="2">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i> Back
+            </button>
+            <button type="button" class="btn-primary btn-inline" data-next="4">
+              Next <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </section>
+
+        <!-- Step 4: Review & Create -->
+        <section class="wizard-panel" data-panel="4">
+          <p class="wizard-panel__hint">Review your company details before creating.</p>
+
+          <div class="review-summary" id="review-summary"></div>
+
+          <div class="wizard-actions">
+            <button type="button" class="btn-secondary btn-inline" data-back="3">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i> Back
+            </button>
+            <button type="submit" class="btn-primary btn-inline" id="submit-btn">
+              <span class="btn-label">Create Company</span>
+            </button>
+          </div>
+        </section>
+
+      </form>
+
+    </div>
+  </main>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/createCompany.js"></script>
+</body>
+</html>

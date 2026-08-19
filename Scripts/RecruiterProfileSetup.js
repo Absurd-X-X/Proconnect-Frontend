@@ -270,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error(result.message || "Couldn't finish setting up your recruiter account.");
       }
 
-      window.location.href = `dashboard.html?email=${encodeURIComponent(email || "")}`;
+      window.location.href = `profile-overview.html?email=${encodeURIComponent(email || "")}`;
     } catch (err) {
       showAlert(err.message);
       btnFinishRecruiter.disabled = false;

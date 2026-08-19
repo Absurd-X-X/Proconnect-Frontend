@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Management · ProConnect</title>
+  <link rel="stylesheet" href="Styles/style.css" />
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/portfolio.css" />
+  <link rel="stylesheet" href="Styles/profile-overview.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="profile-portfolio">
+
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search people, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <button class="icon-btn" disabled title="Notifications (coming soon)"><i class="ti ti-bell" aria-hidden="true"></i></button>
+          <button class="icon-btn" disabled title="Messages (coming soon)"><i class="ti ti-message-2" aria-hidden="true"></i></button>
+          <div class="topbar-user">
+            <img id="topbar-avatar" src="" alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-loading" id="loading-state">
+        <span class="spinner spinner--dark"></span>
+        <span>Loading your portfolio...</span>
+      </div>
+
+      <div class="app-content" id="content" hidden>
+
+        <div class="pf-header">
+          <span class="pf-header__icon"><i class="ti ti-briefcase" aria-hidden="true"></i></span>
+          <div class="pf-header__text">
+            <h1>Portfolio Management</h1>
+            <p>Showcase your best work and projects. Recruiters can view your portfolio to understand your skills better.</p>
+          </div>
+          <button type="button" class="btn-primary btn-compact" id="add-link-btn-top"><i class="ti ti-plus" aria-hidden="true"></i> Add New Link</button>
+        </div>
+
+        <div class="pf-layout">
+
+          <div class="pf-main">
+
+            <div class="card pf-stats-card">
+              <div class="pf-stat">
+                <span class="pf-stat__icon" style="background: var(--pc-purple-light); color: var(--pc-purple);"><i class="ti ti-link" aria-hidden="true"></i></span>
+                <div>
+                  <strong id="stat-total-links">0</strong>
+                  <span>Total Links</span>
+                  <small>Active portfolio links</small>
+                </div>
+              </div>
+              <div class="pf-stat">
+                <span class="pf-stat__icon" style="background: #E8F7EE; color: #22C55E;"><i class="ti ti-eye" aria-hidden="true"></i></span>
+                <div>
+                  <strong id="stat-total-views">0</strong>
+                  <span>Profile Views</span>
+                  <small>From portfolio section</small>
+                </div>
+              </div>
+              <div class="pf-stat">
+                <span class="pf-stat__icon" style="background: #E3F2FD; color: #2563EB;"><i class="ti ti-click" aria-hidden="true"></i></span>
+                <div>
+                  <strong id="stat-total-clicks">0</strong>
+                  <span>Link Clicks</span>
+                  <small>All-time total</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="pf-filters">
+                <div class="pf-tabs" id="pf-tabs">
+                  <button type="button" class="pf-tab is-active" data-filter="all">All Links <span id="count-all">(0)</span></button>
+                  <button type="button" class="pf-tab" data-filter="Website">Websites <span id="count-website">(0)</span></button>
+                  <button type="button" class="pf-tab" data-filter="Project">Projects <span id="count-project">(0)</span></button>
+                  <button type="button" class="pf-tab" data-filter="Design">Designs <span id="count-design">(0)</span></button>
+                  <button type="button" class="pf-tab" data-filter="Other">Others <span id="count-other">(0)</span></button>
+                </div>
+              </div>
+
+              <div id="pf-link-list" class="pf-link-list"></div>
+
+              <div class="pf-cta-banner">
+                <div>
+                  <strong>Add more portfolio links</strong>
+                  <p>A strong portfolio helps you stand out to recruiters and increases your chances of getting hired.</p>
+                </div>
+                <button type="button" class="btn-primary btn-compact" id="add-link-btn-bottom"><i class="ti ti-plus" aria-hidden="true"></i> Add New Link</button>
+              </div>
+            </div>
+
+          </div>
+
+          <aside class="pf-side">
+            <div class="card">
+              <h3 class="av-card-heading"><i class="ti ti-bulb" aria-hidden="true"></i> Portfolio Tips</h3>
+              <div class="pf-tip">
+                <span class="pf-tip__icon"><i class="ti ti-link" aria-hidden="true"></i></span>
+                <div><strong>Add relevant links</strong><span>Include your portfolio website, case studies, or design projects.</span></div>
+              </div>
+              <div class="pf-tip">
+                <span class="pf-tip__icon"><i class="ti ti-refresh" aria-hidden="true"></i></span>
+                <div><strong>Keep it updated</strong><span>Regularly update your portfolio with your latest work.</span></div>
+              </div>
+              <div class="pf-tip">
+                <span class="pf-tip__icon"><i class="ti ti-star" aria-hidden="true"></i></span>
+                <div><strong>Quality over quantity</strong><span>Showcase your best work that highlights your skills.</span></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 class="av-card-heading">Portfolio Strength</h3>
+              <div class="strength-card__body" style="margin-bottom: 12px;">
+                <div class="strength-card__ring">
+                  <svg viewBox="0 0 120 120" class="ring-svg">
+                    <circle cx="60" cy="60" r="52" class="ring-track" />
+                    <circle cx="60" cy="60" r="52" class="ring-fill" id="pf-strength-ring" />
+                  </svg>
+                  <div class="strength-card__pct" id="pf-strength-pct">0%</div>
+                </div>
+                <p class="strength-card__title" id="pf-strength-message">Add links to build your portfolio.</p>
+              </div>
+              <ul class="checklist" id="pf-checklist"></ul>
+              <a href="professional-public-profile.html" id="view-public-profile-link" class="btn-outline btn-compact" style="width: 100%; justify-content: center; margin-top: 14px;">
+                <i class="ti ti-eye" aria-hidden="true"></i> View Public Profile
+              </a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Add/Edit Link modal -->
+  <div class="pf-modal-backdrop" id="link-modal-backdrop" hidden>
+    <div class="pf-modal">
+      <div class="pf-modal__head">
+        <h3 id="link-modal-title">Add New Link</h3>
+        <button type="button" class="icon-btn icon-btn--ghost" id="link-modal-close"><i class="ti ti-x" aria-hidden="true"></i></button>
+      </div>
+      <form id="link-form">
+        <input type="hidden" id="link-id" />
+        <div class="ep-field">
+          <label for="link-title">Title</label>
+          <input type="text" id="link-title" required />
+        </div>
+        <div class="ep-field">
+          <label for="link-url">URL</label>
+          <input type="url" id="link-url" placeholder="https://" required />
+        </div>
+        <div class="ep-field">
+          <label for="link-type">Type</label>
+          <select id="link-type">
+            <option value="Website">Website</option>
+            <option value="Project">Project</option>
+            <option value="Design">Design</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="ep-field">
+          <label for="link-desc">Description</label>
+          <textarea id="link-desc" rows="3"></textarea>
+        </div>
+        <div class="ep-field">
+          <label for="link-thumbnail">Thumbnail (optional)</label>
+          <input type="file" id="link-thumbnail" accept="image/png, image/jpeg, image/webp" />
+        </div>
+        <div class="ep-inline-form__actions">
+          <button type="button" class="btn-outline btn-compact" id="link-modal-cancel">Cancel</button>
+          <button type="submit" class="btn-primary btn-compact" id="link-modal-submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/portfolio.js"></script>
+</body>
+</html>

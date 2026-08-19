@@ -45,9 +45,23 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      // Result<LoginResponse>.Success(response, token) → result.data is the
+      // LoginResponse, result.message is the JWT. Store each field under its
+      // own key — pc_user_id MUST stay the actual User.Id, since the wizard
+      // pages' Update commands take UserId, not ProfileId, and look the
+      // profile up from there.
+      const setupData = result.data || {};
+      const token = result.message;
+
+      if (setupData.id) localStorage.setItem("pc_user_id", setupData.id);
+      if (setupData.profileId) localStorage.setItem("pc_profile_id", setupData.profileId);
+      if (setupData.role) localStorage.setItem("pc_role", setupData.role);
+      if (setupData.userName) localStorage.setItem("pc_username", setupData.userName);
+      if (token) localStorage.setItem("pc_token", token);
+
       const nextPage = role === "Professional"
         ? "professional-profile-setup.html"
-        : "recruiter-profile-setup.html";
+        : "company-onboarding.html";
 
       window.location.href = `${nextPage}?email=${encodeURIComponent(email)}`;
 

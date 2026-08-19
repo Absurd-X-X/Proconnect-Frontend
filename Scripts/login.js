@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("reason") === "session-expired") {
+    const alertBox = document.getElementById("form-alert");
+    if (alertBox) {
+      alertBox.textContent = "Your session expired. Please log in again.";
+      alertBox.hidden = false;
+    }
+  }
   const form = document.getElementById("login-form");
   const alertBox = document.getElementById("form-alert");
   const btnLogin = document.getElementById("btn-login");
@@ -8,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const passwordInput = document.getElementById("password");
   const loginIdInput = document.getElementById("login-id");
 
-  // ----------------Helpers----------------
+  // ---------------- Helpers ----------------
 
   function hideAlert() {
     alertBox.hidden = true;
@@ -47,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ---------------- Validation ----------------
   // LoginCommand accepts either an email OR a username in the same field,
-  // so i only check that something was typed — no email-format enforcement.
+  // so we only check that something was typed — no email-format enforcement.
 
   function validateForm() {
     let valid = true;
@@ -80,8 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const rememberMe = document.getElementById("remember-me").checked;
 
     // Note: LoginCommand only takes (Login, Password) — rememberMe is not
-    // sent to the backend. It's used purely client-side below to decide
-    // where the token gets stored.
+    // sent to the backend. It's used purely client-side to decide where
+    // the token gets stored (localStorage survives closing the browser,
+    // sessionStorage does not).
 
     btnLogin.disabled = true;
     loginLabel.textContent = "Logging in...";
@@ -95,9 +104,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const result = await response.json().catch(() => ({}));
 
+      if (result.message.toLowerCase() === "please verify your email.") {
+        sessionStorage.setItem("pc_pending_email", loginId);
+        window.location.href = "check-email.html";
+      }
+
       // Result<LoginResponse>.Success(response, token) means:
       //   result.data    -> the LoginResponse object (id, email, role, profileId, userName)
-      //   result.message -> the JWT token (unusual, but that's what the handler returns)
+      //   result.message -> the JWT token
       // On failure, result.message carries the actual error text instead
       // (e.g. "Unauthorized", "Please verify your email.", "Account has been deactivated.").
 
@@ -113,6 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (loginData.role) localStorage.setItem("pc_role", loginData.role);
       if (loginData.userName) localStorage.setItem("pc_username", loginData.userName);
 
+      console.log(loginData.profileId);
+
       if (token) {
         const tokenStore = rememberMe ? localStorage : sessionStorage;
         tokenStore.setItem("pc_token", token);
@@ -121,7 +137,24 @@ document.addEventListener("DOMContentLoaded", () => {
       const resolvedEmail = loginData.email || loginId;
       sessionStorage.setItem("pc_pending_email", resolvedEmail);
 
-      window.location.href = `dashboard.html?email=${encodeURIComponent(resolvedEmail)}`;
+      // Case-insensitive on purpose — we haven't confirmed the exact casing
+      // the backend's Roles constants use ("Professional" vs "professional"
+      // vs something else), so this works regardless.
+
+      
+
+      const role = (loginData.role || "").toLowerCase();
+
+      if (role === "recruiter") {
+        window.location.href = "recruiter-dashboard.html"; // not built yet
+      } else if (role === "admin") {
+        window.location.href = "admin-dashboard.html"; // not built yet
+      } else {
+        // Professional, or any unrecognized role — land somewhere real
+        // rather than a dead link.
+        window.location.href = "profile-overview.html";
+      }
+
     } catch (err) {
       showAlert(err.message);
       btnLogin.disabled = false;
@@ -132,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ---------------- Google sign-in (placeholder) ----------------
 
   btnGoogle.addEventListener("click", () => {
-    if (API_ROUTES.googleLogin) {
+    if (typeof API_ROUTES !== "undefined" && API_ROUTES.googleLogin) {
       window.location.href = API_ROUTES.googleLogin;
     } else {
       showAlert("Google sign-in isn't set up yet.");

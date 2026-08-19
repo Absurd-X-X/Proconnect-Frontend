@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Company Management - ProConnect</title>
+  <link rel="stylesheet" href="/Styles/company-layout.css" />
+  <link rel="stylesheet" href="/Styles/company-management.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <div class="app-main">
+
+      <header class="app-topbar" id="app-topbar"></header>
+
+      <main class="app-content">
+
+        <div class="page-header">
+          <div>
+            <h1>Company Management</h1>
+            <p>Manage your company, team, settings and billing all in one place.</p>
+          </div>
+          <button type="button" class="btn-primary btn-inline" id="invite-recruiter-btn">
+            <i class="ti ti-user-plus" aria-hidden="true"></i> Invite Recruiter
+          </button>
+        </div>
+
+        <div class="loading-state" id="loading-state">Loading company management...</div>
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div id="management-content" hidden>
+
+          <nav class="management-tabs">
+            <button class="management-tab is-active" data-tab="overview">Overview</button>
+            <button class="management-tab" data-tab="team">Team &amp; Recruiters</button>
+            <button class="management-tab" data-tab="departments">Departments</button>
+            <button class="management-tab" data-tab="job-templates">Job Templates</button>
+            <button class="management-tab" data-tab="permissions">Permissions</button>
+            <button class="management-tab" data-tab="billing">Billing &amp; Plans</button>
+            <button class="management-tab" data-tab="settings">Settings</button>
+          </nav>
+
+          <!-- Overview tab -->
+          <section class="tab-panel is-active" data-tab-panel="overview">
+
+            <div class="stat-cards" id="mgmt-stat-cards"></div>
+
+            <div class="dashboard-row">
+
+              <div class="content-card">
+                <div class="content-card__header">
+                  <h3>Company Information</h3>
+                  <button type="button" class="icon-btn" aria-label="More options">
+                    <i class="ti ti-dots-vertical" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="company-info-block" id="company-info-block"></div>
+                <a href="company-profile.html" class="btn-secondary btn-block btn-inline">
+                  View Company Profile <i class="ti ti-external-link" aria-hidden="true"></i>
+                </a>
+              </div>
+
+              <div class="content-card">
+                <div class="content-card__header">
+                  <h3>Team &amp; Recruiters</h3>
+                  <button type="button" class="link-arrow-btn" data-goto-tab="team">View All</button>
+                </div>
+                <div class="team-preview-table" id="team-preview-table"></div>
+              </div>
+
+            </div>
+
+            <div class="dashboard-row">
+
+              <div class="content-card">
+                <h3>Plan &amp; Usage</h3>
+                <p class="empty-hint">Plan and billing details will appear here once the Billing module is connected.</p>
+              </div>
+
+              <div class="content-card">
+                <h3>Quick Actions</h3>
+                <div class="quick-actions-grid">
+                  <button type="button" class="quick-action" id="qa-invite-recruiter">
+                    <span class="quick-action__icon"><i class="ti ti-user-plus" aria-hidden="true"></i></span>
+                    Invite New Recruiter
+                  </button>
+                  <a href="edit-company-profile.html" class="quick-action">
+                    <span class="quick-action__icon"><i class="ti ti-pencil" aria-hidden="true"></i></span>
+                    Update Company Details
+                  </a>
+                  <button type="button" class="quick-action" data-goto-tab="departments">
+                    <span class="quick-action__icon"><i class="ti ti-sitemap" aria-hidden="true"></i></span>
+                    Create a Department
+                  </button>
+                  <button type="button" class="quick-action" data-goto-tab="permissions">
+                    <span class="quick-action__icon"><i class="ti ti-lock" aria-hidden="true"></i></span>
+                    Manage Permissions
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="dashboard-row">
+              <div class="content-card">
+                <h3>Recent Job Activity</h3>
+                <p class="empty-hint">Job activity will appear here once the Jobs module is connected.</p>
+              </div>
+
+              <div class="content-card">
+                <h3>Account Security</h3>
+                <div class="security-block">
+                  <span class="security-block__icon"><i class="ti ti-shield-check" aria-hidden="true"></i></span>
+                  <div>
+                    <h4>Your account is secure</h4>
+                    <p>No recent security concerns detected.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- Team & Recruiters tab -->
+          <section class="tab-panel" data-tab-panel="team">
+            <div class="content-card">
+              <div class="content-card__header">
+                <h3>Team &amp; Recruiters</h3>
+                <div class="team-filter-tabs" id="team-filter-tabs">
+                  <button class="filter-pill is-active" data-status="">All</button>
+                  <button class="filter-pill" data-status="Active">Active</button>
+                  <button class="filter-pill" data-status="Pending">Pending</button>
+                  <button class="filter-pill" data-status="Suspended">Suspended</button>
+                </div>
+              </div>
+
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Member</th>
+                      <th>Role</th>
+                      <th>Department</th>
+                      <th>Status</th>
+                      <th>Joined</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="team-table-body"></tbody>
+                </table>
+              </div>
+              <p class="empty-hint" id="team-empty-hint" hidden>No team members found.</p>
+
+              <div class="pagination" id="team-pagination"></div>
+            </div>
+          </section>
+
+          <!-- Placeholder tabs -->
+          <section class="tab-panel" data-tab-panel="departments">
+            <div class="content-card placeholder-card">
+              <i class="ti ti-sitemap" aria-hidden="true"></i>
+              <h3>Departments</h3>
+              <p>Department management isn't available yet. This will let you group recruiters by department.</p>
+            </div>
+          </section>
+
+          <section class="tab-panel" data-tab-panel="job-templates">
+            <div class="content-card placeholder-card">
+              <i class="ti ti-file-text" aria-hidden="true"></i>
+              <h3>Job Templates</h3>
+              <p>Job templates aren't available yet. This will connect to the Jobs module.</p>
+            </div>
+          </section>
+
+          <section class="tab-panel" data-tab-panel="permissions">
+            <div class="content-card placeholder-card">
+              <i class="ti ti-lock" aria-hidden="true"></i>
+              <h3>Permissions</h3>
+              <p>Granular role permissions aren't available yet. Admins currently have full access; other recruiters have standard access.</p>
+            </div>
+          </section>
+
+          <section class="tab-panel" data-tab-panel="billing">
+            <div class="content-card placeholder-card">
+              <i class="ti ti-credit-card" aria-hidden="true"></i>
+              <h3>Billing &amp; Plans</h3>
+              <p>Billing and subscription management isn't available yet.</p>
+            </div>
+          </section>
+
+          <section class="tab-panel" data-tab-panel="settings">
+            <div class="content-card placeholder-card">
+              <i class="ti ti-settings" aria-hidden="true"></i>
+              <h3>Settings</h3>
+              <p>Company-level settings aren't available yet.</p>
+            </div>
+          </section>
+
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Invite Recruiter modal -->
+  <div class="modal-overlay" id="invite-modal-overlay" hidden>
+    <div class="modal">
+      <div class="modal__header">
+        <h3>Invite a Recruiter</h3>
+        <button type="button" class="modal__close" id="invite-modal-close" aria-label="Close">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal__body">
+        <div class="field">
+          <label for="invite-email">Recruiter Email</label>
+          <input type="email" id="invite-email" placeholder="colleague@company.com" />
+          <span class="field-error" data-error-for="invite-email"></span>
+        </div>
+        <div class="invite-code-result" id="invite-code-result" hidden>
+          <p>Invitation sent! Code (valid 7 days):</p>
+          <div class="invite-code-display" id="invite-code-display"></div>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button type="button" class="btn-secondary btn-inline" id="invite-modal-cancel">Cancel</button>
+        <button type="button" class="btn-primary btn-inline" id="invite-modal-submit">
+          <span class="btn-label">Send Invitation</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reject confirm modal -->
+  <div class="modal-overlay" id="confirm-modal-overlay" hidden>
+    <div class="modal modal--sm">
+      <div class="modal__header">
+        <h3 id="confirm-modal-title">Confirm Action</h3>
+      </div>
+      <div class="modal__body">
+        <p id="confirm-modal-text"></p>
+      </div>
+      <div class="modal__footer">
+        <button type="button" class="btn-secondary btn-inline" id="confirm-modal-cancel">Cancel</button>
+        <button type="button" class="btn-danger btn-inline" id="confirm-modal-submit">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/Layouts/companyLayout.js"></script>
+  <script src="Scripts/companyManagement.js"></script>
+</body>
+</html>

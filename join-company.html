@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join a Company - ProConnect</title>
+  <link rel="stylesheet" href="/Styles/join-company.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <main class="wizard-page">
+    <div class="wizard-card">
+
+      <a href="company-onboarding.html" class="wizard-back">
+        <i class="ti ti-arrow-left" aria-hidden="true"></i> Back
+      </a>
+
+      <div class="wizard-header">
+        <h1>Join an Existing Company</h1>
+        <p>Request to join your company on ProConnect and collaborate with your team.</p>
+      </div>
+
+      <ol class="wizard-steps" id="wizard-steps">
+        <li class="wizard-step is-active" data-step="1">
+          <span class="wizard-step__circle">1</span>
+          <span class="wizard-step__label">Verify Invitation</span>
+        </li>
+        <li class="wizard-step" data-step="2">
+          <span class="wizard-step__circle">2</span>
+          <span class="wizard-step__label">Company Details</span>
+        </li>
+        <li class="wizard-step" data-step="3">
+          <span class="wizard-step__circle">3</span>
+          <span class="wizard-step__label">Request Access</span>
+        </li>
+      </ol>
+
+      <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+      <!-- Step 1: Verify Invitation -->
+      <section class="wizard-panel is-active" data-panel="1">
+        <h2>Enter Invitation Code</h2>
+        <p class="wizard-panel__hint">Enter the invitation code provided by your company admin.</p>
+
+        <div class="field">
+          <label for="invitationCode">Invitation Code</label>
+          <input type="text" id="invitationCode" placeholder="Enter invitation code" autocomplete="off" />
+          <span class="field-error" data-error-for="invitationCode"></span>
+        </div>
+
+        <button type="button" class="btn-primary" id="verify-btn">
+          <span class="btn-label">Verify Code</span>
+        </button>
+      </section>
+
+      <!-- Step 2: Company Details (preview) -->
+      <section class="wizard-panel" data-panel="2">
+        <h2>Company Details</h2>
+        <p class="wizard-panel__hint">Confirm this is the company you want to join.</p>
+
+        <div class="company-preview" id="company-preview">
+          <div class="company-preview__logo" id="company-logo"></div>
+          <div class="company-preview__info">
+            <h3 id="company-name"></h3>
+            <p id="company-industry"></p>
+            <span id="company-size" class="company-preview__badge"></span>
+          </div>
+        </div>
+
+        <button type="button" class="btn-secondary" id="back-to-step1">Back</button>
+        <button type="button" class="btn-primary" id="continue-btn">
+          <span class="btn-label">Continue</span>
+        </button>
+      </section>
+
+      <!-- Step 3: Request Access -->
+      <section class="wizard-panel" data-panel="3">
+        <h2>Request Access</h2>
+        <p class="wizard-panel__hint">
+          Submit your request to join the company. The admin will review and approve.
+        </p>
+
+        <button type="button" class="btn-primary" id="submit-request-btn">
+          <span class="btn-label">Request Access</span>
+        </button>
+      </section>
+
+      <!-- Success state -->
+      <section class="wizard-panel" data-panel="success">
+        <div class="wizard-success">
+          <i class="ti ti-circle-check" aria-hidden="true"></i>
+          <h2>Request Submitted</h2>
+          <p>Your request has been sent to the company admin for approval. You'll be notified once it's reviewed.</p>
+          <a href="dashboard.html" class="btn-primary">Go to Dashboard</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/joinCompany.js"></script>
+</body>
+</html>

@@ -1,0 +1,330 @@
+.ep-header {
+  margin-bottom: 0.5rem;
+}
+
+.ep-header h1 {
+  font-size: 22px;
+  margin: 0 0 4px;
+}
+
+.ep-header p {
+  font-size: 13px;
+  color: var(--pc-text-secondary);
+  margin: 0;
+}
+
+.ep-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr 260px;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* ---------- Tabs ---------- */
+
+.ep-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.75rem;
+}
+
+.ep-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  border: none;
+  background: none;
+  border-radius: var(--pc-radius);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--pc-text-secondary);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--pc-font);
+}
+
+.ep-tab:hover {
+  background: var(--pc-panel-bg);
+}
+
+.ep-tab.is-active {
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+}
+
+/* ---------- Panels ---------- */
+
+.ep-panel {
+  display: none;
+}
+
+.ep-panel.is-active {
+  display: block;
+}
+
+.ep-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3pc;
+  margin-bottom: 4px;
+}
+
+.ep-panel__head h3 {
+  font-size: 15px;
+  margin: 0;
+}
+
+.ep-required-note {
+  font-size: 11.5px;
+  color: var(--pc-text-muted);
+}
+
+.ep-panel__sub {
+  font-size: 12px;
+  color: var(--pc-text-secondary);
+  margin: 0 0 1.25rem;
+}
+
+.ep-panel--placeholder {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.ep-panel--placeholder i {
+  font-size: 32px;
+  color: var(--pc-purple);
+  margin-bottom: 10px;
+}
+
+.ep-panel--placeholder h3 {
+  font-size: 15px;
+  margin: 0 0 6px;
+}
+
+.ep-panel--placeholder p {
+  font-size: 12.5px;
+  color: var(--pc-text-secondary);
+  max-width: 320px;
+  margin: 0 auto 16px;
+}
+
+/* ---------- Photo row ---------- */
+
+.ep-label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--pc-text-primary);
+  margin-bottom: 8px;
+}
+
+.ep-photo-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.ep-photo {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--pc-purple-light);
+}
+
+.ep-photo-hint {
+  font-size: 11.5px;
+  color: var(--pc-text-muted);
+  margin: 0 0 8px;
+}
+
+.ep-photo-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ---------- Fields ---------- */
+
+/* .ep-field, .ep-field-row, .ep-checkbox-field, and .ep-inline-form__actions
+   now live in dashboard.css — shared across pages */
+
+/* ---------- Resume panel ---------- */
+
+#resume-current {
+  margin-bottom: 14px;
+}
+
+/* ---------- Portfolio manage list ---------- */
+
+/* ---------- Shared manage-list item (used by Experience, Education,
+   Certifications, Portfolio) ---------- */
+
+.manage-item,
+.pl-manage-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pc-border);
+}
+
+.manage-item:last-child,
+.pl-manage-item:last-child {
+  border-bottom: none;
+}
+
+.manage-item__icon,
+.pl-manage-item__icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 8px;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+
+.manage-item__body,
+.pl-manage-item__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.manage-item__title,
+.pl-manage-item__title {
+  font-size: 12.5px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.manage-item__sub {
+  font-size: 11.5px;
+  color: var(--pc-purple);
+}
+
+.manage-item__meta,
+.pl-manage-item__url {
+  font-size: 11px;
+  color: var(--pc-text-secondary);
+}
+
+.manage-item__actions {
+  display: flex;
+  gap: 4px;
+}
+
+.manage-item__edit,
+.manage-item__delete,
+.pl-manage-item__delete {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.manage-item__edit {
+  color: var(--pc-text-secondary);
+}
+
+.manage-item__edit:hover {
+  background: var(--pc-panel-bg);
+  color: var(--pc-purple);
+}
+
+.manage-item__delete,
+.pl-manage-item__delete {
+  color: var(--pc-danger);
+}
+
+.manage-item__delete:hover,
+.pl-manage-item__delete:hover {
+  background: var(--pc-danger-bg);
+}
+
+.ep-notice {
+  background: var(--pc-panel-bg);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  padding: 10px 12px;
+}
+
+.chip-removable {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chip-removable button {
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  padding: 0;
+}
+
+.ep-inline-form {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--pc-border);
+}
+
+/* .ep-inline-form__actions now lives in dashboard.css */
+
+/* ---------- Right sidebar ---------- */
+
+.ep-side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ep-side__heading {
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+
+/* .ep-preview styles now live in dashboard.css — shared across pages */
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px) {
+  .ep-layout {
+    grid-template-columns: 200px 1fr;
+  }
+
+  .ep-side {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .ep-side .card {
+    flex: 1 1 260px;
+  }
+}
+
+@media (max-width: 760px) {
+  .ep-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ep-tabs {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .ep-side {
+    flex-direction: column;
+  }
+}

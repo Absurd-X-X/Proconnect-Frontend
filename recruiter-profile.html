@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recruiter Profile - ProConnect</title>
+  <link rel="stylesheet" href="/Styles/company-layout.css" />
+  <link rel="stylesheet" href="/Styles/recruiter-profile.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <div class="app-main">
+
+      <header class="app-topbar" id="app-topbar"></header>
+
+      <main class="app-content">
+
+        <div class="page-header">
+          <div>
+            <h1>Recruiter Profile</h1>
+            <p>Manage your professional information and preferences.</p>
+          </div>
+          <a href="edit-recruiter-profile.html" class="btn-primary btn-inline">
+            <i class="ti ti-pencil" aria-hidden="true"></i> Edit Profile
+          </a>
+        </div>
+
+        <div class="loading-state" id="loading-state">Loading profile...</div>
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="profile-layout" id="profile-layout" hidden>
+
+          <div class="profile-main">
+
+            <div class="content-card profile-header-card">
+              <div class="profile-avatar" id="profile-avatar"></div>
+              <div class="profile-header-info">
+                <div class="profile-header-info__name-row">
+                  <h2 id="recruiter-name"></h2>
+                  <span class="role-badge" id="role-badge"></span>
+                </div>
+                <p class="profile-header-info__meta" id="recruiter-meta"></p>
+                <div class="contact-row" id="contact-row"></div>
+              </div>
+            </div>
+
+            <div class="content-card">
+              <div class="stats-grid" id="stats-grid"></div>
+            </div>
+
+            <div class="content-card">
+              <nav class="profile-tabs">
+                <button class="profile-tab is-active" data-tab="about">About</button>
+                <button class="profile-tab" data-tab="experience">Experience</button>
+                <button class="profile-tab" data-tab="skills">Skills</button>
+                <button class="profile-tab" data-tab="certifications">Certifications</button>
+              </nav>
+
+              <section class="tab-panel is-active" data-tab-panel="about">
+                <h3>Professional Summary</h3>
+                <p id="recruiter-bio"></p>
+              </section>
+
+              <section class="tab-panel" data-tab-panel="experience">
+                <div class="placeholder-block">
+                  <i class="ti ti-briefcase" aria-hidden="true"></i>
+                  <p>Work experience history isn't available yet for recruiter profiles.</p>
+                </div>
+              </section>
+
+              <section class="tab-panel" data-tab-panel="skills">
+                <div class="placeholder-block">
+                  <i class="ti ti-tools" aria-hidden="true"></i>
+                  <p>Skills aren't available yet for recruiter profiles.</p>
+                </div>
+              </section>
+
+              <section class="tab-panel" data-tab-panel="certifications">
+                <div class="placeholder-block">
+                  <i class="ti ti-certificate" aria-hidden="true"></i>
+                  <p>Certifications aren't available yet for recruiter profiles.</p>
+                </div>
+              </section>
+            </div>
+
+          </div>
+
+          <aside class="profile-sidebar">
+
+            <div class="content-card">
+              <h3>Recruitment Preferences</h3>
+              <div class="placeholder-block placeholder-block--sm">
+                <p>Recruitment preferences aren't available yet.</p>
+              </div>
+            </div>
+
+            <div class="content-card" id="connected-company-card" hidden>
+              <h3>Connected Company</h3>
+              <div class="connected-company" id="connected-company"></div>
+              <a href="company-profile.html" class="btn-secondary btn-block btn-inline">
+                View Company Profile <i class="ti ti-external-link" aria-hidden="true"></i>
+              </a>
+            </div>
+
+            <div class="content-card" id="no-company-card" hidden>
+              <h3>No Company Yet</h3>
+              <p class="empty-hint">You're not linked to a company yet.</p>
+              <a href="company-onboarding.html" class="btn-primary btn-block btn-inline">
+                Create or Join a Company
+              </a>
+            </div>
+
+          </aside>
+
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/Layouts/companyLayout.js"></script>
+  <script src="Scripts/recruiterProfile.js"></script>
+</body>
+</html>

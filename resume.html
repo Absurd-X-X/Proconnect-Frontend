@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume / CV Management · ProConnect</title>
+  <link rel="stylesheet" href="Styles/style.css" />
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/resume.css" />
+  <link rel="stylesheet" href="Styles/profile-overview.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="profile-resume">
+
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search for jobs, companies, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <button class="icon-btn" disabled title="Notifications (coming soon)"><i class="ti ti-bell" aria-hidden="true"></i></button>
+          <button class="icon-btn" disabled title="Messages (coming soon)"><i class="ti ti-message-2" aria-hidden="true"></i></button>
+          <div class="topbar-user">
+            <img id="topbar-avatar" src="" alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-loading" id="loading-state">
+        <span class="spinner spinner--dark"></span>
+        <span>Loading your resume...</span>
+      </div>
+
+      <div class="app-content" id="content" hidden>
+
+        <a href="profile-overview.html" class="rs-back-link"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back to Profile</a>
+
+        <div class="rs-header">
+          <div class="rs-header__text">
+            <h1>Resume / CV Management</h1>
+            <p>Upload, manage and keep your resume up to date. Your resume helps recruiters learn more about you and find the best opportunities for your career.</p>
+          </div>
+          <div class="rs-tip-card">
+            <span class="rs-tip-card__icon"><i class="ti ti-sparkles" aria-hidden="true"></i></span>
+            <div>
+              <strong>A great resume gets you noticed</strong>
+              <p>Keep your resume updated to showcase your latest skills and achievements.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rs-layout">
+
+          <div class="card rs-current-card">
+            <div class="rs-current-card__head">
+              <h3>Current Resume</h3>
+              <span class="chip" id="rs-status-chip" style="background: #E8F7EE; color: #16A34A;">Active</span>
+            </div>
+
+            <div id="rs-current-body"></div>
+          </div>
+
+          <div class="card">
+            <h3 class="av-card-heading">Resume Stats</h3>
+            <div class="rs-stats">
+              <div class="rs-stat">
+                <span class="rs-stat__icon"><i class="ti ti-eye" aria-hidden="true"></i></span>
+                <strong id="rs-stat-views">0</strong>
+                <span>Views</span>
+              </div>
+              <div class="rs-stat">
+                <span class="rs-stat__icon"><i class="ti ti-download" aria-hidden="true"></i></span>
+                <strong id="rs-stat-downloads">0</strong>
+                <span>Downloads</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card rs-tips-card">
+          <div class="rs-tips-illustration"><i class="ti ti-file-description" aria-hidden="true"></i></div>
+          <div class="rs-tips-list">
+            <h3 class="av-card-heading">Resume Tips</h3>
+            <ul>
+              <li><i class="ti ti-circle-check-filled" aria-hidden="true"></i> Keep your resume up to 2 pages</li>
+              <li><i class="ti ti-circle-check-filled" aria-hidden="true"></i> Tailor your resume for the roles you're applying for</li>
+              <li><i class="ti ti-circle-check-filled" aria-hidden="true"></i> Highlight your most relevant achievements and measurable results</li>
+              <li><i class="ti ti-circle-check-filled" aria-hidden="true"></i> Use clear, professional language</li>
+            </ul>
+          </div>
+          <div class="rs-help">
+            <h3 class="av-card-heading">Need help?</h3>
+            <p>Check out our guide on how to create a standout resume.</p>
+            <a href="#" class="btn-outline btn-compact" title="Not built yet"><i class="ti ti-external-link" aria-hidden="true"></i> View Resume Guide</a>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <input type="file" id="resume-file-input" accept="application/pdf" hidden />
+
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/resume.js"></script>
+</body>
+</html>

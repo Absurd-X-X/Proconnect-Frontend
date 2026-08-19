@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const result = await response.json().catch(() => ({}));
 
-      if (!response.ok || result.isSuccess === false) {
+      if (!response.ok || result.status === false) {
         throw new Error(result.message || "Couldn't save your profile. Please try again.");
       }
 
@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const result = await response.json().catch(() => ({}));
 
-      if (!response.ok || result.isSuccess === false) {
+      if (!response.ok || result.status === false) {
         throw new Error(result.message || "Couldn't add this experience.");
       }
 
@@ -392,7 +392,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const result = await response.json().catch(() => ({}));
 
-      if (!response.ok || result.isSuccess === false) {
+      if (!response.ok || result.status === false) {
         throw new Error(result.message || "Couldn't add this education entry.");
       }
 
@@ -613,7 +613,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ---------------- Finish ----------------
 
   btnFinish.addEventListener("click", () => {
-    window.location.href = `dashboard.html?email=${encodeURIComponent(email)}`;
+    window.location.href = `profile-overview.html?email=${encodeURIComponent(email)}`;
   });
 
   // ---------------- Skip (scoped to the current step only) ----------------
@@ -633,7 +633,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (currentStep === TOTAL_STEPS) {
-      window.location.href = `dashboard.html?email=${encodeURIComponent(email)}`;
+      // window.location.href = `dashboard.html?email=${encodeURIComponent(email)}`;
+      window.location.href = `profile-overview.html`;
       return;
     }
 

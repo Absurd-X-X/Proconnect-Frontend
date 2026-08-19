@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Profile · ProConnect</title>
+  <link rel="stylesheet" href="Styles/edit-professional-profile.css" />
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/profile-overview.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="profile-edit">
+
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search people, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <button class="icon-btn" disabled title="Notifications (coming soon)"><i class="ti ti-bell" aria-hidden="true"></i></button>
+          <button class="icon-btn" disabled title="Messages (coming soon)"><i class="ti ti-message-2" aria-hidden="true"></i></button>
+          <div class="topbar-user">
+            <img id="topbar-avatar" src="" alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <button type="button" class="btn-primary btn-compact" id="save-changes-btn">Save Changes</button>
+        </div>
+      </header>
+
+      <div class="app-loading" id="loading-state">
+        <span class="spinner spinner--dark"></span>
+        <span>Loading your profile...</span>
+      </div>
+
+      <div class="app-content" id="content" hidden>
+
+        <div class="ep-header">
+          <h1>Edit Profile</h1>
+          <p>Update your information and manage how others see you.</p>
+        </div>
+
+        <div class="ep-layout">
+
+          <!-- Tab nav -->
+          <nav class="ep-tabs card">
+            <button type="button" class="ep-tab is-active" data-tab="basic"><i class="ti ti-user" aria-hidden="true"></i> Basic Information</button>
+            <button type="button" class="ep-tab" data-tab="headline"><i class="ti ti-align-left" aria-hidden="true"></i> Headline &amp; Summary</button>
+            <button type="button" class="ep-tab" data-tab="experience"><i class="ti ti-briefcase" aria-hidden="true"></i> Experience</button>
+            <button type="button" class="ep-tab" data-tab="education"><i class="ti ti-school" aria-hidden="true"></i> Education</button>
+            <button type="button" class="ep-tab" data-tab="skills"><i class="ti ti-bulb" aria-hidden="true"></i> Skills</button>
+            <button type="button" class="ep-tab" data-tab="certifications"><i class="ti ti-certificate" aria-hidden="true"></i> Certifications</button>
+            <button type="button" class="ep-tab" data-tab="resume"><i class="ti ti-file-text" aria-hidden="true"></i> Resume</button>
+            <button type="button" class="ep-tab" data-tab="portfolio"><i class="ti ti-link" aria-hidden="true"></i> Portfolio</button>
+            <button type="button" class="ep-tab" data-tab="availability"><i class="ti ti-calendar-event" aria-hidden="true"></i> Availability</button>
+          </nav>
+
+          <!-- Panels -->
+          <div class="ep-panels">
+
+            <!-- Basic Information -->
+            <section class="card ep-panel is-active" data-panel="basic">
+              <div class="ep-panel__head">
+                <h3>Basic Information</h3>
+                <span class="ep-required-note">* Required</span>
+              </div>
+              <p class="ep-panel__sub">This information will be displayed on your profile.</p>
+
+              <label class="ep-label">Profile Photo</label>
+              <div class="ep-photo-row">
+                <img id="basic-photo" src="" alt="" class="ep-photo" />
+                <div>
+                  <p class="ep-photo-hint">JPG, PNG or WEBP. Max size 2MB.</p>
+                  <div class="ep-photo-actions">
+                    <button type="button" class="btn-primary btn-compact" id="basic-change-photo-btn">Change Photo</button>
+                    <input type="file" id="basic-photo-input" accept="image/png, image/jpeg, image/webp" hidden />
+                  </div>
+                </div>
+              </div>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label for="basic-first-name">First name <span class="req">*</span></label>
+                  <input type="text" id="basic-first-name" required />
+                </div>
+                <div class="ep-field">
+                  <label for="basic-last-name">Last name <span class="req">*</span></label>
+                  <input type="text" id="basic-last-name" required />
+                </div>
+              </div>
+
+              <div class="ep-field">
+                <label for="basic-email">Email Address <span class="req">*</span></label>
+                <input type="email" id="basic-email" disabled title="Email changes require re-verification — not yet available here" />
+                <span class="ep-field-hint">Changing your email requires re-verification and isn't available on this screen yet.</span>
+              </div>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label for="basic-phone">Phone Number</label>
+                  <input type="tel" id="basic-phone" placeholder="+1 (415) 555-0123" />
+                </div>
+                <div class="ep-field">
+                  <label for="basic-location">Location</label>
+                  <input type="text" id="basic-location" placeholder="San Francisco, CA, USA" />
+                </div>
+              </div>
+            </section>
+
+            <!-- Headline & Summary -->
+            <section class="card ep-panel" data-panel="headline">
+              <div class="ep-panel__head"><h3>Headline &amp; Summary</h3></div>
+              <p class="ep-panel__sub">Tell recruiters who you are and what you're looking for.</p>
+
+              <div class="ep-field">
+                <label for="hs-headline">Headline</label>
+                <input type="text" id="hs-headline" placeholder="Product Designer | Human-Centered Design Enthusiast" />
+              </div>
+
+              <div class="ep-field">
+                <label for="hs-summary">Summary</label>
+                <textarea id="hs-summary" rows="5" placeholder="Passionate product designer with 6+ years of experience..."></textarea>
+              </div>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label for="hs-github">GitHub URL</label>
+                  <input type="url" id="hs-github" placeholder="https://github.com/yourname" />
+                </div>
+                <div class="ep-field">
+                  <label for="hs-linkedin">LinkedIn URL</label>
+                  <input type="url" id="hs-linkedin" placeholder="https://linkedin.com/in/yourname" />
+                </div>
+              </div>
+            </section>
+
+            <!-- Experience -->
+            <section class="card ep-panel" data-panel="experience">
+              <div class="ep-panel__head">
+                <h3>Experience</h3>
+                <button type="button" class="btn-primary btn-compact" id="add-experience-btn"><i class="ti ti-plus" aria-hidden="true"></i> Add Experience</button>
+              </div>
+              <div id="experience-manage-list"></div>
+
+              <form id="experience-form" class="ep-inline-form" hidden>
+                <input type="hidden" id="exp-id" />
+                <div class="ep-field-row">
+                  <div class="ep-field">
+                    <label for="exp-title">Job title</label>
+                    <input type="text" id="exp-title" required />
+                  </div>
+                  <div class="ep-field">
+                    <label for="exp-company">Company</label>
+                    <input type="text" id="exp-company" required />
+                  </div>
+                </div>
+                <div class="ep-field-row">
+                  <div class="ep-field">
+                    <label for="exp-type">Employment type</label>
+                    <select id="exp-type">
+                      <option value="FullTime">Full-time</option>
+                      <option value="PartTime">Part-time</option>
+                      <option value="Contract">Contract</option>
+                      <option value="Internship">Internship</option>
+                      <option value="Freelance">Freelance</option>
+                      <option value="Temporary">Temporary</option>
+                      <option value="Remote">Remote</option>
+                    </select>
+                  </div>
+                  <div class="ep-field">
+                    <label for="exp-location">Location</label>
+                    <input type="text" id="exp-location" />
+                  </div>
+                </div>
+                <div class="ep-field-row">
+                  <div class="ep-field">
+                    <label for="exp-start">Start date</label>
+                    <input type="date" id="exp-start" required />
+                  </div>
+                  <div class="ep-field">
+                    <label for="exp-end">End date</label>
+                    <input type="date" id="exp-end" />
+                  </div>
+                </div>
+                <div class="ep-field ep-checkbox-field">
+                  <label><input type="checkbox" id="exp-current" /> I currently work here</label>
+                </div>
+                <div class="ep-field">
+                  <label for="exp-desc">Description</label>
+                  <textarea id="exp-desc" rows="3"></textarea>
+                </div>
+                <div class="ep-inline-form__actions">
+                  <button type="button" class="btn-outline btn-compact" id="cancel-experience-btn">Cancel</button>
+                  <button type="submit" class="btn-primary btn-compact">Save</button>
+                </div>
+              </form>
+            </section>
+
+            <!-- Education -->
+            <section class="card ep-panel" data-panel="education">
+              <div class="ep-panel__head">
+                <h3>Education</h3>
+                <button type="button" class="btn-primary btn-compact" id="add-education-btn"><i class="ti ti-plus" aria-hidden="true"></i> Add Education</button>
+              </div>
+              <div id="education-manage-list"></div>
+
+              <form id="education-form" class="ep-inline-form" hidden>
+                <input type="hidden" id="edu-id" />
+                <div class="ep-field-row">
+                  <div class="ep-field">
+                    <label for="edu-institution">Institution</label>
+                    <input type="text" id="edu-institution" required />
+                  </div>
+                  <div class="ep-field">
+                    <label for="edu-degree">Degree</label>
+                    <input type="text" id="edu-degree" required />
+                  </div>
+                </div>
+                <div class="ep-field-row">
+                  <div class="ep-field">
+                    <label for="edu-field">Field of study</label>
+                    <input type="text" id="edu-field" />
+                  </div>
+                  <div class="ep-field">
+                    <label for="edu-grade">Grade</label>
+                    <input type="text" id="edu-grade" />
+                  </div>
+                </div>
+                <div class="ep-field-row">
+                  <div class="ep-field">
+                    <label for="edu-start">Start date</label>
+                    <input type="date" id="edu-start" required />
+                  </div>
+                  <div class="ep-field">
+                    <label for="edu-end">End date</label>
+                    <input type="date" id="edu-end" />
+                  </div>
+                </div>
+                <div class="ep-field">
+                  <label for="edu-desc">Description</label>
+                  <textarea id="edu-desc" rows="3"></textarea>
+                </div>
+                <div class="ep-inline-form__actions">
+                  <button type="button" class="btn-outline btn-compact" id="cancel-education-btn">Cancel</button>
+                  <button type="submit" class="btn-primary btn-compact">Save</button>
+                </div>
+              </form>
+            </section>
+
+            <!-- Skills -->
+            <section class="card ep-panel" data-panel="skills">
+              <div class="ep-panel__head">
+                <h3>Skills</h3>
+              </div>
+              <p class="ep-panel__sub ep-notice">
+                Adding new skills isn't available yet — this section needs a skill lookup that hasn't been built.
+                You can remove existing skills below.
+              </p>
+              <div id="skills-manage-list" class="chip-list"></div>
+            </section>
+
+            <!-- Certifications -->
+            <section class="card ep-panel" data-panel="certifications">
+              <div class="ep-panel__head">
+                <h3>Certifications</h3>
+                <button type="button" class="btn-primary btn-compact" id="add-certificate-btn"><i class="ti ti-plus" aria-hidden="true"></i> Add Certification</button>
+              </div>
+              <div id="certificate-manage-list"></div>
+
+              <form id="certificate-form" class="ep-inline-form" hidden>
+                <input type="hidden" id="cert-id" />
+                <div class="ep-field-row">
+                  <div class="ep-field">
+                    <label for="cert-name">Certificate name</label>
+                    <input type="text" id="cert-name" required />
+                  </div>
+                  <div class="ep-field">
+                    <label for="cert-org">Issuing organization</label>
+                    <input type="text" id="cert-org" required />
+                  </div>
+                </div>
+                <div class="ep-field-row">
+                  <div class="ep-field">
+                    <label for="cert-issue">Issue date</label>
+                    <input type="date" id="cert-issue" required />
+                  </div>
+                  <div class="ep-field">
+                    <label for="cert-expire">Expiry date (optional)</label>
+                    <input type="date" id="cert-expire" />
+                  </div>
+                </div>
+                <div class="ep-field-row">
+                  <div class="ep-field">
+                    <label for="cert-cred-id">Credential ID</label>
+                    <input type="text" id="cert-cred-id" />
+                  </div>
+                  <div class="ep-field">
+                    <label for="cert-cred-url">Credential URL</label>
+                    <input type="url" id="cert-cred-url" placeholder="https://" />
+                  </div>
+                </div>
+                <div class="ep-inline-form__actions">
+                  <button type="button" class="btn-outline btn-compact" id="cancel-certificate-btn">Cancel</button>
+                  <button type="submit" class="btn-primary btn-compact">Save</button>
+                </div>
+              </form>
+            </section>
+
+            <!-- Resume -->
+            <section class="card ep-panel" data-panel="resume">
+              <div class="ep-panel__head"><h3>Resume</h3></div>
+              <p class="ep-panel__sub">Upload your resume so recruiters can learn more about you.</p>
+              <div id="resume-current"></div>
+              <input type="file" id="resume-input" accept=".pdf,.doc,.docx" hidden />
+              <button type="button" class="btn-primary btn-compact" id="resume-upload-btn">Upload Resume</button>
+            </section>
+
+            <!-- Portfolio -->
+            <section class="card ep-panel" data-panel="portfolio">
+              <div class="ep-panel__head">
+                <h3>Portfolio Links</h3>
+                <button type="button" class="btn-primary btn-compact" id="add-portfolio-btn"><i class="ti ti-plus" aria-hidden="true"></i> Add Link</button>
+              </div>
+              <div id="portfolio-manage-list"></div>
+
+              <form id="add-portfolio-form" class="ep-inline-form" hidden>
+                <div class="ep-field-row">
+                  <div class="ep-field">
+                    <label for="pl-title">Title</label>
+                    <input type="text" id="pl-title" required />
+                  </div>
+                  <div class="ep-field">
+                    <label for="pl-type">Type</label>
+                    <select id="pl-type">
+                      <option value="Website">Website</option>
+                      <option value="Project">Project</option>
+                      <option value="Design">Design</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="ep-field">
+                  <label for="pl-url">URL</label>
+                  <input type="url" id="pl-url" required placeholder="https://" />
+                </div>
+                <div class="ep-inline-form__actions">
+                  <button type="button" class="btn-outline btn-compact" id="cancel-portfolio-btn">Cancel</button>
+                  <button type="submit" class="btn-primary btn-compact">Save Link</button>
+                </div>
+              </form>
+            </section>
+
+            <!-- Availability -->
+            <section class="card ep-panel" data-panel="availability">
+              <div class="ep-panel__head"><h3>Availability</h3></div>
+              <p class="ep-panel__sub">Let recruiters know when you're open to new opportunities.</p>
+
+              <div class="ep-field">
+                <label for="av-status">Status</label>
+                <select id="av-status">
+                  <option value="Available">Available</option>
+                  <option value="OpenToOffers">Open to Offers</option>
+                  <option value="NotLooking">Not Looking</option>
+                  <option value="NotAvailable">Not Available</option>
+                </select>
+              </div>
+
+              <div class="ep-field">
+                <label for="av-start-date">Earliest Start Date</label>
+                <input type="date" id="av-start-date" />
+              </div>
+
+              <div class="ep-field ep-checkbox-field">
+                <label><input type="checkbox" id="av-relocate" /> Willing to relocate</label>
+              </div>
+
+              <div class="ep-field">
+                <label for="av-work-auth">Work Authorization</label>
+                <select id="av-work-auth">
+                  <option value="AuthorizedNoSponsorship">Authorized — no sponsorship needed</option>
+                  <option value="RequiresSponsorship">Requires sponsorship</option>
+                  <option value="NotAuthorized">Not authorized</option>
+                </select>
+              </div>
+
+              <div class="ep-field">
+                <label for="av-visibility">Who can see your availability</label>
+                <select id="av-visibility">
+                  <option value="AllRecruiters">All Recruiters</option>
+                  <option value="MyNetworkOnly">My Network Only</option>
+                  <option value="Hidden">Hidden</option>
+                </select>
+              </div>
+            </section>
+
+          </div>
+
+          <!-- Right sidebar -->
+          <aside class="ep-side">
+            <div class="card">
+              <h3 class="ep-side__heading">Profile Completeness</h3>
+              <div class="strength-card__body">
+                <div class="strength-card__ring">
+                  <svg viewBox="0 0 120 120" class="ring-svg">
+                    <circle cx="60" cy="60" r="52" class="ring-track" />
+                    <circle cx="60" cy="60" r="52" class="ring-fill" id="ep-strength-ring" />
+                  </svg>
+                  <div class="strength-card__pct" id="ep-strength-pct">0%</div>
+                </div>
+                <p class="strength-card__title" id="ep-strength-message">Great job! Your profile is almost complete.</p>
+              </div>
+              <a href="profile-overview.html" class="btn-outline btn-compact" style="width: 100%; justify-content: center; margin-top: 12px;">
+                <i class="ti ti-eye" aria-hidden="true"></i> View Profile
+              </a>
+            </div>
+
+            <div class="card">
+              <h3 class="ep-side__heading">Profile Preview</h3>
+              <p class="ep-panel__sub" style="margin-bottom: 10px;">This is how others see your profile.</p>
+              <div class="ep-preview">
+                <img id="preview-photo" src="" alt="" class="ep-preview__photo" />
+                <p class="ep-preview__name" id="preview-name">—</p>
+                <p class="ep-preview__headline" id="preview-headline">—</p>
+                <p class="ep-preview__location" id="preview-location" hidden></p>
+              </div>
+              <a href="professional-public-profile.html" class="btn-outline btn-compact" style="width: 100%; justify-content: center; margin-top: 10px;">View Public Profile</a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/editProfessionalProfile.js"></script>
+</body>
+</html>

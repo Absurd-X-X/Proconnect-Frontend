@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Availability Settings · ProConnect</title>
+  <link rel="stylesheet" href="Styles/availability.css" />
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="css/availability.css" />
+  <link rel="stylesheet" href="Styles/profile-overview.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="profile-availability">
+
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search people, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <button class="icon-btn" disabled title="Notifications (coming soon)"><i class="ti ti-bell" aria-hidden="true"></i></button>
+          <button class="icon-btn" disabled title="Messages (coming soon)"><i class="ti ti-message-2" aria-hidden="true"></i></button>
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" src="" alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-loading" id="loading-state">
+        <span class="spinner spinner--dark"></span>
+        <span>Loading your availability...</span>
+      </div>
+
+      <div class="app-content" id="content" hidden>
+
+        <div class="av-header">
+          <h1>Availability Settings</h1>
+          <p>Manage your availability and let recruiters know when you're open to new opportunities.</p>
+        </div>
+
+        <div class="av-layout">
+
+          <div class="av-main">
+
+            <!-- Current status banner -->
+            <div class="card">
+              <h3 class="av-card-heading">Current Availability Status</h3>
+              <div class="av-current-banner">
+                <span class="av-current-banner__icon" id="current-status-icon"><i class="ti ti-calendar-event" aria-hidden="true"></i></span>
+                <div class="av-current-banner__text">
+                  <p class="av-current-banner__status" id="current-status-label">—</p>
+                  <p class="av-current-banner__desc" id="current-status-desc">—</p>
+                  <span class="av-current-banner__visible"><i class="ti ti-eye" aria-hidden="true"></i> <span id="current-visibility-label">—</span></span>
+                </div>
+                <button type="button" class="btn-outline btn-compact" id="change-status-btn"><i class="ti ti-pencil" aria-hidden="true"></i> Change Status</button>
+              </div>
+            </div>
+
+            <!-- Status selector -->
+            <div class="card" id="status-selector-section">
+              <h3 class="av-card-heading">Availability Status</h3>
+              <p class="av-card-sub">Select your current availability</p>
+              <div class="av-status-grid" id="status-grid">
+                <button type="button" class="av-status-card" data-status="Available">
+                  <span class="av-status-card__dot av-dot-available"></span>
+                  <strong>Available</strong>
+                  <span>Actively looking for new opportunities</span>
+                </button>
+                <button type="button" class="av-status-card" data-status="OpenToOffers">
+                  <span class="av-status-card__dot av-dot-open"></span>
+                  <strong>Open to Offers</strong>
+                  <span>Open to interesting opportunities</span>
+                </button>
+                <button type="button" class="av-status-card" data-status="NotLooking">
+                  <span class="av-status-card__dot av-dot-not-looking"></span>
+                  <strong>Not Looking</strong>
+                  <span>Not looking for new opportunities</span>
+                </button>
+                <button type="button" class="av-status-card" data-status="NotAvailable">
+                  <span class="av-status-card__dot av-dot-unavailable"></span>
+                  <strong>Not Available</strong>
+                  <span>Not available for new opportunities</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Details -->
+            <div class="card">
+              <h3 class="av-card-heading">Availability Details</h3>
+              <p class="av-card-sub">Help recruiters understand your preferences</p>
+
+              <div class="av-field-row">
+                <div class="av-field">
+                  <label>Preferred Job Types</label>
+                  <div class="tag-input" id="job-types-input">
+                    <div class="tag-input__chips" id="job-types-chips"></div>
+                    <select id="job-types-select">
+                      <option value="">Add a job type...</option>
+                      <option value="FullTime">Full-time</option>
+                      <option value="PartTime">Part-time</option>
+                      <option value="Contract">Contract</option>
+                      <option value="Internship">Internship</option>
+                      <option value="Freelance">Freelance</option>
+                      <option value="Temporary">Temporary</option>
+                      <option value="Remote">Remote</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="av-field">
+                  <label>Preferred Locations</label>
+                  <div class="tag-input" id="locations-input">
+                    <div class="tag-input__chips" id="locations-chips"></div>
+                    <input type="text" id="locations-text" placeholder="Type a location and press Enter" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="av-field-row">
+                <div class="av-field">
+                  <label for="earliest-start">Earliest Start Date</label>
+                  <input type="date" id="earliest-start" />
+                </div>
+                <div class="av-field">
+                  <label for="willing-relocate">Willing to Relocate</label>
+                  <div class="toggle-row">
+                    <label class="toggle-switch">
+                      <input type="checkbox" id="willing-relocate" />
+                      <span class="toggle-switch__track"></span>
+                    </label>
+                    <span>Yes, I'm open to relocate</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="av-field">
+                <label for="work-auth">Work Authorization</label>
+                <select id="work-auth">
+                  <option value="AuthorizedNoSponsorship">Authorized to work — no sponsorship needed</option>
+                  <option value="RequiresSponsorship">Authorized to work — requires sponsorship</option>
+                  <option value="NotAuthorized">Not authorized to work</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Visibility -->
+            <div class="card">
+              <h3 class="av-card-heading">Visibility Settings</h3>
+              <p class="av-card-sub">Control who can see your availability</p>
+              <div class="av-visibility-grid" id="visibility-grid">
+                <button type="button" class="av-visibility-card" data-visibility="AllRecruiters">
+                  <i class="ti ti-world" aria-hidden="true"></i>
+                  <strong>All Recruiters</strong>
+                  <span>All recruiters can see my availability</span>
+                </button>
+                <button type="button" class="av-visibility-card" data-visibility="MyNetworkOnly">
+                  <i class="ti ti-users" aria-hidden="true"></i>
+                  <strong>My Network Only</strong>
+                  <span>Only my connections can see my availability</span>
+                </button>
+                <button type="button" class="av-visibility-card" data-visibility="Hidden">
+                  <i class="ti ti-eye-off" aria-hidden="true"></i>
+                  <strong>Hidden</strong>
+                  <span>Hide my availability from all recruiters</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="av-save-row">
+              <div class="form-alert" id="form-alert" role="alert" hidden></div>
+              <button type="button" class="btn-primary" id="save-availability-btn">Save Changes</button>
+            </div>
+
+          </div>
+
+          <!-- Right sidebar -->
+          <aside class="av-side">
+            <div class="card">
+              <h3 class="av-card-heading">Availability Summary</h3>
+              <div class="av-summary-status">
+                <span class="av-summary-status__icon" id="summary-status-icon"><i class="ti ti-calendar-event" aria-hidden="true"></i></span>
+                <div>
+                  <p class="av-summary-status__label" id="summary-status-label">—</p>
+                  <p class="av-summary-status__desc" id="summary-status-desc">—</p>
+                </div>
+              </div>
+              <ul class="av-summary-list" id="summary-list"></ul>
+            </div>
+
+            <div class="card">
+              <h3 class="av-card-heading">Profile Preview</h3>
+              <p class="av-card-sub">This is how recruiters see your availability</p>
+              <div class="ep-preview">
+                <img id="preview-photo" src="" alt="" class="ep-preview__photo" />
+                <p class="ep-preview__name" id="preview-name">—</p>
+                <p class="ep-preview__headline" id="preview-headline">—</p>
+                <span class="status-pill" id="preview-status-pill" style="margin-top: 6px;"><span class="status-dot"></span> —</span>
+              </div>
+              <a href="professional-public-profile.html" id="view-public-profile-link" class="btn-outline btn-compact" style="width: 100%; justify-content: center; margin-top: 10px;">
+                <i class="ti ti-eye" aria-hidden="true"></i> View Public Profile
+              </a>
+            </div>
+
+            <div class="card av-break-card">
+              <h3 class="av-card-heading">Need a break?</h3>
+              <p class="av-card-sub">You can pause your visibility without changing your availability status.</p>
+              <button type="button" class="btn-outline btn-compact" disabled title="Not available yet">
+                <i class="ti ti-player-pause" aria-hidden="true"></i> Pause Visibility
+              </button>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/availabilty.js"></script>
+</body>
+</html>

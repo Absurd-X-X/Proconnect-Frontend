@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Company Profile - ProConnect</title>
+  <link rel="stylesheet" href="/Styles/company-layout.css" />
+  <link rel="stylesheet" href="/Styles/company-profile.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <!-- Sidebar (shared shell — reuse your existing dashboard sidebar include/partial here) -->
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <div class="app-main">
+
+      <!-- Topbar (shared shell) -->
+      <header class="app-topbar" id="app-topbar"></header>
+
+      <main class="app-content">
+
+        <div class="page-header">
+          <div>
+            <h1>Company Profile</h1>
+            <p>View and manage your company information and public profile.</p>
+          </div>
+          <a href="edit-company-profile.html" class="btn-primary btn-inline" id="edit-profile-link">
+            <i class="ti ti-pencil" aria-hidden="true"></i> Edit Profile
+          </a>
+        </div>
+
+        <div class="loading-state" id="loading-state">Loading company profile...</div>
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="profile-layout" id="profile-layout" hidden>
+
+          <div class="profile-main">
+
+            <div class="cover-card">
+              <div class="cover-card__banner"></div>
+              <div class="cover-card__body">
+                <div class="cover-card__logo" id="company-logo"></div>
+                <div class="cover-card__info">
+                  <h2 id="company-name"></h2>
+                  <span class="verified-badge" id="verified-badge" hidden>
+                    <i class="ti ti-rosette-discount-check" aria-hidden="true"></i>
+                  </span>
+                  <p id="company-industry" class="cover-card__industry"></p>
+                  <div class="cover-card__meta">
+                    <span id="company-headquarters"><i class="ti ti-map-pin" aria-hidden="true"></i></span>
+                    <span id="company-size-meta"><i class="ti ti-users" aria-hidden="true"></i></span>
+                    <span id="company-website-meta"><i class="ti ti-world" aria-hidden="true"></i></span>
+                  </div>
+                </div>
+              </div>
+
+              <nav class="profile-tabs">
+                <button class="profile-tab is-active" data-tab="overview">Overview</button>
+                <button class="profile-tab" data-tab="jobs">Jobs</button>
+                <button class="profile-tab" data-tab="team">Team</button>
+                <button class="profile-tab" data-tab="about">About Us</button>
+              </nav>
+            </div>
+
+            <!-- Overview tab -->
+            <section class="tab-panel is-active" data-tab-panel="overview">
+
+              <div class="content-card">
+                <h3>About Us</h3>
+                <p id="company-description"></p>
+              </div>
+
+              <div class="content-card">
+                <h3>Company Highlights</h3>
+                <div class="highlights-grid" id="highlights-grid"></div>
+              </div>
+
+              <div class="content-card">
+                <h3>Recent Job Openings</h3>
+                <div class="jobs-list" id="recent-jobs-list"></div>
+                <p class="empty-hint" id="jobs-empty-hint" hidden>No open positions right now.</p>
+              </div>
+
+            </section>
+
+            <!-- Jobs tab -->
+            <section class="tab-panel" data-tab-panel="jobs">
+              <div class="content-card">
+                <h3>All Jobs</h3>
+                <div class="jobs-list" id="all-jobs-list"></div>
+              </div>
+            </section>
+
+            <!-- Team tab -->
+            <section class="tab-panel" data-tab-panel="team">
+              <div class="content-card">
+                <h3>Team</h3>
+                <div class="team-grid" id="team-grid"></div>
+              </div>
+            </section>
+
+            <!-- About Us tab -->
+            <section class="tab-panel" data-tab-panel="about">
+              <div class="content-card">
+                <h3>Company Overview</h3>
+                <div class="about-detail-grid">
+                  <div>
+                    <span class="about-detail-label">Industry</span>
+                    <span id="about-industry"></span>
+                  </div>
+                  <div>
+                    <span class="about-detail-label">Company Size</span>
+                    <span id="about-size"></span>
+                  </div>
+                  <div>
+                    <span class="about-detail-label">Founded</span>
+                    <span id="about-founded"></span>
+                  </div>
+                  <div>
+                    <span class="about-detail-label">Company Type</span>
+                    <span id="about-type"></span>
+                  </div>
+                  <div>
+                    <span class="about-detail-label">Headquarters</span>
+                    <span id="about-headquarters"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="content-card">
+                <h3>Office Locations</h3>
+                <div class="locations-display" id="locations-display"></div>
+              </div>
+            </section>
+
+          </div>
+
+          <aside class="profile-sidebar">
+
+            <div class="content-card">
+              <h3>Company Details</h3>
+              <ul class="detail-list">
+                <li>
+                  <i class="ti ti-world" aria-hidden="true"></i>
+                  <div>
+                    <span class="detail-list__label">Website</span>
+                    <a id="sidebar-website" href="#" target="_blank" rel="noopener"></a>
+                  </div>
+                </li>
+                <li>
+                  <i class="ti ti-mail" aria-hidden="true"></i>
+                  <div>
+                    <span class="detail-list__label">Email</span>
+                    <a id="sidebar-email" href="#"></a>
+                  </div>
+                </li>
+                <li>
+                  <i class="ti ti-phone" aria-hidden="true"></i>
+                  <div>
+                    <span class="detail-list__label">Phone</span>
+                    <span id="sidebar-phone"></span>
+                  </div>
+                </li>
+              </ul>
+
+              <div class="social-links" id="social-links"></div>
+            </div>
+
+            <div class="content-card verification-card" id="verification-card">
+              <div class="verification-card__icon"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
+              <div>
+                <h4 id="verification-title">Verification Pending</h4>
+                <p id="verification-text">This company profile has not been verified yet.</p>
+              </div>
+            </div>
+
+            <a href="company-management.html" class="btn-secondary btn-block">
+              <i class="ti ti-settings" aria-hidden="true"></i> Manage Company
+            </a>
+
+          </aside>
+
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/Layouts/companyLayout.js"></script>
+  <script src="Scripts/companyProfile.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/professional-public-profile.css" />
+  <link rel="stylesheet" href="Styles/profile-overview.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search anything..." />
+        </div>
+        <div class="app-topbar__icons">
+          <button class="icon-btn" disabled title="Notifications (coming soon)"><i class="ti ti-bell" aria-hidden="true"></i></button>
+          <button class="icon-btn" disabled title="Messages (coming soon)"><i class="ti ti-message-2" aria-hidden="true"></i></button>
+          <div class="topbar-user">
+            <img id="topbar-avatar" src="" alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-loading" id="loading-state">
+        <span class="spinner spinner--dark"></span>
+        <span>Loading profile...</span>
+      </div>
+
+      <div class="app-content" id="content" hidden>
+
+        <!-- Banner -->
+        <section class="card vp-banner">
+          <img id="vp-photo" src="" alt="" class="vp-banner__photo" />
+          <div class="vp-banner__info">
+            <div class="vp-banner__name-row">
+              <h1 id="vp-name">—</h1>
+              <i class="ti ti-rosette-discount-check vp-verified" id="vp-verified" hidden aria-hidden="true"></i>
+              <span class="verified-label" id="vp-verified-label" hidden>Verified</span>
+            </div>
+            <p class="vp-headline" id="vp-headline">—</p>
+            <div class="vp-meta">
+              <span id="vp-location" hidden><i class="ti ti-map-pin" aria-hidden="true"></i> <span></span></span>
+              <a href="#" id="vp-linkedin" class="vp-linkedin" hidden><i class="ti ti-brand-linkedin" aria-hidden="true"></i> <span></span></a>
+            </div>
+            <div class="chip-list" id="vp-top-skills"></div>
+          </div>
+          <div class="vp-banner__actions">
+            <button type="button" class="btn-primary btn-compact" disabled title="Coming soon"><i class="ti ti-user-plus" aria-hidden="true"></i> Connect</button>
+            <button type="button" class="btn-outline btn-compact" disabled title="Coming soon"><i class="ti ti-message-2" aria-hidden="true"></i> Message</button>
+            <div class="dropdown-wrap" id="vp-more-toggle">
+              <button class="btn-outline btn-compact"><i class="ti ti-dots" aria-hidden="true"></i> More</button>
+              <div class="dropdown-menu dropdown-menu--right" id="vp-more-dropdown">
+                <button type="button" class="dropdown-menu__item" id="vp-share-btn"><i class="ti ti-share" aria-hidden="true"></i> Share Profile</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Main grid -->
+        <section class="profile-grid-3">
+
+          <div class="grid-col">
+            <div class="card">
+              <div class="card-header"><h3>About</h3></div>
+              <p id="vp-about" class="about-text">—</p>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Experience</h3>
+                <a href="#" class="view-all-link">View all</a>
+              </div>
+              <div id="vp-experience-list" class="timeline-list"></div>
+            </div>
+          </div>
+
+          <div class="grid-col">
+            <div class="card">
+              <div class="card-header">
+                <h3>Education</h3>
+                <a href="#" class="view-all-link">View all</a>
+              </div>
+              <div id="vp-education-list" class="timeline-list"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Skills</h3>
+                <a href="#" class="view-all-link">View all</a>
+              </div>
+              <div id="vp-skills-list" class="chip-list"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Certifications</h3>
+                <a href="#" class="view-all-link">View all</a>
+              </div>
+              <div id="vp-certifications-list" class="cert-list"></div>
+            </div>
+          </div>
+
+          <div class="grid-col">
+            <div class="card">
+              <div class="card-header"><h3>Profile Highlights</h3></div>
+              <div id="vp-highlights"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header"><h3>Availability</h3></div>
+              <div id="vp-availability"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Portfolio</h3>
+                <a href="#" class="view-all-link">View all</a>
+              </div>
+              <div id="vp-portfolio-list" class="portfolio-links-list"></div>
+            </div>
+
+            <div class="card vp-cta-card">
+              <h3>Looking for top talent?</h3>
+              <p>Invite <span id="vp-cta-name">this person</span> to apply for your job or connect to start a conversation.</p>
+              <button type="button" class="btn-primary btn-compact" disabled title="Jobs module not built yet"><i class="ti ti-briefcase" aria-hidden="true"></i> View Jobs</button>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/professionalPublicProfile.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+.rs-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--pc-purple);
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.rs-back-link:hover {
+  text-decoration: underline;
+}
+
+.rs-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.rs-header__text h1 {
+  font-size: 22px;
+  margin: 0 0 6px;
+}
+
+.rs-header__text p {
+  font-size: 13px;
+  color: var(--pc-text-secondary);
+  max-width: 520px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.rs-tip-card {
+  display: flex;
+  gap: 12px;
+  background: var(--pc-purple-light);
+  border-radius: var(--pc-radius);
+  padding: 14px 16px;
+  max-width: 300px;
+}
+
+.rs-tip-card__icon {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  background: var(--pc-surface);
+  color: var(--pc-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.rs-tip-card strong {
+  display: block;
+  font-size: 12.5px;
+  margin-bottom: 3px;
+}
+
+.rs-tip-card p {
+  font-size: 11.5px;
+  color: var(--pc-text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.rs-layout {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+  align-items: start;
+}
+
+.rs-current-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.rs-current-card__head h3 {
+  font-size: 15px;
+  margin: 0;
+}
+
+.rs-current-file {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.rs-current-file__icon {
+  width: 68px;
+  height: 68px;
+  min-width: 68px;
+  border-radius: 10px;
+  background: #FCEDED;
+  color: #D64545;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.rs-current-file__body {
+  flex: 1;
+  min-width: 180px;
+}
+
+.rs-current-file__name {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.rs-current-file__meta {
+  font-size: 12px;
+  color: var(--pc-text-secondary);
+  margin: 3px 0;
+}
+
+.rs-current-file__uploaded {
+  font-size: 11.5px;
+  color: var(--pc-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rs-current-file__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.rs-visible-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #16A34A;
+  background: #E8F7EE;
+  border-radius: var(--pc-radius);
+  padding: 8px 12px;
+  margin-top: 14px;
+}
+
+.rs-empty {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.rs-empty i {
+  font-size: 40px;
+  color: var(--pc-text-muted);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.rs-empty p {
+  font-size: 13px;
+  color: var(--pc-text-secondary);
+  margin: 0 0 14px;
+}
+
+/* ---------- Stats ---------- */
+
+.rs-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rs-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rs-stat__icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 8px;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.rs-stat strong {
+  font-size: 17px;
+  margin-right: 6px;
+}
+
+.rs-stat span {
+  font-size: 12px;
+  color: var(--pc-text-secondary);
+}
+
+/* ---------- Tips card ---------- */
+
+.rs-tips-card {
+  display: grid;
+  grid-template-columns: 90px 1fr 220px;
+  gap: 24px;
+  align-items: center;
+}
+
+.rs-tips-illustration {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.rs-tips-list ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rs-tips-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--pc-text-secondary);
+}
+
+.rs-tips-list li i {
+  color: #22C55E;
+  font-size: 15px;
+}
+
+.rs-help {
+  border-left: 1px solid var(--pc-border);
+  padding-left: 24px;
+}
+
+.rs-help p {
+  font-size: 12px;
+  color: var(--pc-text-secondary);
+  margin: 6px 0 12px;
+  line-height: 1.5;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1000px) {
+  .rs-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .rs-tips-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .rs-help {
+    border-left: none;
+    border-top: 1px solid var(--pc-border);
+    padding-left: 0;
+    padding-top: 16px;
+  }
+}

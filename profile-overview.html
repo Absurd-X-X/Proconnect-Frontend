@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile Overview · ProConnect</title>
+  <link rel="stylesheet" href="Styles/profile-overview.css" />
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="profile-overview">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search people, jobs, skills..." />
+        </div>
+
+        <div class="app-topbar__icons">
+          <button class="icon-btn" disabled title="Notifications (coming soon)">
+            <i class="ti ti-bell" aria-hidden="true"></i>
+            <span class="icon-btn__badge" id="notif-badge" hidden></span>
+          </button>
+          <button class="icon-btn" disabled title="Messages (coming soon)">
+            <i class="ti ti-message-2" aria-hidden="true"></i>
+            <span class="icon-btn__badge" id="msg-badge" hidden></span>
+          </button>
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" src="" alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+
+            <div class="dropdown-menu" id="topbar-dropdown">
+              <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+              <a href="#" class="dropdown-menu__item"><i class="ti ti-settings" aria-hidden="true"></i> Settings</a>
+              <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+            </div>
+          </div>
+          <button class="btn-primary btn-compact" disabled title="Posts (coming soon)">
+            <i class="ti ti-plus" aria-hidden="true"></i> Add Post
+          </button>
+        </div>
+      </header>
+
+      <div class="app-loading" id="loading-state">
+        <span class="spinner spinner--dark"></span>
+        <span>Loading your profile...</span>
+      </div>
+
+      <div class="app-content" id="content" hidden>
+
+        <section class="top-row">
+
+          <div class="card profile-banner-card">
+            <div class="profile-banner__top">
+              <div class="profile-banner__photo-wrap">
+                <img id="profile-photo" src="" alt="" class="profile-banner__photo" />
+                <button type="button" class="profile-banner__camera" id="photo-upload-btn" title="Change photo"><i class="ti ti-camera" aria-hidden="true"></i></button>
+                <input type="file" id="photo-upload-input" accept="image/png, image/jpeg, image/webp" hidden />
+              </div>
+
+              <div class="profile-banner__info">
+                <div class="profile-banner__name-row">
+                  <h1 id="profile-name">—</h1>
+                  <i class="ti ti-rosette-discount-check profile-banner__verified" id="verified-badge" aria-hidden="true" hidden></i>
+                  <span class="verified-label" id="verified-label" hidden>Verified</span>
+                </div>
+                <p id="profile-headline" class="profile-banner__headline">—</p>
+                <div class="profile-banner__meta">
+                  <span id="profile-location" hidden><i class="ti ti-map-pin" aria-hidden="true"></i> <span></span></span>
+                  <a href="#" id="profile-linkedin" class="profile-banner__linkedin" hidden><i class="ti ti-brand-linkedin" aria-hidden="true"></i> <span></span></a>
+                </div>
+                <span class="status-pill" id="availability-pill"><span class="status-dot"></span> —</span>
+              </div>
+
+              <div class="profile-banner__actions">
+                <div>
+                  <a href="edit-professional-profile.html" class="btn-primary btn-compact"><i class="ti ti-pencil" aria-hidden="true"></i> Edit Profile</a>
+                  <a href="professional-public-profile.html" class="btn-outline btn-compact">View Public Profile</a>
+                  <div class="dropdown-wrap" id="banner-more-toggle">
+                    <button class="icon-btn icon-btn--ghost" title="More options"><i class="ti ti-dots" aria-hidden="true"></i></button>
+                    <div class="dropdown-menu dropdown-menu--right" id="banner-more-dropdown">
+                      <button type="button" class="dropdown-menu__item" id="share-profile-btn"><i class="ti ti-share" aria-hidden="true"></i> Share Profile</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p class="profile-banner__bio" id="banner-bio">—</p>
+          </div>
+
+          <div class="card strength-card">
+            <h3 class="strength-card__heading">Profile Strength</h3>
+            <div class="strength-card__body">
+              <div class="strength-card__ring">
+                <svg viewBox="0 0 120 120" class="ring-svg">
+                  <circle cx="60" cy="60" r="52" class="ring-track" />
+                  <circle cx="60" cy="60" r="52" class="ring-fill" id="strength-ring" />
+                </svg>
+                <div class="strength-card__pct" id="strength-pct">0%</div>
+              </div>
+              <p class="strength-card__title" id="strength-message">Complete your profile to unlock more opportunities.</p>
+            </div>
+            <button class="btn-outline btn-compact strength-card__btn"><i class="ti ti-trending-up" aria-hidden="true"></i> Improve Profile</button>
+            <p class="strength-card__subtitle">Complete your profile to reach 100%</p>
+            <div class="progress-track"><div class="progress-fill" id="strength-bar"></div></div>
+          </div>
+
+          <div class="card quick-actions-card">
+            <h3>Quick Actions</h3>
+            <a href="#" class="quick-action" id="qa-experience">
+              <span class="quick-action__icon"><i class="ti ti-briefcase" aria-hidden="true"></i></span>
+              <span><strong>Add Experience</strong><br /><small>Share your work history</small></span>
+              <i class="ti ti-chevron-right" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="quick-action" id="qa-education">
+              <span class="quick-action__icon"><i class="ti ti-school" aria-hidden="true"></i></span>
+              <span><strong>Add Education</strong><br /><small>Show your academic background</small></span>
+              <i class="ti ti-chevron-right" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="quick-action" id="qa-skills">
+              <span class="quick-action__icon"><i class="ti ti-bulb" aria-hidden="true"></i></span>
+              <span><strong>Add Skills</strong><br /><small>Highlight your expertise</small></span>
+              <i class="ti ti-chevron-right" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="quick-action" id="qa-certification">
+              <span class="quick-action__icon"><i class="ti ti-certificate" aria-hidden="true"></i></span>
+              <span><strong>Add Certification</strong><br /><small>Showcase your achievements</small></span>
+              <i class="ti ti-chevron-right" aria-hidden="true"></i>
+            </a>
+          </div>
+        </section>
+
+        <section class="stat-strip" id="stat-strip"></section>
+
+        <section class="profile-grid-3">
+
+          <div class="grid-col">
+            <div class="card">
+              <div class="card-header">
+                <h3>About</h3>
+                <button class="icon-btn icon-btn--ghost icon-btn--sm" title="Edit about"><i class="ti ti-pencil" aria-hidden="true"></i></button>
+              </div>
+              <p id="about-text" class="about-text clamp-3">—</p>
+              <button class="link-btn" id="about-toggle" hidden>Show more</button>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Experience</h3>
+                <a href="#" class="view-all-link">View all</a>
+              </div>
+              <div id="experience-list" class="timeline-list"></div>
+              <a href="#" class="link-btn" id="experience-view-all" hidden>View all experience</a>
+            </div>
+          </div>
+
+          <div class="grid-col">
+            <div class="card">
+              <div class="card-header">
+                <h3>Skills</h3>
+                <a href="#" class="view-all-link">Manage Skills</a>
+              </div>
+              <div id="skills-list" class="chip-list"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Education</h3>
+                <a href="#" class="view-all-link">View all</a>
+              </div>
+              <div id="education-list" class="timeline-list"></div>
+            </div>
+          </div>
+
+          <div class="grid-col">
+            <div class="card">
+              <div class="card-header">
+                <h3>Certifications</h3>
+                <a href="#" class="view-all-link">View all</a>
+              </div>
+              <div id="certifications-list" class="cert-list"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Resume</h3>
+                <a href="#" class="view-all-link">View all</a>
+              </div>
+              <div id="resume-block"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Portfolio</h3>
+                <a href="#" class="view-all-link">View all</a>
+              </div>
+              <div id="portfolio-list" class="portfolio-links-list"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Availability</h3>
+                <button class="icon-btn icon-btn--ghost icon-btn--sm" title="Edit availability"><i class="ti ti-pencil" aria-hidden="true"></i></button>
+              </div>
+              <div id="availability-block"></div>
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/profileOverview.js"></script>
+</body>
+</html>
