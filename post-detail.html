@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/feed.css" />
+  <link rel="stylesheet" href="Styles/post-detail.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="dashboard">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, skills..." />
+        </div>
+
+        <div class="topbar-nav-icons" id="topbar-nav-icons"></div>
+
+        <div class="app-topbar__icons">
+          <button class="icon-btn" disabled title="Messages (coming soon)">
+            <i class="ti ti-message-2" aria-hidden="true"></i>
+          </button>
+          <button class="icon-btn" disabled title="Notifications (coming soon)">
+            <i class="ti ti-bell" aria-hidden="true"></i>
+          </button>
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" src="" alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+
+            <div class="dropdown-menu" id="topbar-dropdown">
+              <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+              <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content post-detail-layout">
+        <div class="post-detail-main">
+
+          <a href="feed.html" class="back-to-feed"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back to feed</a>
+
+          <div id="post-detail-container">
+            <p class="app-loading-inline">Loading post...</p>
+          </div>
+
+          <section class="card comments-section" id="comments-section" hidden>
+            <div class="card-header">
+              <h3>Comments (<span id="comments-total">0</span>)</h3>
+            </div>
+
+            <div class="comment-composer">
+              <input type="text" placeholder="Write a comment..." id="detail-comment-input" />
+              <button type="button" id="detail-comment-submit"><i class="ti ti-send" aria-hidden="true"></i></button>
+            </div>
+
+            <div id="detail-comment-list" class="comment-list"></div>
+            <p class="empty-note" id="comments-empty" hidden>No comments yet. Be the first to comment.</p>
+            <button type="button" class="btn-load-more" id="btn-load-more-comments" hidden>View more comments</button>
+          </section>
+
+        </div>
+
+        <aside class="post-detail-side">
+
+          <section class="card author-card" id="author-card" hidden>
+            <h3 class="side-card__heading">About the author</h3>
+            <div class="author-card__body">
+              <div id="author-card-avatar"></div>
+              <p class="author-card__name" id="author-card-name">—</p>
+              <p class="author-card__headline" id="author-card-headline"></p>
+              <p class="author-card__location" id="author-card-location" hidden><i class="ti ti-map-pin" aria-hidden="true"></i> <span></span></p>
+              <p class="author-card__followers" id="author-card-followers"></p>
+              <button type="button" class="btn-outline-sm author-card__follow-btn" id="author-card-follow-btn"></button>
+            </div>
+          </section>
+
+          <section class="card" id="more-from-author-card" hidden>
+            <h3 class="side-card__heading">More from this author</h3>
+            <div id="more-from-author-list" class="side-post-list"></div>
+          </section>
+
+          <section class="card" id="people-to-follow-card" hidden>
+            <h3 class="side-card__heading">People to follow</h3>
+            <div id="people-to-follow-list" class="side-suggestion-list"></div>
+          </section>
+
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/postDetail.js"></script>
+</body>
+</html>

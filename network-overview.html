@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Network · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/network-shared.css" />
+  <link rel="stylesheet" href="Styles/network-overview.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="network">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search people, jobs, skills..." />
+        </div>
+
+        <div class="app-topbar__icons">
+          <button class="icon-btn" disabled title="Notifications (coming soon)">
+            <i class="ti ti-bell" aria-hidden="true"></i>
+            <span class="icon-btn__badge" id="notif-badge" hidden></span>
+          </button>
+          <button class="icon-btn" disabled title="Messages (coming soon)">
+            <i class="ti ti-message-2" aria-hidden="true"></i>
+            <span class="icon-btn__badge" id="msg-badge" hidden></span>
+          </button>
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" src="" alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+
+            <div class="dropdown-menu" id="topbar-dropdown">
+              <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+              <a href="#" class="dropdown-menu__item"><i class="ti ti-settings" aria-hidden="true"></i> Settings</a>
+              <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <div class="page-heading">
+          <h1>My Network</h1>
+          <p>Manage your professional connections and grow your network.</p>
+        </div>
+
+        <!-- Tabs -->
+        <nav class="network-tabs">
+          <a href="network-overview.html" class="network-tab is-active">Overview</a>
+          <a href="discover-people.html" class="network-tab">People You May Know</a>
+          <a href="pending-requests.html" class="network-tab">
+            Pending Requests
+            <span class="network-tab__badge" id="tab-badge-pending" hidden></span>
+          </a>
+          <a href="connections.html" class="network-tab">
+            Connections
+            <span class="network-tab__badge" id="tab-badge-connections" hidden></span>
+          </a>
+          <a href="followers.html" class="network-tab">
+            Followers
+            <span class="network-tab__badge" id="tab-badge-followers" hidden></span>
+          </a>
+        </nav>
+
+        <!-- Stat strip -->
+        <div class="network-stat-strip" id="network-stat-strip">
+          <div class="stat-pill">
+            <span class="stat-pill__icon"><i class="ti ti-users" aria-hidden="true"></i></span>
+            <span>
+              <strong id="stat-connections">—</strong>
+              <span>Connections</span>
+            </span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-pill__icon"><i class="ti ti-user-plus" aria-hidden="true"></i></span>
+            <span>
+              <strong id="stat-pending">—</strong>
+              <span>Pending Requests</span>
+            </span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-pill__icon"><i class="ti ti-eye" aria-hidden="true"></i></span>
+            <span>
+              <strong id="stat-followers">—</strong>
+              <span>Followers</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="network-overview-grid">
+
+          <!-- Main column -->
+          <div class="grid-col">
+
+            <section class="card">
+              <div class="card-header">
+                <h3>Pending Requests</h3>
+                <a href="pending-requests.html" class="view-all-link">View all</a>
+              </div>
+              <div id="pending-requests-list" class="network-list">
+                <p class="app-loading-inline">Loading requests...</p>
+              </div>
+              <p class="empty-note" id="pending-requests-empty" hidden>No pending requests right now.</p>
+            </section>
+
+            <section class="card">
+              <div class="card-header">
+                <h3>Your Connections</h3>
+              </div>
+              <div class="network-search">
+                <i class="ti ti-search" aria-hidden="true"></i>
+                <input type="text" id="connections-filter-input" placeholder="Search connections" />
+              </div>
+              <div id="connections-preview-list" class="network-list">
+                <p class="app-loading-inline">Loading connections...</p>
+              </div>
+              <p class="empty-note" id="connections-preview-empty" hidden>No connections yet.</p>
+              <a href="connections.html" class="link-btn">View all connections →</a>
+            </section>
+
+          </div>
+
+          <!-- Side column -->
+          <div class="grid-col">
+
+            <section class="card network-cta-card">
+              <div class="network-cta-card__icon"><i class="ti ti-users-plus" aria-hidden="true"></i></div>
+              <h3>Grow your network</h3>
+              <p>Connecting with the right people can open doors to new opportunities.</p>
+              <a href="discover-people.html" class="btn-primary btn-compact">Find People</a>
+            </section>
+
+            <section class="card">
+              <div class="card-header">
+                <h3>People You May Know</h3>
+                <a href="discover-people.html" class="view-all-link">View all</a>
+              </div>
+              <div id="suggestions-preview-list" class="network-list">
+                <p class="app-loading-inline">Loading suggestions...</p>
+              </div>
+              <p class="empty-note" id="suggestions-preview-empty" hidden>No suggestions right now.</p>
+            </section>
+
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/network-overview.js"></script>
+</body>
+</html>

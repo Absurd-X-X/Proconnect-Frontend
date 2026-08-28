@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/messages.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="messages">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, skills..." />
+        </div>
+
+        <div class="topbar-nav-icons" id="topbar-nav-icons"></div>
+
+        <div class="app-topbar__icons">
+          <button class="icon-btn" disabled title="Notifications (coming soon)">
+            <i class="ti ti-bell" aria-hidden="true"></i>
+          </button>
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" src="" alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+
+            <div class="dropdown-menu" id="topbar-dropdown">
+              <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+              <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content messages-content">
+
+        <div class="messages-shell">
+
+          <!-- Left pane: conversation list -->
+          <aside class="messages-list-pane">
+            <div class="messages-list-pane__header">
+              <h1>Messages</h1>
+              <button type="button" class="icon-action-btn" id="btn-new-conversation" title="New message">
+                <i class="ti ti-edit" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <div class="network-search">
+              <i class="ti ti-search" aria-hidden="true"></i>
+              <input type="text" id="conversation-search-input" placeholder="Search messages or people..." />
+            </div>
+
+            <div id="pinned-section" hidden>
+              <p class="messages-list-pane__label"><i class="ti ti-pin" aria-hidden="true"></i> Pinned</p>
+              <div id="pinned-list" class="conversation-list"></div>
+            </div>
+
+            <p class="messages-list-pane__label">All conversations</p>
+            <div id="conversation-list" class="conversation-list">
+              <p class="app-loading-inline">Loading conversations...</p>
+            </div>
+            <p class="empty-note" id="conversations-empty" hidden>No conversations yet. Start one with a connection.</p>
+          </aside>
+
+          <!-- Right pane: chat thread -->
+          <section class="chat-pane" id="chat-pane">
+            <div class="chat-empty-state" id="chat-empty-state">
+              <div class="chat-empty-state__icon"><i class="ti ti-messages" aria-hidden="true"></i></div>
+              <h2>Your conversations</h2>
+              <p>Select a conversation from the list or start a new message to connect.</p>
+              <button type="button" class="btn-primary btn-compact" id="btn-new-conversation-empty">
+                <i class="ti ti-plus" aria-hidden="true"></i> New message
+              </button>
+            </div>
+
+            <div class="chat-thread" id="chat-thread" hidden>
+              <header class="chat-thread__header">
+                <div class="chat-thread__header-user">
+                  <div id="chat-header-avatar"></div>
+                  <div>
+                    <p class="chat-thread__name" id="chat-header-name">—</p>
+                    <span class="chat-thread__status" id="chat-header-status"></span>
+                  </div>
+                </div>
+                <div class="chat-thread__header-actions">
+                  <button type="button" class="icon-action-btn" data-action="call-video" title="Video call"><i class="ti ti-video" aria-hidden="true"></i></button>
+                  <button type="button" class="icon-action-btn" data-action="call-voice" title="Voice call"><i class="ti ti-phone" aria-hidden="true"></i></button>
+                  <div class="chat-menu-wrap">
+                    <button type="button" class="icon-action-btn" id="chat-menu-btn" title="More"><i class="ti ti-dots-vertical" aria-hidden="true"></i></button>
+                    <div class="chat-menu" id="chat-menu">
+                      <button type="button" class="chat-menu__item" data-action="pin">Pin conversation</button>
+                      <button type="button" class="chat-menu__item" data-action="unpin" hidden>Unpin conversation</button>
+                      <button type="button" class="chat-menu__item" data-action="mute">Mute notifications</button>
+                      <button type="button" class="chat-menu__item" data-action="unmute" hidden>Unmute notifications</button>
+                      <button type="button" class="chat-menu__item" data-action="hide">Archive conversation</button>
+                      <button type="button" class="chat-menu__item chat-menu__item--danger" data-action="leave">Leave conversation</button>
+                    </div>
+                  </div>
+                </div>
+              </header>
+
+              <div class="chat-thread__messages" id="chat-messages">
+                <button type="button" class="btn-load-more" id="btn-load-older" hidden>Load older messages</button>
+              </div>
+
+              <div class="chat-typing-indicator" id="chat-typing-indicator" hidden>
+                <span class="typing-dots"><span></span><span></span><span></span></span>
+                <span id="typing-indicator-text">typing...</span>
+              </div>
+
+              <div class="chat-composer">
+                <div id="composer-attachment-preview" class="composer-file-preview"></div>
+                <div class="chat-composer__row">
+                  <button type="button" class="composer-icon-btn" id="composer-attach-btn" title="Attach file"><i class="ti ti-paperclip" aria-hidden="true"></i></button>
+                  <input type="file" id="composer-file-input" multiple hidden />
+                  <textarea id="composer-textarea" placeholder="Type a message..." rows="1"></textarea>
+                  <button type="button" class="composer-icon-btn composer-send-btn" id="composer-send-btn" disabled title="Send"><i class="ti ti-send" aria-hidden="true"></i></button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- New conversation / group modal -->
+  <div class="modal-overlay" id="new-conversation-modal" hidden>
+    <div class="modal-card">
+      <div class="modal-card__header">
+        <h3>New message</h3>
+        <button type="button" class="icon-action-btn" id="close-new-conversation-modal"><i class="ti ti-x" aria-hidden="true"></i></button>
+      </div>
+
+      <div class="modal-tabs">
+        <button type="button" class="modal-tab is-active" data-modal-tab="direct">Direct message</button>
+        <button type="button" class="modal-tab" data-modal-tab="group">Create group</button>
+      </div>
+
+      <div class="modal-panel" id="modal-panel-direct">
+        <div class="network-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" id="direct-search-input" placeholder="Search your connections..." />
+        </div>
+        <div id="direct-connection-list" class="connection-picker-list">
+          <p class="app-loading-inline">Loading your connections...</p>
+        </div>
+      </div>
+
+      <div class="modal-panel" id="modal-panel-group" hidden>
+        <div class="ep-field">
+          <label for="group-name-input">Group name</label>
+          <input type="text" id="group-name-input" placeholder="e.g. Design Team" />
+        </div>
+        <div class="network-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" id="group-search-input" placeholder="Search your connections to add..." />
+        </div>
+        <div id="group-connection-list" class="connection-picker-list connection-picker-list--checkable">
+          <p class="app-loading-inline">Loading your connections...</p>
+        </div>
+        <button type="button" class="btn-primary btn-compact" id="btn-create-group" style="width:100%; justify-content:center; margin-top:10px;">Create group</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/messages.js"></script>
+</body>
+</html>

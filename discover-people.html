@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>People You May Know · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/network-shared.css" />
+  <link rel="stylesheet" href="Styles/discover-people.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="network">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search people, jobs, skills..." />
+        </div>
+
+        <div class="app-topbar__icons">
+          <button class="icon-btn" disabled title="Notifications (coming soon)">
+            <i class="ti ti-bell" aria-hidden="true"></i>
+            <span class="icon-btn__badge" id="notif-badge" hidden></span>
+          </button>
+          <button class="icon-btn" disabled title="Messages (coming soon)">
+            <i class="ti ti-message-2" aria-hidden="true"></i>
+            <span class="icon-btn__badge" id="msg-badge" hidden></span>
+          </button>
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" src="" alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+
+            <div class="dropdown-menu" id="topbar-dropdown">
+              <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+              <a href="#" class="dropdown-menu__item"><i class="ti ti-settings" aria-hidden="true"></i> Settings</a>
+              <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <div class="page-heading">
+          <h1>People You May Know</h1>
+          <p>Discover professionals and grow your network.</p>
+        </div>
+
+        <!-- Tabs -->
+        <nav class="network-tabs">
+          <a href="network-overview.html" class="network-tab">Overview</a>
+          <a href="discover-people.html" class="network-tab is-active">People You May Know</a>
+          <a href="pending-requests.html" class="network-tab">
+            Pending Requests
+            <span class="network-tab__badge" id="tab-badge-pending" hidden></span>
+          </a>
+          <a href="connections.html" class="network-tab">
+            Connections
+            <span class="network-tab__badge" id="tab-badge-connections" hidden></span>
+          </a>
+          <a href="followers.html" class="network-tab">
+            Followers
+            <span class="network-tab__badge" id="tab-badge-followers" hidden></span>
+          </a>
+        </nav>
+
+        <div class="network-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" id="suggestions-filter-input" placeholder="Search by name, title, or company..." />
+        </div>
+
+        <!-- Filter chips — map directly to the SuggestionFilter query param -->
+        <div class="network-filter-chips">
+          <button type="button" class="network-filter-chip is-active" data-filter="All">All Suggestions</button>
+          <button type="button" class="network-filter-chip" data-filter="SameCompany">People at Your Company</button>
+          <button type="button" class="network-filter-chip" data-filter="SameIndustry">People in Your Industry</button>
+          <button type="button" class="network-filter-chip" data-filter="Alumni">Alumni</button>
+        </div>
+
+        <section class="card">
+          <div id="suggestions-grid" class="network-card-grid">
+            <p class="app-loading-inline">Loading suggestions...</p>
+          </div>
+          <p class="empty-note" id="suggestions-empty" hidden>
+            No suggestions found for this filter yet. As you connect with more people, we'll surface better matches.
+          </p>
+          <button type="button" class="btn-load-more" id="btn-load-more" hidden>Load more</button>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/discoverPeople.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+/* ==========================================================================
+   discover-people.html — page-specific styles only.
+   Shared Networking classes (tabs, filter chips, list rows, buttons,
+   toasts, search, .network-card-grid, .network-card) live in
+   Styles/networking-shared.css — include that file BEFORE this one.
+   ========================================================================== */
+
+.network-card__name {
+  font-size: 13.5px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--pc-text-primary);
+}
+
+.network-card__meta {
+  font-size: 11.5px;
+  color: var(--pc-text-secondary);
+  margin: 2px 0 0;
+  line-height: 1.4;
+}
+
+.network-card__sub {
+  font-size: 11px;
+  color: var(--pc-text-muted);
+  margin: 3px 0 0;
+}
+
+.network-card__match-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.network-card__match-tag {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--pc-purple);
+  background: var(--pc-purple-light);
+  border-radius: 999px;
+  padding: 2px 8px;
+}

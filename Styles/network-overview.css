@@ -1,0 +1,21 @@
+/* ==========================================================================
+   network-overview.html — page-specific styles only.
+   Shared Networking classes (tabs, list rows, buttons, toasts, search,
+   stat strip) live in Styles/networking-shared.css — include that file
+   BEFORE this one.
+   ========================================================================== */
+
+/* ---------- Overview two-column grid ---------- */
+
+.network-overview-grid {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .network-overview-grid {
+    grid-template-columns: 1fr;
+  }
+}

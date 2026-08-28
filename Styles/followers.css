@@ -1,0 +1,34 @@
+/* ==========================================================================
+   followers.html — page-specific styles only.
+   Shared Networking classes (tabs, list rows, buttons, toasts, search,
+   stat strip) live in Styles/networking-shared.css — include that file
+   BEFORE this one.
+   ========================================================================== */
+
+.follow-subtabs {
+  display: flex;
+  gap: 6px;
+}
+
+.follow-subtab {
+  padding: 8px 16px;
+  border-radius: var(--pc-radius);
+  border: 1px solid var(--pc-border);
+  background: var(--pc-surface);
+  color: var(--pc-text-secondary);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: var(--pc-font);
+  cursor: pointer;
+}
+
+.follow-subtab:hover {
+  background: var(--pc-panel-bg);
+  color: var(--pc-text-primary);
+}
+
+.follow-subtab.is-active {
+  background: var(--pc-purple);
+  border-color: var(--pc-purple);
+  color: #fff;
+}

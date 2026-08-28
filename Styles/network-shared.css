@@ -1,0 +1,454 @@
+/* ==========================================================================
+   Networking module — shared styles
+   Used across: network-overview.html, discover-people.html,
+   pending-requests.html, connections.html, followers.html
+   Include this AFTER company-layout.css and dashboard.css, and BEFORE the
+   page's own page-specific CSS file.
+   ========================================================================== */
+
+/* ---------- Page heading ---------- */
+
+.page-heading h1 {
+  font-size: 22px;
+  margin: 0 0 2px;
+}
+
+.page-heading p {
+  font-size: 13px;
+  color: var(--pc-text-secondary);
+  margin: 0;
+}
+
+/* ---------- Tabs ---------- */
+
+.network-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius-lg);
+  padding: 6px;
+  overflow-x: auto;
+}
+
+.network-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--pc-radius);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pc-text-secondary);
+  white-space: nowrap;
+}
+
+.network-tab:hover {
+  background: var(--pc-panel-bg);
+  color: var(--pc-text-primary);
+}
+
+.network-tab.is-active {
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+}
+
+.network-tab__badge {
+  background: var(--pc-purple);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
+.network-tab.is-active .network-tab__badge {
+  background: var(--pc-purple);
+  color: #fff;
+}
+
+/* ---------- Stat strip ---------- */
+
+.network-stat-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.network-stat-strip--2col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 640px) {
+  .network-stat-strip,
+  .network-stat-strip--2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Search box (reuses app-search look) ---------- */
+
+.network-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--pc-panel-bg);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  padding: 0 12px;
+  height: 38px;
+  margin-bottom: 14px;
+}
+
+.network-search i {
+  color: var(--pc-text-muted);
+  font-size: 15px;
+}
+
+.network-search input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 13px;
+  width: 100%;
+  color: var(--pc-text-primary);
+  font-family: var(--pc-font);
+}
+
+/* ---------- Filter chips (Suggestions / Connections filter tabs) ---------- */
+
+.network-filter-chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.network-filter-chip {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--pc-border);
+  background: var(--pc-surface);
+  color: var(--pc-text-secondary);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: var(--pc-font);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.network-filter-chip:hover {
+  background: var(--pc-panel-bg);
+  color: var(--pc-text-primary);
+}
+
+.network-filter-chip.is-active {
+  background: var(--pc-purple-light);
+  border-color: var(--pc-purple-light);
+  color: var(--pc-purple);
+}
+
+/* ---------- List rows (shared across all Networking pages) ---------- */
+
+.network-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.network-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.network-row__avatar {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.network-row__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.network-row__name {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--pc-text-primary);
+}
+
+.network-row__meta {
+  font-size: 11.5px;
+  color: var(--pc-text-secondary);
+  margin: 1px 0 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.network-row__sub {
+  font-size: 11px;
+  color: var(--pc-text-muted);
+  margin: 1px 0 0;
+}
+
+.network-row__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ---------- Grid card variant (used by People You May Know, which lays
+   suggestion cards in a 2-column grid rather than a single-column list) --- */
+
+.network-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 760px) {
+  .network-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.network-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius-lg);
+  background: var(--pc-surface);
+}
+
+.network-card__top {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.network-card__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.network-card__actions .btn-primary-sm,
+.network-card__actions .btn-outline-sm {
+  flex: 1;
+  justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ---------- Buttons ---------- */
+
+.icon-action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--pc-border);
+  background: var(--pc-surface);
+  color: var(--pc-text-secondary);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.icon-action-btn:hover {
+  background: var(--pc-panel-bg);
+}
+
+.icon-action-btn--accept {
+  background: var(--pc-purple);
+  border-color: var(--pc-purple);
+  color: #fff;
+}
+
+.icon-action-btn--accept:hover {
+  background: var(--pc-purple-dark);
+}
+
+.icon-action-btn--reject:hover {
+  color: var(--pc-danger);
+}
+
+.icon-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-outline-sm {
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--pc-radius);
+  border: 1px solid var(--pc-border);
+  background: var(--pc-surface);
+  color: var(--pc-text-primary);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--pc-font);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-outline-sm:hover {
+  background: var(--pc-panel-bg);
+}
+
+.btn-outline-sm:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn-primary-sm {
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--pc-radius);
+  border: none;
+  background: var(--pc-purple);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--pc-font);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primary-sm:hover {
+  opacity: 0.92;
+}
+
+.btn-primary-sm:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ---------- Grow your network CTA card ---------- */
+
+.network-cta-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.network-cta-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.network-cta-card h3 {
+  font-size: 14.5px;
+  margin: 0;
+}
+
+.network-cta-card p {
+  font-size: 12px;
+  color: var(--pc-text-secondary);
+  margin: 0 0 6px;
+  line-height: 1.5;
+}
+
+/* ---------- Loading / inline states ---------- */
+
+.app-loading-inline {
+  font-size: 12.5px;
+  color: var(--pc-text-muted);
+  padding: 8px 0;
+  margin: 0;
+}
+
+/* ---------- Load more ---------- */
+
+.btn-load-more {
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  background: var(--pc-surface);
+  color: var(--pc-text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--pc-font);
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.btn-load-more:hover {
+  background: var(--pc-panel-bg);
+}
+
+.btn-load-more:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- Toasts ---------- */
+
+.toast-stack {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 100;
+  width: min(92vw, 420px);
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: var(--pc-text-primary);
+  box-shadow: 0 10px 30px -10px rgba(30, 20, 80, 0.2);
+  animation: toastIn 0.15s ease;
+}
+
+.toast i {
+  font-size: 16px;
+}
+
+.toast--success i { color: var(--pc-success); }
+.toast--error i { color: var(--pc-danger); }
+.toast--info i { color: var(--pc-purple); }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

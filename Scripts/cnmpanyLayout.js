@@ -21,6 +21,7 @@
       label: "Main",
       links: [
         { href: "recruiter-dashboard.html", icon: "ti-home", label: "Home" },
+        { href: "my-network.html", icon: "ti-users", label: "My Network", badgeKey: "connections" },
         { href: "candidates.html", icon: "ti-users", label: "Candidates" },
         { href: "jobs.html", icon: "ti-briefcase", label: "Jobs" },
         { href: "applications.html", icon: "ti-file-text", label: "Applications", badgeKey: "applications" },
@@ -56,9 +57,12 @@
   }
 
   // Sidebar/topbar badge counts (unread applications, messages,
-  // notifications) are real data, not hardcoded — pages can call
-  // window.ProConnectShell.setBadgeCounts({...}) once they've fetched
-  // the relevant counts, or leave them unset to show nothing.
+  // notifications, pending connection requests) are real data, not
+  // hardcoded — pages can call window.ProConnectShell.setBadgeCounts({...})
+  // once they've fetched the relevant counts, or leave them unset to show
+  // nothing. The pending-connections count is fetched automatically below
+  // so it shows up on every page that includes this shell, not just
+  // my-network.html.
   const badgeCounts = {};
 
   function badgeHtml(key) {
@@ -170,6 +174,11 @@
       if (link) link.textContent = counts.applications;
     }
 
+    if (counts.connections !== undefined) {
+      const link = document.querySelector('.sidebar-link[href="my-network.html"] .sidebar-link__badge');
+      if (link) link.textContent = counts.connections;
+    }
+
     if (counts.messages !== undefined) {
       const link = document.querySelector('.sidebar-link[href="messages.html"] .sidebar-link__badge');
       if (link) link.textContent = counts.messages;
@@ -190,9 +199,41 @@
     }
   }
 
+  // Fetches how many connection requests are waiting on this user to
+  // respond to (ConnectionStatus.Pending, received side only) and reflects
+  // it as a badge on the "My Network" sidebar link. Runs once per page
+  // load, on every page that includes this shell — not just my-network.html
+  // — so the count is always visible, the same way LinkedIn's sidebar works.
+  // Silently does nothing on failure so a network hiccup never breaks the
+  // rest of the shell.
+  async function loadPendingConnectionsBadge() {
+    try {
+      const response = await fetch(
+        `${API_ROUTES.getReceivedRequests}?pageNumber=1&pageSize=1&usePaging=true`,
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || result.status === false) return;
+
+      const totalCount = result?.data?.totalCount;
+
+      if (typeof totalCount === "number") {
+        setBadgeCounts({ connections: totalCount });
+      }
+    } catch {
+      // Network/parse failure — leave the badge unset, don't block the shell.
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     renderSidebar();
     renderTopbar();
+    loadPendingConnectionsBadge();
   });
 
   window.ProConnectShell = { setBadgeCounts };

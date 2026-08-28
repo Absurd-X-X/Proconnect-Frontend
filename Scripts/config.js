@@ -36,4 +36,55 @@ const API_ROUTES = {
   companyTeam: `${API_BASE_URL}/Recruiter/team`,
   companyManagementOverview: `${API_BASE_URL}/Recruiter/management-overview`,
   recruiterProfile: `${API_BASE_URL}/Recruiter/profile`,
+
+
+  // ---- Connections (Module 4 — Networking) ----
+sendConnectionRequest: `${API_BASE_URL}/Connections/send-connection-request`,
+acceptConnectionRequest: `${API_BASE_URL}/Connections/accept-connection-request`,
+rejectConnectionRequest: `${API_BASE_URL}/Connections/reject-connection-request`,
+cancelConnectionRequest: `${API_BASE_URL}/Connections/cancel-connection-request`,
+removeConnection: `${API_BASE_URL}/Connections/remove-connection`,
+followUser: `${API_BASE_URL}/Connections/follow-user`,
+unfollowUser: `${API_BASE_URL}/Connections/unfollow-user`,
+getMyConnections: `${API_BASE_URL}/Connections/my-connections`,
+getReceivedRequests: `${API_BASE_URL}/Connections/received-requests`,
+getSentRequests: `${API_BASE_URL}/Connections/sent-requests`,
+getMyFollowers: `${API_BASE_URL}/Connections/my-followers`,
+getMyFollowing: `${API_BASE_URL}/Connections/my-following`,
+getConnectionSuggestions: `${API_BASE_URL}/Connections/suggestions`,
+
+
+// ---- Posts (Module 5) ----
+createPost: `${API_BASE_URL}/Posts/create-post`,
+updatePost: `${API_BASE_URL}/Posts/update-post`,
+deletePost: `${API_BASE_URL}/Posts/delete-post`,
+sharePost: `${API_BASE_URL}/Posts/share-post`,
+reactToPost: `${API_BASE_URL}/Posts/react`,
+removeReaction: `${API_BASE_URL}/Posts/remove-reaction`,
+addComment: `${API_BASE_URL}/Posts/add-comment`,
+updateComment: `${API_BASE_URL}/Posts/update-comment`,
+deleteComment: `${API_BASE_URL}/Posts/delete-comment`,
+getFeed: `${API_BASE_URL}/Posts/feed`,
+getPostById: `${API_BASE_URL}/Posts/post`,
+getPostsByUser: `${API_BASE_URL}/Posts/user`,
+getComments: `${API_BASE_URL}/Posts/comments`,
+getUserPublicProfile: `${API_BASE_URL}/Users`,
+
+// ---- Messaging (Module 6) ----
+startConversation: `${API_BASE_URL}/Messages/start-conversation`,
+createGroupConversation: `${API_BASE_URL}/Messages/create-group`,
+addParticipant: `${API_BASE_URL}/Messages/add-participant`,
+leaveConversation: `${API_BASE_URL}/Messages/leave-conversation`,
+sendMessage: `${API_BASE_URL}/Messages/send-message`,
+markConversationRead: `${API_BASE_URL}/Messages/mark-read`,
+getMyConversations: `${API_BASE_URL}/Messages/conversations`,
+getConversationMessages: `${API_BASE_URL}/Messages/messages`,
+getConversationParticipants: `${API_BASE_URL}/Messages/participants`,
+pinConversation: `${API_BASE_URL}/Messages/pin`,
+unpinConversation: `${API_BASE_URL}/Messages/unpin`,
+muteConversation: `${API_BASE_URL}/Messages/mute`,
+unmuteConversation: `${API_BASE_URL}/Messages/unmute`,
+hideConversation: `${API_BASE_URL}/Messages/hide`,
+unhideConversation: `${API_BASE_URL}/Messages/unhide`,
 };
+

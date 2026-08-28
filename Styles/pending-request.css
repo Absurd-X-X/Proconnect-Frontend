@@ -1,0 +1,29 @@
+/* ==========================================================================
+   pending-requests.html — page-specific styles only.
+   Shared Networking classes (tabs, list rows, buttons, toasts, stat strip)
+   live in Styles/networking-shared.css — include that file BEFORE this one.
+   ========================================================================== */
+
+.pending-row__time {
+  font-size: 11px;
+  color: var(--pc-text-muted);
+  white-space: nowrap;
+  margin-right: 4px;
+}
+
+.pending-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--pc-text-secondary);
+  background: var(--pc-panel-bg);
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.pending-status-pill i {
+  font-size: 13px;
+}

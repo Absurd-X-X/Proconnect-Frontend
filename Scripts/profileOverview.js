@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const result = await response.json().catch(() => ({}));
 
     if (response.status === 401) {
-      ["pc_token", "pc_user_id", "pc_profile_id", "pc_role", "pc_username"].forEach((key) => {
+      ["pc_token", "pc_user_id", "pc_profile_id", "pc_role", "pc_username", "pc_avatar_url"].forEach((key) => {
         localStorage.removeItem(key);
         sessionStorage.removeItem(key);
       });
@@ -74,9 +74,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
       }
 
-      // Basic client-side guardrails — the backend should still validate
-      // this too, this just avoids an obviously-doomed upload attempt.
-      const maxSizeBytes = 2 * 1024 * 1024; // 2MB
+      const maxSizeBytes = 2 * 1024 * 1024;
       if (file.size > maxSizeBytes) {
         alert("That image is too large. Please choose one under 2MB.");
         fileInput.value = "";
@@ -97,8 +95,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           headers: { "Authorization": `Bearer ${token}` },
           body: formData,
         });
-        
-          console.log(token);
 
         const result = await response.json().catch(() => ({}));
 
@@ -108,13 +104,15 @@ document.addEventListener("DOMContentLoaded", async () => {
           return;
         }
 
-        // Backend returns the new URL as result.data — update every avatar
-        // on the page immediately instead of requiring a reload.
         const newUrl = result.data;
         document.getElementById("profile-photo").src = newUrl;
         document.getElementById("topbar-avatar").src = newUrl;
         const sidebarAvatar = document.getElementById("sidebar-avatar");
         if (sidebarAvatar) sidebarAvatar.src = newUrl;
+
+        // Persist so every other page (feed, messages, Networking) picks
+        // up the new photo too, not just this one until next fetch.
+        localStorage.setItem("pc_avatar_url", newUrl);
 
       } catch (err) {
         console.error("Photo upload threw an error:", err);
@@ -133,7 +131,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     wireDropdown("topbar-user-toggle", "topbar-dropdown");
     wireDropdown("banner-more-toggle", "banner-more-dropdown");
 
-    // Close any open dropdown when clicking anywhere else on the page.
     document.addEventListener("click", (e) => {
       document.querySelectorAll(".dropdown-menu.is-open").forEach((menu) => {
         if (!menu.parentElement.contains(e.target)) {
@@ -145,7 +142,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const topbarLogout = document.getElementById("topbar-logout");
     if (topbarLogout) {
       topbarLogout.addEventListener("click", () => {
-        ["pc_token", "pc_user_id", "pc_profile_id", "pc_role", "pc_username"].forEach((key) => {
+        ["pc_token", "pc_user_id", "pc_profile_id", "pc_role", "pc_username", "pc_avatar_url"].forEach((key) => {
           localStorage.removeItem(key);
           sessionStorage.removeItem(key);
         });
@@ -156,9 +153,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const shareBtn = document.getElementById("share-profile-btn");
     if (shareBtn) {
       shareBtn.addEventListener("click", async () => {
-        // No public-profile page is built yet, so this just copies the
-        // current page URL as a stand-in — swap for the real public
-        // profile URL once view-public-profile.html exists.
         try {
           await navigator.clipboard.writeText(window.location.href);
           shareBtn.innerHTML = `<i class="ti ti-check" aria-hidden="true"></i> Link copied!`;
@@ -185,24 +179,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // ---------------- Field reference (GetProfessionalProfileResponse) ----------------
-  // id, userId, firstName, lastName, profilePicture, isVerified,
-  // headLine, summary, gitHubUrl, linkedInUrl, resumeUrl,
-  // resumeViewCount, resumeDownloadCount, userStatus,
-  // preferredJobTypes, preferredLocations, earliestStartDate,
-  // willingToRelocate, workAuthorization, availabilityVisibility,
-  // portfolioLinks[], educations[], experiences[], certificates[],
-  // projects[], skills[]
-  // NOTE: this response has no "location" field on ProfessionalProfile —
-  // if you want the "San Francisco, CA, USA" line under the headline like
-  // the reference image, that needs adding to the backend (it doesn't
-  // exist in ProfessionalProfile right now). Left as a graceful no-op
-  // below until that's confirmed.
-
   function renderProfile(profile) {
     const fullName = (profile.firstName || profile.lastName)
       ? `${profile.firstName || ""} ${profile.lastName || ""}`.trim()
-      : "Your Profile"; // fallback if the API isn't sending a name yet — see console warning below
+      : "Your Profile";
 
     if (!profile.firstName && !profile.lastName) {
       console.warn("GetProfessionalProfileResponse has no firstName/lastName — check the backend response shape.");
@@ -215,6 +195,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const sidebarAvatar = document.getElementById("sidebar-avatar");
     if (sidebarAvatar) sidebarAvatar.src = avatarSrc;
     document.getElementById("topbar-avatar").src = avatarSrc;
+
+    // Persist to localStorage so other pages (feed, messages, Networking)
+    // that don't fetch the full profile can still show the real photo via
+    // sidebar.js's avatar-fallback logic, instead of defaulting to
+    // initials until the person happens to visit their own profile page.
+    if (profile.profilePicture) {
+      localStorage.setItem("pc_avatar_url", profile.profilePicture);
+    }
 
     document.getElementById("profile-photo").src = avatarSrc;
     document.getElementById("profile-name").textContent = fullName;
@@ -232,7 +220,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("about-text").textContent = bio;
     setupShowMore();
 
-    // No "location" field exists on ProfessionalProfile yet — hidden until added.
     document.getElementById("profile-location").hidden = true;
 
     const linkedinEl = document.getElementById("profile-linkedin");
@@ -283,12 +270,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     return url.replace(/^https?:\/\//, "").replace(/\/$/, "");
   }
 
-  // Fallback ordering ONLY used if the backend is still sending UserStatus
-  // as a raw number (pre-JsonStringEnumConverter fix). This assumes the
-  // C# enum is declared Available=0, OpenToOffers=1, NotLooking=2,
-  // NotAvailable=3 — confirm that matches your actual enum, or this maps
-  // to the wrong label. Once the backend fix is applied, this array is
-  // dead code and status arrives as a string directly.
   const STATUS_BY_INDEX = ["Available", "OpenToOffers", "NotLooking", "NotAvailable"];
 
   function resolveStatus(status) {
@@ -482,8 +463,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     ring.style.strokeDasharray = `${circumference}`;
     ring.style.strokeDashoffset = `${circumference - (pct / 100) * circumference}`;
   }
-
-  // ---------------- Helpers ----------------
 
   function initials(name) {
     if (!name) return "?";

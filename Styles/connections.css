@@ -1,0 +1,49 @@
+/* ==========================================================================
+   connections.html — page-specific styles only.
+   Shared Networking classes (tabs, list rows, buttons, toasts, search) live
+   in Styles/networking-shared.css — include that file BEFORE this one.
+   ========================================================================== */
+
+.connection-menu-wrap {
+  position: relative;
+}
+
+.connection-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 170px;
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  box-shadow: 0 10px 30px -10px rgba(30, 20, 80, 0.2);
+  padding: 6px;
+  z-index: 20;
+}
+
+.connection-menu.is-open {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.connection-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--pc-danger);
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--pc-font);
+}
+
+.connection-menu__item:hover {
+  background: var(--pc-danger-bg);
+}

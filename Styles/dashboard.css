@@ -1,3 +1,40 @@
+:root {
+  --pc-purple: #5B3FE0;
+  --pc-purple-dark: #4A32BF;
+  --pc-purple-light: #EFEBFC;
+  --pc-panel-bg: #F7F6FC;
+  --pc-text-primary: #1A1A2E;
+  --pc-text-secondary: #6B6B80;
+  --pc-text-muted: #9A9AAE;
+  --pc-border: #E4E3EF;
+  --pc-surface: #FFFFFF;
+  --pc-page-bg: #F5F4FB;
+  --pc-danger: #D64545;
+  --pc-danger-bg: #FCEDED;
+  --pc-success: #1F9254;
+  --pc-success-bg: #E9F7EF;
+  --pc-radius: 10px;
+  --pc-radius-lg: 16px;
+  --pc-sidebar-width: 240px;
+  --pc-topbar-height: 68px;
+  --pc-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--pc-font);
+  background: var(--pc-page-bg);
+  color: var(--pc-text-primary);
+}
+
+a {
+  font-family: var(--pc-font);
+}
+
 /* [hidden] must always win over any class's explicit display value.
    Without this, a rule like .app-content { display: flex } silently
    overrides the browser's built-in [hidden] behavior. */
@@ -12,6 +49,7 @@
   grid-template-columns: 240px 1fr;
   min-height: 100vh;
   background: var(--pc-page-bg);
+  transition: grid-template-columns 0.18s ease;
 }
 
 /* ---------- Sidebar ---------- */
@@ -62,6 +100,7 @@
   font-weight: 500;
   color: var(--pc-text-secondary);
   text-decoration: none;
+  position: relative;
 }
 
 .sidebar-link i {
@@ -147,11 +186,68 @@
   margin-top: 12px;
 }
 
+.sidebar-user-wrap {
+  position: relative;
+}
+
 .sidebar-user {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
+  width: 100%;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: var(--pc-radius);
+  font-family: var(--pc-font);
+}
+
+.sidebar-user:hover {
+  background: var(--pc-panel-bg);
+}
+
+.sidebar-user__chevron {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--pc-text-muted);
+  transition: transform 0.15s ease;
+  flex-shrink: 0;
+}
+
+#sidebar-user-toggle.is-open .sidebar-user__chevron {
+  transform: rotate(180deg);
+}
+
+.sidebar-user-dropdown {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  box-shadow: 0 -10px 30px -10px rgba(30, 20, 80, 0.2);
+  padding: 6px;
+  z-index: 30;
+}
+
+.sidebar-user-dropdown.is-open {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+/* When the sidebar is collapsed, there's no room for a full-width dropdown
+   flush against the (now icon-only) trigger — widen it and let it hang
+   off the right edge of the narrow collapsed rail instead of being
+   squashed to 76px. */
+body.sidebar-collapsed .sidebar-user-dropdown {
+  left: 0;
+  right: auto;
+  min-width: 180px;
 }
 
 .sidebar-user__avatar {
@@ -160,6 +256,15 @@
   border-radius: 50%;
   object-fit: cover;
   background: var(--pc-purple-light);
+}
+
+.sidebar-user__avatar--fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pc-purple);
+  font-weight: 700;
+  font-size: 13px;
 }
 
 .sidebar-user__name {
@@ -184,11 +289,87 @@
 .app-topbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
   padding: 1rem 2rem;
   background: var(--pc-surface);
   border-bottom: 1px solid var(--pc-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app-topbar__icons {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- Topbar nav icon row (Home / Network / Jobs / Messages /
+   Notifications) — sits between the search box and the utility icons.
+   Rendered dynamically by sidebar.js into #topbar-nav-icons. ---------- */
+
+.topbar-nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.topbar-nav-icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--pc-radius);
+  color: var(--pc-text-secondary);
+  font-size: 19px;
+  text-decoration: none;
+}
+
+.topbar-nav-icon:hover {
+  background: var(--pc-panel-bg);
+  color: var(--pc-text-primary);
+}
+
+.topbar-nav-icon.is-active {
+  color: var(--pc-purple);
+}
+
+.topbar-nav-icon.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--pc-purple);
+}
+
+.topbar-nav-icon__badge {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background: var(--pc-purple);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 700;
+  min-width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+}
+
+@media (max-width: 960px) {
+  .topbar-nav-icons {
+    display: none;
+  }
 }
 
 .app-search {
@@ -216,12 +397,6 @@
   font-size: 13.5px;
   width: 100%;
   color: var(--pc-text-primary);
-}
-
-.app-topbar__icons {
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 
 .icon-btn {
@@ -348,6 +523,19 @@
   border-radius: 50%;
   object-fit: cover;
   background: var(--pc-purple-light);
+}
+
+.topbar-avatar-fallback {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  font-weight: 700;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .topbar-user i {
@@ -1173,5 +1361,110 @@ a {
 
   .profile-banner__top {
     flex-direction: column;
+  }
+}
+
+/* ==========================================================================
+   Sidebar collapse / expand
+   Toggled by sidebar.js via a class on <body>. Persisted in localStorage
+   so the preference survives navigation between pages.
+   ========================================================================== */
+
+body.sidebar-collapsed .app-shell {
+  grid-template-columns: 76px 1fr;
+}
+
+body.sidebar-collapsed .sidebar {
+  padding: 1.5rem 0.75rem;
+  align-items: center;
+}
+
+body.sidebar-collapsed .sidebar-brand {
+  justify-content: center;
+  padding: 0;
+}
+
+body.sidebar-collapsed .sidebar-brand__name {
+  display: none;
+}
+
+body.sidebar-collapsed .sidebar-nav,
+body.sidebar-collapsed .sidebar-bottom {
+  width: 100%;
+}
+
+body.sidebar-collapsed .sidebar-link,
+body.sidebar-collapsed .sidebar-link--group {
+  justify-content: center;
+  padding: 10px 0;
+}
+
+body.sidebar-collapsed .sidebar-link__text,
+body.sidebar-collapsed .sidebar-group__chevron {
+  display: none;
+}
+
+body.sidebar-collapsed .sidebar-subnav {
+  display: none !important;
+}
+
+body.sidebar-collapsed .sidebar-link__badge {
+  position: absolute;
+  top: 4px;
+  right: 14px;
+  min-width: 8px;
+  height: 8px;
+  padding: 0;
+  font-size: 0;
+}
+
+body.sidebar-collapsed .sidebar-user {
+  justify-content: center;
+  padding: 8px 0;
+}
+
+body.sidebar-collapsed .sidebar-user__info {
+  display: none;
+}
+
+body.sidebar-collapsed .sidebar-collapse-toggle {
+  justify-content: center;
+}
+
+/* ---------- Collapse toggle button itself ---------- */
+
+.sidebar-collapse-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  margin-top: 6px;
+  border: none;
+  border-top: 1px solid var(--pc-border);
+  background: none;
+  color: var(--pc-text-secondary);
+  font-size: 13.5px;
+  font-family: var(--pc-font);
+  cursor: pointer;
+  border-radius: var(--pc-radius);
+}
+
+.sidebar-collapse-toggle:hover {
+  background: var(--pc-panel-bg);
+  color: var(--pc-text-primary);
+}
+
+.sidebar-collapse-toggle i {
+  font-size: 17px;
+}
+
+/* When collapsed, the fixed 240px sidebar width in the responsive
+   breakpoint below no longer applies — the 76px collapsed rule above
+   takes priority at any screen size down to where the sidebar hides
+   itself entirely (960px, per the existing rule). */
+@media (max-width: 960px) {
+  body.sidebar-collapsed .app-shell {
+    grid-template-columns: 1fr;
   }
 }

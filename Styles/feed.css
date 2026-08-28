@@ -1,0 +1,952 @@
+/* ==========================================================================
+   feed.html — page-specific styles.
+   Base variables, shell, and generic card/button classes come from
+   Styles/dashboard.css — include that file BEFORE this one.
+   ========================================================================== */
+
+.feed-layout {
+  display: flex;
+  justify-content: center;
+}
+
+.feed-main {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ---------- Composer ---------- */
+
+.composer-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.composer-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.composer-avatar {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--pc-purple-light);
+}
+
+.composer-avatar--fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--pc-purple);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.composer-top textarea {
+  flex: 1;
+  border: none;
+  resize: none;
+  font-family: var(--pc-font);
+  font-size: 14px;
+  color: var(--pc-text-primary);
+  outline: none;
+  padding: 8px 0;
+  min-height: 40px;
+}
+
+.composer-top textarea::placeholder {
+  color: var(--pc-text-muted);
+}
+
+.composer-file-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.composer-file-preview:empty {
+  display: none;
+}
+
+.composer-file-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--pc-panel-bg);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  padding: 6px 10px;
+  font-size: 11.5px;
+  color: var(--pc-text-secondary);
+}
+
+.composer-file-chip button {
+  border: none;
+  background: none;
+  color: var(--pc-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+
+.composer-file-chip button:hover {
+  color: var(--pc-danger);
+}
+
+.composer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-top: 1px solid var(--pc-border);
+  padding-top: 10px;
+}
+
+.composer-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.composer-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background: none;
+  color: var(--pc-text-secondary);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: var(--pc-font);
+  padding: 7px 10px;
+  border-radius: var(--pc-radius);
+  cursor: pointer;
+}
+
+.composer-action-btn:hover {
+  background: var(--pc-panel-bg);
+  color: var(--pc-text-primary);
+}
+
+.composer-visibility {
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  font-size: 12px;
+  font-family: var(--pc-font);
+  color: var(--pc-text-secondary);
+  padding: 6px 8px;
+  background: var(--pc-surface);
+}
+
+.composer-post-btn {
+  padding: 0 20px;
+}
+
+/* ---------- Feed tabs ---------- */
+
+.feed-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius-lg);
+  padding: 6px;
+  overflow-x: auto;
+}
+
+.feed-tab {
+  padding: 8px 16px;
+  border-radius: var(--pc-radius);
+  border: none;
+  background: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--pc-text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--pc-font);
+}
+
+.feed-tab:hover {
+  background: var(--pc-panel-bg);
+  color: var(--pc-text-primary);
+}
+
+.feed-tab.is-active {
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+}
+
+/* ---------- Feed list / post card ---------- */
+
+.feed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.post-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.post-card__avatar {
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.post-card__author {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-card__name {
+  font-size: 13.5px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--pc-text-primary);
+}
+
+.post-card__meta {
+  font-size: 11px;
+  color: var(--pc-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.post-card__menu-btn {
+  border: none;
+  background: none;
+  color: var(--pc-text-muted);
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.post-card__menu-btn:hover {
+  background: var(--pc-panel-bg);
+}
+
+.post-card__menu-wrap {
+  position: relative;
+}
+
+.post-card__menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 160px;
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  box-shadow: 0 10px 30px -10px rgba(30, 20, 80, 0.2);
+  padding: 6px;
+  z-index: 20;
+}
+
+.post-card__menu.is-open {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.post-card__menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--pc-text-primary);
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--pc-font);
+}
+
+.post-card__menu-item:hover {
+  background: var(--pc-panel-bg);
+}
+
+.post-card__menu-item--danger {
+  color: var(--pc-danger);
+}
+
+.post-card__menu-item--danger:hover {
+  background: var(--pc-danger-bg);
+}
+
+/* ---------- Post edit form (inline, shown when editing your own post) ---------- */
+
+.post-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.post-edit-form textarea {
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  padding: 10px 12px;
+  font-size: 13.5px;
+  font-family: var(--pc-font);
+  color: var(--pc-text-primary);
+  resize: vertical;
+  outline: none;
+}
+
+.post-edit-form textarea:focus {
+  border-color: var(--pc-purple);
+}
+
+.post-edit-form select {
+  align-self: flex-start;
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  font-size: 12px;
+  font-family: var(--pc-font);
+  color: var(--pc-text-secondary);
+  padding: 6px 8px;
+  background: var(--pc-surface);
+}
+
+.post-edit-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.post-card__content {
+  font-size: 13.5px;
+  color: var(--pc-text-primary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.post-card__content-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.post-card__content-link:hover {
+  text-decoration: underline;
+}
+
+.post-card__media {
+  display: grid;
+  gap: 4px;
+  border-radius: var(--pc-radius);
+  overflow: hidden;
+}
+
+.post-card__media[data-count="1"] { grid-template-columns: 1fr; }
+.post-card__media[data-count="2"] { grid-template-columns: 1fr 1fr; }
+.post-card__media[data-count="3"],
+.post-card__media[data-count="4"] { grid-template-columns: 1fr 1fr; }
+
+.post-card__media a {
+  display: block;
+  cursor: pointer;
+}
+
+.post-card__media img,
+.post-card__media video {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  background: var(--pc-panel-bg);
+  display: block;
+}
+
+/* ---------- Shared/embedded original post ---------- */
+
+.shared-post {
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shared-post__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shared-post__avatar {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.shared-post__name {
+  font-size: 12.5px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--pc-text-primary);
+}
+
+.shared-post__meta {
+  font-size: 10.5px;
+  color: var(--pc-text-muted);
+}
+
+.shared-post__content {
+  font-size: 12.5px;
+  color: var(--pc-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.shared-post__media img,
+.shared-post__media video {
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: var(--pc-radius);
+  display: block;
+}
+
+/* ---------- Reaction/comment/share summary bar ---------- */
+
+.post-card__stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: var(--pc-text-secondary);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--pc-border);
+}
+
+.post-card__reaction-summary {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.post-card__reaction-icons {
+  display: flex;
+}
+
+.post-card__reaction-icons span {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--pc-purple-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  margin-left: -4px;
+  border: 1.5px solid var(--pc-surface);
+}
+
+.post-card__stats-right {
+  display: flex;
+  gap: 10px;
+}
+
+.post-card__stats-right button,
+.post-card__stats-right a {
+  border: none;
+  background: none;
+  color: var(--pc-text-secondary);
+  font-size: 11.5px;
+  cursor: pointer;
+  font-family: var(--pc-font);
+  padding: 0;
+  text-decoration: none;
+}
+
+.post-card__stats-right button:hover,
+.post-card__stats-right a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Action row (Like / Comment / Share) ---------- */
+
+.post-card__action-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.post-card__action-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.post-card__action-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  color: var(--pc-text-secondary);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: var(--pc-font);
+  padding: 8px;
+  border-radius: var(--pc-radius);
+  cursor: pointer;
+}
+
+.post-card__action-btn:hover {
+  background: var(--pc-panel-bg);
+}
+
+.post-card__action-btn.is-reacted {
+  color: var(--pc-purple);
+}
+
+.reaction-picker {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: 999px;
+  padding: 6px;
+  gap: 4px;
+  box-shadow: 0 10px 30px -10px rgba(30, 20, 80, 0.25);
+  z-index: 15;
+}
+
+.reaction-picker.is-open {
+  display: flex;
+}
+
+.reaction-picker button {
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  line-height: 1;
+  transition: transform 0.1s ease;
+}
+
+.reaction-picker button:hover {
+  transform: scale(1.25);
+  background: var(--pc-panel-bg);
+}
+
+/* ---------- Comments ---------- */
+
+.post-card__comments {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  border-top: 1px solid var(--pc-border);
+  padding-top: 10px;
+}
+
+.post-card__comments.is-open {
+  display: flex;
+}
+
+.comment-composer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.comment-composer input {
+  flex: 1;
+  border: 1px solid var(--pc-border);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 12.5px;
+  font-family: var(--pc-font);
+  color: var(--pc-text-primary);
+  outline: none;
+}
+
+.comment-composer input:focus {
+  border-color: var(--pc-purple);
+}
+
+.comment-composer button {
+  border: none;
+  background: none;
+  color: var(--pc-purple);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+}
+
+.comment-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.comment-row__avatar {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.comment-row__bubble {
+  background: var(--pc-panel-bg);
+  border-radius: var(--pc-radius);
+  padding: 8px 12px;
+  flex: 1;
+}
+
+.comment-row__name {
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--pc-text-primary);
+}
+
+.comment-row__text {
+  font-size: 12.5px;
+  color: var(--pc-text-secondary);
+  margin: 2px 0 0;
+  white-space: pre-wrap;
+}
+
+.comment-row__time {
+  font-size: 10.5px;
+  color: var(--pc-text-muted);
+  margin-left: 8px;
+}
+
+.view-comments-link {
+  align-self: flex-start;
+  border: none;
+  background: none;
+  color: var(--pc-purple);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--pc-font);
+  padding: 0;
+}
+
+/* ---------- Comment row menu (Edit / Delete, own comments only) ---------- */
+
+.comment-row {
+  position: relative;
+}
+
+.comment-row__menu-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.comment-row__menu-btn {
+  border: none;
+  background: none;
+  color: var(--pc-text-muted);
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.comment-row__menu-btn:hover {
+  background: var(--pc-panel-bg);
+}
+
+.comment-row__menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 130px;
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  box-shadow: 0 10px 30px -10px rgba(30, 20, 80, 0.2);
+  padding: 5px;
+  z-index: 20;
+}
+
+.comment-row__menu.is-open {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.comment-row__menu-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 9px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--pc-text-primary);
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--pc-font);
+}
+
+.comment-row__menu-item:hover {
+  background: var(--pc-panel-bg);
+}
+
+.comment-row__menu-item--danger {
+  color: var(--pc-danger);
+}
+
+.comment-row__menu-item--danger:hover {
+  background: var(--pc-danger-bg);
+}
+
+.comment-row__edit-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.comment-row__edit-form input {
+  flex: 1;
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  padding: 5px 8px;
+  font-size: 12px;
+  font-family: var(--pc-font);
+  outline: none;
+}
+
+.comment-row__edit-form input:focus {
+  border-color: var(--pc-purple);
+}
+
+/* ---------- Share composer (inline, appears when Share clicked) ---------- */
+
+.share-composer {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid var(--pc-border);
+  padding-top: 10px;
+}
+
+.share-composer.is-open {
+  display: flex;
+}
+
+.share-composer textarea {
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  padding: 8px 10px;
+  font-size: 12.5px;
+  font-family: var(--pc-font);
+  resize: none;
+  outline: none;
+}
+
+.share-composer textarea:focus {
+  border-color: var(--pc-purple);
+}
+
+.share-composer__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ---------- Loading / toast (self-contained, no dependency on other modules' CSS) ---------- */
+
+.app-loading-inline {
+  font-size: 12.5px;
+  color: var(--pc-text-muted);
+  padding: 8px 0;
+  margin: 0;
+}
+
+.btn-load-more {
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  background: var(--pc-surface);
+  color: var(--pc-text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--pc-font);
+  cursor: pointer;
+}
+
+.btn-load-more:hover {
+  background: var(--pc-panel-bg);
+}
+
+.btn-load-more:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-primary-sm {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: var(--pc-radius);
+  border: none;
+  background: var(--pc-purple);
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: var(--pc-font);
+  cursor: pointer;
+}
+
+.btn-primary-sm:hover {
+  opacity: 0.92;
+}
+
+.btn-primary-sm:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-outline-sm {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: var(--pc-radius);
+  border: 1px solid var(--pc-border);
+  background: var(--pc-surface);
+  color: var(--pc-text-primary);
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: var(--pc-font);
+  cursor: pointer;
+}
+
+.btn-outline-sm:hover {
+  background: var(--pc-panel-bg);
+}
+
+.toast-stack {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 100;
+  width: min(92vw, 420px);
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: var(--pc-text-primary);
+  box-shadow: 0 10px 30px -10px rgba(30, 20, 80, 0.2);
+  animation: toastIn 0.15s ease;
+}
+
+.toast i { font-size: 16px; }
+.toast--success i { color: var(--pc-success); }
+.toast--error i { color: var(--pc-danger); }
+.toast--info i { color: var(--pc-purple); }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.empty-note {
+  font-size: 12px;
+  color: var(--pc-text-muted);
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 760px) {
+  .feed-main {
+    max-width: 100%;
+  }
+
+  .post-card__media img,
+  .post-card__media video {
+    height: 160px;
+  }
+}
