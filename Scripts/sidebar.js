@@ -1,44 +1,133 @@
-const SIDEBAR_NAV_ITEMS = [
-  { page: "dashboard", href: "feed.html", icon: "ti-home", label: "Home" },
-  { page: "network", href: "network-overview.html", icon: "ti-users", label: "My Network" },
-  { page: "jobs", href: "#", icon: "ti-briefcase", label: "Jobs" },
-  { page: "messages", href: "messages.html", icon: "ti-message-2", label: "Messages" },
-  { page: "saved", href: "#", icon: "ti-bookmark", label: "Saved" },
-  { page: "applications", href: "#", icon: "ti-file-text", label: "Applications" },
-  {
-    group: "profile",
-    icon: "ti-user",
-    label: "Profile",
-    children: [
-      { page: "profile-overview", href: "profile-overview.html", label: "Overview" },
-      { page: "profile-edit", href: "edit-professional-profile.html", label: "Edit Profile" },
-      { page: "profile-resume", href: "resume.html", label: "Resume" },
-      { page: "profile-portfolio", href: "portfolio.html", label: "Portfolio" },
-      { page: "profile-availability", href: "availability.html", label: "Availability" },
-    ],
-  },
-  { page: "analytics", href: "#", icon: "ti-chart-bar", label: "Analytics" },
-  { page: "events", href: "#", icon: "ti-calendar", label: "Events" },
-];
+// Unified app shell — replaces companyLayout.js + sidebar.js.
+// One nav renderer, one topbar renderer, role picks the data.
+//
+// Nav model: array of "sections". Each section is either:
+//   { label: "Main", items: [...] }                 → plain header + flat links (recruiter style)
+//   { items: [...] }                                → no header, just links (professional style)
+// Each item is either:
+//   { page, href, icon, label, badgeKey? }           → plain link
+//   { group, icon, label, children: [{page,href,label}] } → collapsible sub-nav (professional style)
 
-// The row of icon shortcuts that sits in the topbar itself (Home / Network /
-// Jobs / Messages / Notifications), separate from the left sidebar's own
-// nav links — matches the mockups' redundant top-nav + sidebar layout.
-// Rendered into a page's <div id="topbar-nav-icons"></div> mount point, if
-// the page includes one. Pages that don't include the mount point simply
-// don't get this row — nothing breaks.
-const TOPBAR_NAV_ICON_ITEMS = [
-  { page: "dashboard", href: "feed.html", icon: "ti-home", label: "Home" },
-  { page: "network", href: "network-overview.html", icon: "ti-users", label: "My Network" },
-  { page: "jobs", href: "#", icon: "ti-briefcase", label: "Jobs" },
-  { page: "messages", href: "messages.html", icon: "ti-message-2", label: "Messages", badgeKey: "messages" },
-  { page: "notifications", href: "#", icon: "ti-bell", label: "Notifications", badgeKey: "notifications" },
-];
+const NAV_CONFIG = {
+  recruiter: [
+    {
+      label: "Main",
+      items: [
+        { page: "dashboard", href: "recruiter-dashboard.html", icon: "ti-home", label: "Home" },
+        { page: "network", href: "network-overview.html", icon: "ti-users", label: "My Network", badgeKey: "network" },
+        { page: "candidates", href: "candidates.html", icon: "ti-users", label: "Candidates" },
+        { page: "jobs", href: "jobs.html", icon: "ti-briefcase", label: "Jobs" },
+        { page: "applications", href: "applications.html", icon: "ti-file-text", label: "Applications", badgeKey: "applications" },
+        { page: "messages", href: "messages.html", icon: "ti-message-circle", label: "Messages", badgeKey: "messages" },
+      ],
+    },
+    {
+      label: "Hiring",
+      items: [
+        { page: "talent-search", href: "talent-search.html", icon: "ti-search", label: "Talent Search" },
+        { page: "saved-candidates", href: "saved-candidates.html", icon: "ti-bookmark", label: "Saved Candidates" },
+        { page: "interviews", href: "interviews.html", icon: "ti-calendar-event", label: "Interviews" },
+      ],
+    },
+    {
+      label: "Company",
+      items: [
+        { page: "company-profile", href: "company-profile.html", icon: "ti-building", label: "Company Profile" },
+        { page: "team-recruiters", href: "team-recruiters.html", icon: "ti-users-group", label: "Team / Recruiters" },
+        { page: "company-management", href: "company-management.html", icon: "ti-building-skyscraper", label: "Company Management" },
+      ],
+    },
+    {
+      label: "Events",
+      items: [
+        { page: "create-event", href: "create-event.html", icon: "ti-calendar-plus", label: "Create Event" },
+        { page: "managed-events", href: "managed-events.html", icon: "ti-calendar-event", label: "Managed Events" },
+      ],
+    },
+    {
+      label: "Insights",
+      items: [
+        { page: "recruiter-analytics-dashboard", href: "recruiter-analytics-dashboard.html", icon: "ti-chart-bar", label: "Analytics" },
+      ],
+    },
+  ],
+
+  professional: [
+    {
+      items: [
+        { page: "dashboard", href: "feed.html", icon: "ti-home", label: "Home" },
+        { page: "network", href: "network-overview.html", icon: "ti-users", label: "My Network", badgeKey: "network" },
+        {
+          group: "jobs", icon: "ti-briefcase", label: "Jobs",
+          children: [
+            { page: "job-search", href: "job-search.html", label: "All Jobs" },
+            { page: "job-recommended", href: "job-search.html?tab=recommended", label: "Recommended" },
+            { page: "saved-jobs", href: "saved-jobs.html", label: "Saved Jobs" },
+            { page: "job-categories", href: "job-categories.html", label: "Job Categories" },
+          ],
+        },
+        { page: "messages", href: "messages.html", icon: "ti-message-2", label: "Messages", badgeKey: "messages" },
+        { page: "my-applications", href: "my-applications.html", icon: "ti-file-text", label: "Applications" },
+        { page: "saved-jobs", href: "saved-jobs.html", icon: "ti-bookmark", label: "Saved" },
+        {
+          group: "profile", icon: "ti-user", label: "Profile",
+          children: [
+            { page: "profile-overview", href: "profile-overview.html", label: "Overview" },
+            { page: "profile-edit", href: "edit-professional-profile.html", label: "Edit Profile" },
+            { page: "profile-resume", href: "resume.html", label: "Resume" },
+            { page: "profile-portfolio", href: "portfolio.html", label: "Portfolio" },
+            { page: "profile-availability", href: "availability.html", label: "Availability" },
+          ],
+        },
+        { page: "analytics-dashboard", href: "analytics-dashboard.html", icon: "ti-chart-bar", label: "Analytics" },
+        { page: "notification", href: "notifications.html", icon: "ti-bell", label: "Notifications", badgeKey: "notifications" },
+        {
+          group: "events", icon: "ti-calendar", label: "Events",
+          children: [
+            { page: "events-discover", href: "events-discover.html", label: "Discover" },
+            { page: "my-events", href: "my-events.html", label: "My Events" },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+// Icon-row shortcuts in the topbar itself: Home / Network / Jobs /
+// Messages / Notifications, role-aware. renderTopbarNavIcons() below
+// creates the #topbar-nav-icons mount itself if a page's markup doesn't
+// already have one, so this renders on every page without needing each
+// page's HTML edited by hand.
+const TOPBAR_NAV_ICON_ITEMS = {
+  professional: [
+    { page: "dashboard", href: "feed.html", icon: "ti-home", label: "Home" },
+    { page: "network", href: "network-overview.html", icon: "ti-users", label: "My Network", badgeKey: "network" },
+    { page: "job-search", href: "job-search.html", icon: "ti-briefcase", label: "Jobs" },
+    { page: "messages", href: "messages.html", icon: "ti-message-2", label: "Messages", badgeKey: "messages" },
+    { page: "notifications", href: "notifications.html", icon: "ti-bell", label: "Notifications", badgeKey: "notifications" },
+  ],
+  recruiter: [
+    { page: "dashboard", href: "recruiter-dashboard.html", icon: "ti-home", label: "Home" },
+    { page: "network", href: "network-overview.html", icon: "ti-users", label: "My Network", badgeKey: "network" },
+    { page: "jobs", href: "jobs.html", icon: "ti-briefcase", label: "Jobs" },
+    { page: "messages", href: "messages.html", icon: "ti-message-2", label: "Messages", badgeKey: "messages" },
+    { page: "notifications", href: "notifications.html", icon: "ti-bell", label: "Notifications", badgeKey: "notifications" },
+  ],
+};
 
 const SIDEBAR_COLLAPSE_STORAGE_KEY = "pc_sidebar_collapsed";
 
 function currentActivePage() {
   return document.body.dataset.page || "";
+}
+
+function currentRole() {
+  const raw = (localStorage.getItem("pc_role") || "professional").toLowerCase();
+  return raw === "recruiter" || raw === "company" ? "recruiter" : "professional";
+}
+
+function profileHref(role) {
+  return role === "recruiter" ? "recruiter-profile.html" : "profile-overview.html";
 }
 
 function isSidebarCollapsed() {
@@ -47,7 +136,6 @@ function isSidebarCollapsed() {
 
 function applySidebarCollapsedState(collapsed) {
   document.body.classList.toggle("sidebar-collapsed", collapsed);
-
   const toggleBtn = document.getElementById("sidebar-collapse-toggle");
   if (toggleBtn) {
     const icon = toggleBtn.querySelector("i");
@@ -56,40 +144,58 @@ function applySidebarCollapsedState(collapsed) {
   }
 }
 
+function badgeSpan(key) {
+  return `<span class="sidebar-link__badge" data-badge-key="${key}" hidden></span>`;
+}
+
+function renderNavItem(item, activePage) {
+  if (item.children) {
+    const isGroupActive = item.children.some((c) => c.page === activePage);
+    const childrenHtml = item.children
+      .map((c) => `
+        <a href="${c.href}" class="sidebar-sublink${c.page === activePage ? " is-active" : ""}">
+          ${c.label}
+        </a>`)
+      .join("");
+
+    return `
+      <div class="sidebar-group${isGroupActive ? " is-open" : ""}">
+        <span class="sidebar-link sidebar-link--group${isGroupActive ? " is-active" : ""}" title="${item.label}">
+          <i class="ti ${item.icon}" aria-hidden="true"></i> <span class="sidebar-link__text">${item.label}</span>
+          <i class="ti ti-chevron-down sidebar-group__chevron" aria-hidden="true"></i>
+        </span>
+        <div class="sidebar-subnav">${childrenHtml}</div>
+      </div>`;
+  }
+
+  return `
+    <a href="${item.href}" class="sidebar-link${item.page === activePage ? " is-active" : ""}" title="${item.label}">
+      <i class="ti ${item.icon}" aria-hidden="true"></i> <span class="sidebar-link__text">${item.label}</span>
+      ${item.badgeKey ? badgeSpan(item.badgeKey) : ""}
+    </a>`;
+}
+
 function renderSidebar() {
   const root = document.getElementById("sidebar-root");
-  if (!root) return; // page didn't include a mount point — nothing to do
+  if (!root) return; // page didn't include a mount point
 
   const activePage = currentActivePage();
+  const role = currentRole();
   const username = localStorage.getItem("pc_username") || "User";
   const avatarUrl = localStorage.getItem("pc_avatar_url") || "";
 
-  const navHtml = SIDEBAR_NAV_ITEMS.map((item) => {
-    if (item.children) {
-      const isGroupActive = item.children.some((c) => c.page === activePage);
-      const childrenHtml = item.children.map((c) => `
-        <a href="${c.href}" class="sidebar-sublink${c.page === activePage ? " is-active" : ""}">
-          ${c.label}
-        </a>
-      `).join("");
-
-      return `
-        <div class="sidebar-group${isGroupActive ? " is-open" : ""}">
-          <span class="sidebar-link sidebar-link--group${isGroupActive ? " is-active" : ""}" title="${item.label}">
-            <i class="ti ${item.icon}" aria-hidden="true"></i> <span class="sidebar-link__text">${item.label}</span>
-            <i class="ti ti-chevron-down sidebar-group__chevron" aria-hidden="true"></i>
-          </span>
-          <div class="sidebar-subnav">${childrenHtml}</div>
-        </div>
-      `;
-    }
-
-    return `
-      <a href="${item.href}" class="sidebar-link${item.page === activePage ? " is-active" : ""}" title="${item.label}">
-        <i class="ti ${item.icon}" aria-hidden="true"></i> <span class="sidebar-link__text">${item.label}</span>
-      </a>
-    `;
-  }).join("");
+  const sections = NAV_CONFIG[role];
+  const navHtml = sections
+    .map((section) => {
+      const itemsHtml = section.items.map((item) => renderNavItem(item, activePage)).join("");
+      return section.label
+        ? `<div class="sidebar-section">
+             <div class="sidebar-group__label">${section.label}</div>
+             ${itemsHtml}
+           </div>`
+        : itemsHtml;
+    })
+    .join("");
 
   const collapsed = isSidebarCollapsed();
 
@@ -119,7 +225,7 @@ function renderSidebar() {
           </button>
 
           <div class="sidebar-user-dropdown" id="sidebar-user-dropdown">
-            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <a href="${profileHref(role)}" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
             <a href="#" class="dropdown-menu__item"><i class="ti ti-settings" aria-hidden="true"></i> Settings</a>
             <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="sidebar-user-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
           </div>
@@ -134,17 +240,11 @@ function renderSidebar() {
     </aside>
   `;
 
-  // Manual toggle for a group that isn't currently active — clicking the
-  // "Profile" label expands/collapses its sub-links without navigating.
   root.querySelectorAll(".sidebar-group").forEach((group) => {
     const header = group.querySelector(".sidebar-link--group");
-    header.addEventListener("click", () => {
-      group.classList.toggle("is-open");
-    });
+    header.addEventListener("click", () => group.classList.toggle("is-open"));
   });
 
-  // Logout: clear everything login.js stored, then leave. Shared by both
-  // the standalone "Log out" sidebar link and the dropdown's Log out item.
   function performLogout() {
     ["pc_token", "pc_user_id", "pc_profile_id", "pc_role", "pc_username", "pc_avatar_url"].forEach((key) => {
       localStorage.removeItem(key);
@@ -161,8 +261,6 @@ function renderSidebar() {
     });
   }
 
-  // Sidebar user dropdown — opens upward since it sits near the bottom of
-  // the screen, mirroring the topbar's user dropdown behavior.
   const sidebarUserToggle = document.getElementById("sidebar-user-toggle");
   const sidebarUserDropdown = document.getElementById("sidebar-user-dropdown");
   if (sidebarUserToggle && sidebarUserDropdown) {
@@ -178,12 +276,8 @@ function renderSidebar() {
   }
 
   const sidebarUserLogout = document.getElementById("sidebar-user-logout");
-  if (sidebarUserLogout) {
-    sidebarUserLogout.addEventListener("click", performLogout);
-  }
+  if (sidebarUserLogout) sidebarUserLogout.addEventListener("click", performLogout);
 
-  // Collapse/expand toggle — persists the preference so it stays collapsed
-  // or expanded as the person navigates between pages, not just on this one.
   document.getElementById("sidebar-collapse-toggle").addEventListener("click", () => {
     const nowCollapsed = !isSidebarCollapsed();
     localStorage.setItem(SIDEBAR_COLLAPSE_STORAGE_KEY, nowCollapsed ? "true" : "false");
@@ -194,33 +288,78 @@ function renderSidebar() {
 }
 
 function renderTopbarNavIcons() {
-  const mount = document.getElementById("topbar-nav-icons");
-  if (!mount) return; // page didn't include a mount point — nothing to do
+  let mount = document.getElementById("topbar-nav-icons");
+
+  // Not every page's markup includes this mount point — create it so the
+  // icon row renders everywhere without needing each page hand-edited.
+  if (!mount) {
+    const topbar = document.querySelector(".app-topbar");
+    if (!topbar) return;
+    mount = document.createElement("div");
+    mount.id = "topbar-nav-icons";
+    mount.className = "topbar-nav-icons";
+    const iconsWrap = topbar.querySelector(".app-topbar__icons");
+    if (iconsWrap) {
+      topbar.insertBefore(mount, iconsWrap);
+    } else {
+      topbar.appendChild(mount);
+    }
+  }
 
   const activePage = currentActivePage();
+  const role = currentRole();
+  const items = TOPBAR_NAV_ICON_ITEMS[role];
 
-  mount.innerHTML = TOPBAR_NAV_ICON_ITEMS.map((item) => `
-    <a href="${item.href}" class="topbar-nav-icon${item.page === activePage ? " is-active" : ""}" title="${item.label}">
-      <i class="ti ${item.icon}" aria-hidden="true"></i>
-      ${item.badgeKey ? `<span class="topbar-nav-icon__badge" data-badge-key="${item.badgeKey}" hidden></span>` : ""}
-    </a>
-  `).join("");
+  mount.innerHTML = items
+    .map((item) => `
+      <a href="${item.href}" class="topbar-nav-icon${item.page === activePage ? " is-active" : ""}" title="${item.label}">
+        <i class="ti ${item.icon}" aria-hidden="true"></i>
+        ${item.badgeKey ? `<span class="topbar-nav-icon__badge" data-badge-key="${item.badgeKey}" hidden></span>` : ""}
+      </a>`)
+    .join("");
 }
 
-// Fills in the topbar's user name/avatar and wires its dropdown + logout
-// button, on any page that has the standard topbar-user markup
-// (#topbar-name, #topbar-avatar, #topbar-user-toggle, #topbar-dropdown,
-// #topbar-logout). Centralized here instead of duplicated in every page's
-// own script, since every page's topbar uses the exact same static markup
-// and the same localStorage-derived data. If a page doesn't have this
-// markup, each lookup below just returns null and is skipped — nothing
-// breaks.
+// "Recruiter" / "Professional" label shown under the name in the topbar
+// user card, mirroring the sidebar's own role display.
+function roleLabel(role) {
+  return role === "recruiter" ? "Recruiter" : "Professional";
+}
+
+// Wraps #topbar-name in a .topbar-user__text block and injects a role
+// line under it (once per page — idempotent), so every page gets the
+// two-line name/role card without needing its markup changed by hand.
+function ensureTopbarRoleLine(role) {
+  const nameEl = document.getElementById("topbar-name");
+  if (!nameEl) return;
+
+  let wrap = nameEl.parentElement;
+  if (!wrap.classList.contains("topbar-user__text")) {
+    wrap = document.createElement("div");
+    wrap.className = "topbar-user__text";
+    nameEl.parentElement.insertBefore(wrap, nameEl);
+    wrap.appendChild(nameEl);
+  }
+  nameEl.classList.add("topbar-user__name");
+
+  let roleEl = document.getElementById("topbar-role");
+  if (!roleEl) {
+    roleEl = document.createElement("span");
+    roleEl.id = "topbar-role";
+    roleEl.className = "topbar-user__role";
+    wrap.appendChild(roleEl);
+  }
+  roleEl.textContent = roleLabel(role);
+}
+
 function renderTopbarUserInfo() {
   const username = localStorage.getItem("pc_username") || "User";
   const avatarUrl = localStorage.getItem("pc_avatar_url") || "";
+  const role = currentRole();
 
   const nameEl = document.getElementById("topbar-name");
   if (nameEl) nameEl.textContent = username;
+
+  ensureTopbarRoleLine(role);
 
   const avatarImg = document.getElementById("topbar-avatar");
   if (avatarImg) {
@@ -264,14 +403,16 @@ function renderTopbarUserInfo() {
   }
 }
 
-// Sidebar/topbar badge counts (unread messages, notifications, etc.) are
-// real data, not hardcoded — pages can call window.ProConnectShell
-// .setBadgeCounts({...}) once they've fetched the relevant counts, or
-// leave them unset to show nothing. Updates both the left-sidebar link's
-// badge (if that nav item has one) and the topbar icon row's badge (found
-// via data-badge-key), whichever mount points actually exist on the page.
+// Updates BOTH the sidebar link badge and the topbar icon row badge for a
+// given key, whichever mount points exist on the current page.
 function setBadgeCounts(counts) {
   Object.entries(counts).forEach(([key, value]) => {
+    const sidebarBadge = document.querySelector(`.sidebar-link__badge[data-badge-key="${key}"]`);
+    if (sidebarBadge) {
+      sidebarBadge.textContent = value;
+      sidebarBadge.hidden = !value;
+    }
+
     const topbarBadge = document.querySelector(`#topbar-nav-icons [data-badge-key="${key}"]`);
     if (topbarBadge) {
       topbarBadge.textContent = value;
@@ -280,9 +421,6 @@ function setBadgeCounts(counts) {
   });
 }
 
-// Apply the collapsed state to <body> immediately, before the rest of the
-// page paints — avoids a visible "flash" of the expanded sidebar snapping
-// shut a moment after load.
 if (isSidebarCollapsed()) {
   document.body.classList.add("sidebar-collapsed");
 }

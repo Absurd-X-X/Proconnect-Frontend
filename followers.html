@@ -24,24 +24,16 @@
         </div>
 
         <div class="app-topbar__icons">
-          <button class="icon-btn" disabled title="Notifications (coming soon)">
-            <i class="ti ti-bell" aria-hidden="true"></i>
-            <span class="icon-btn__badge" id="notif-badge" hidden></span>
-          </button>
-          <button class="icon-btn" disabled title="Messages (coming soon)">
-            <i class="ti ti-message-2" aria-hidden="true"></i>
-            <span class="icon-btn__badge" id="msg-badge" hidden></span>
-          </button>
-          <div class="topbar-user" id="topbar-user-toggle">
-            <img id="topbar-avatar" src="" alt="" />
+<div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
             <span id="topbar-name">—</span>
             <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
 
-            <div class="dropdown-menu" id="topbar-dropdown">
-              <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
-              <a href="#" class="dropdown-menu__item"><i class="ti ti-settings" aria-hidden="true"></i> Settings</a>
-              <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
-            </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <a href="#" class="dropdown-menu__item"><i class="ti ti-settings" aria-hidden="true"></i> Settings</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
           </div>
         </div>
       </header>

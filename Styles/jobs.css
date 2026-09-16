@@ -1,0 +1,392 @@
+/* ---------- Header ---------- */
+
+.jm-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.jm-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.jm-subtitle {
+  font-size: 13px;
+  color: var(--pc-text-secondary);
+  margin: 0;
+}
+
+.jm-header__actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ---------- Alert ---------- */
+
+.form-alert {
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: var(--pc-radius);
+  background: var(--pc-danger-bg);
+  color: var(--pc-danger);
+  margin-bottom: 1rem;
+}
+
+.form-alert[hidden] {
+  display: none;
+}
+
+.form-alert--success {
+  background: var(--pc-success-bg);
+  color: var(--pc-success);
+}
+
+/* ---------- Top-level tabs ---------- */
+
+.jm-tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--pc-border);
+  margin-bottom: 1.25rem;
+}
+
+.jm-tab {
+  border: none;
+  background: none;
+  font-family: var(--pc-font);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--pc-text-secondary);
+  padding: 10px 4px;
+  margin-right: 22px;
+  cursor: pointer;
+  position: relative;
+}
+
+.jm-tab:hover {
+  color: var(--pc-text-primary);
+}
+
+.jm-tab.is-active {
+  color: var(--pc-purple);
+}
+
+.jm-tab.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--pc-purple);
+}
+
+/* ---------- Placeholder panels ---------- */
+
+.jm-placeholder {
+  text-align: center;
+  padding: 3.5rem 1.5rem;
+  color: var(--pc-text-secondary);
+}
+
+.jm-placeholder i {
+  font-size: 34px;
+  color: var(--pc-text-muted);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.jm-placeholder p {
+  margin: 4px 0;
+  font-size: 13.5px;
+}
+
+.jm-placeholder__sub {
+  font-size: 12.5px;
+  color: var(--pc-text-muted);
+}
+
+/* ---------- Status sub-tabs (My Job Posts) ---------- */
+
+.jm-status-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1rem;
+}
+
+.jm-status-tab {
+  border: 1px solid var(--pc-border);
+  background: var(--pc-surface);
+  font-family: var(--pc-font);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--pc-text-secondary);
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.jm-status-tab:hover {
+  border-color: var(--pc-purple);
+  color: var(--pc-purple);
+}
+
+.jm-status-tab.is-active {
+  background: var(--pc-purple);
+  border-color: var(--pc-purple);
+  color: #fff;
+}
+
+/* ---------- Table card ---------- */
+
+.jm-table-card {
+  padding: 1rem 1.25rem;
+}
+
+.jm-table-toolbar {
+  margin-bottom: 1rem;
+}
+
+.jm-search {
+  max-width: 320px;
+  height: 36px;
+}
+
+.jm-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--pc-text-secondary);
+  font-size: 13.5px;
+  padding: 3rem 0;
+}
+
+.jm-empty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.jm-empty i {
+  font-size: 34px;
+  color: var(--pc-text-muted);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.jm-empty p {
+  margin: 4px 0 14px;
+  font-size: 13.5px;
+  color: var(--pc-text-secondary);
+}
+
+.jm-table-wrap {
+  overflow-x: auto;
+}
+
+.jm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.jm-table th {
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--pc-text-muted);
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--pc-border);
+  white-space: nowrap;
+}
+
+.jm-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--pc-border);
+  vertical-align: middle;
+}
+
+.jm-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.jm-table tbody tr:hover {
+  background: var(--pc-panel-bg);
+}
+
+.jm-job-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.jm-job-cell__icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 8px;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.jm-job-cell__title {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--pc-text-primary);
+}
+
+.jm-job-cell__sub {
+  font-size: 11.5px;
+  color: var(--pc-text-secondary);
+}
+
+.jm-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.jm-status-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.jm-status-badge--active {
+  background: var(--pc-success-bg);
+  color: var(--pc-success);
+}
+.jm-status-badge--active::before { background: var(--pc-success); }
+
+.jm-status-badge--draft {
+  background: var(--pc-panel-bg);
+  color: var(--pc-text-secondary);
+}
+.jm-status-badge--draft::before { background: var(--pc-text-muted); }
+
+.jm-status-badge--scheduled {
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+}
+.jm-status-badge--scheduled::before { background: var(--pc-purple); }
+
+.jm-status-badge--closed {
+  background: var(--pc-danger-bg);
+  color: var(--pc-danger);
+}
+.jm-status-badge--closed::before { background: var(--pc-danger); }
+
+.jm-actions {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.jm-action-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  color: var(--pc-text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.jm-action-btn:hover {
+  background: var(--pc-panel-bg);
+  color: var(--pc-text-primary);
+}
+
+.jm-action-btn--danger:hover {
+  background: var(--pc-danger-bg);
+  color: var(--pc-danger);
+}
+
+/* ---------- Pagination ---------- */
+
+.jm-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  font-size: 12.5px;
+  color: var(--pc-text-secondary);
+}
+
+/* ---------- Confirm modal ---------- */
+
+.jm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 26, 46, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.jm-modal {
+  background: var(--pc-surface);
+  border-radius: var(--pc-radius-lg);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.jm-modal h3 {
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+.jm-modal p {
+  font-size: 13px;
+  color: var(--pc-text-secondary);
+  margin: 0 0 1.25rem;
+  line-height: 1.5;
+}
+
+.jm-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 760px) {
+  .jm-header {
+    flex-direction: column;
+  }
+
+  .jm-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .jm-status-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

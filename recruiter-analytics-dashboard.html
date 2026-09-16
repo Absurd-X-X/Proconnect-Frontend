@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recruiter Analytics · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/analytics-dashboard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+</head>
+<body data-page="recruiter-analytics-dashboard">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search candidates, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="recruiter-profile.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <div class="an-header">
+          <div>
+            <h1 class="an-title">Recruiter Analytics</h1>
+            <p class="an-subtitle">Track hiring performance across your company's jobs and applicants.</p>
+          </div>
+          <div class="an-header__actions">
+            <select id="date-range-select" class="an-select">
+              <option value="Last7Days">Last 7 days</option>
+              <option value="Last30Days" selected>Last 30 days</option>
+              <option value="Last90Days">Last 90 days</option>
+              <option value="LastYear">Last year</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="an-kpi-row">
+          <div class="card an-kpi-card">
+            <div class="an-kpi-card__icon"><i class="ti ti-briefcase" aria-hidden="true"></i></div>
+            <div class="an-kpi-card__label">Active Jobs</div>
+            <div class="an-kpi-card__value" id="kpi-active-jobs">—</div>
+            <div class="an-kpi-card__delta" id="kpi-jobs-sub"></div>
+          </div>
+
+          <div class="card an-kpi-card">
+            <div class="an-kpi-card__icon"><i class="ti ti-file-text" aria-hidden="true"></i></div>
+            <div class="an-kpi-card__label">Applications</div>
+            <div class="an-kpi-card__value" id="kpi-applications">—</div>
+            <div class="an-kpi-card__delta" id="kpi-applications-delta"></div>
+          </div>
+
+          <div class="card an-kpi-card">
+            <div class="an-kpi-card__icon"><i class="ti ti-calendar-event" aria-hidden="true"></i></div>
+            <div class="an-kpi-card__label">Interviews Scheduled</div>
+            <div class="an-kpi-card__value" id="kpi-interviews">—</div>
+            <div class="an-kpi-card__delta an-kpi-card__delta--muted" id="kpi-interviews-sub"></div>
+          </div>
+
+          <div class="card an-kpi-card">
+            <div class="an-kpi-card__icon"><i class="ti ti-user-check" aria-hidden="true"></i></div>
+            <div class="an-kpi-card__label">Hired</div>
+            <div class="an-kpi-card__value" id="kpi-hired">—</div>
+            <div class="an-kpi-card__delta an-kpi-card__delta--muted" id="kpi-hired-sub"></div>
+          </div>
+        </div>
+
+        <div class="an-chart-row">
+          <div class="card an-chart-card">
+            <div class="an-chart-card__header">
+              <h3>Applications Trend</h3>
+            </div>
+            <canvas id="applications-trend-chart" height="220"></canvas>
+          </div>
+
+          <aside class="an-sidebar">
+            <div class="card an-sidebar-card">
+              <div class="an-sidebar-card__header">
+                <h3>Top Job Roles by Applications</h3>
+              </div>
+              <div id="top-roles-list" class="an-top-posts">
+                <div class="jm-loading" id="top-roles-loading">
+                  <span class="spinner spinner--dark"></span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="an-chart-row">
+          <div class="card an-chart-card">
+            <div class="an-chart-card__header">
+              <h3>Application Funnel</h3>
+            </div>
+            <div id="funnel-container" class="an-funnel">
+              <div class="jm-loading" id="funnel-loading">
+                <span class="spinner spinner--dark"></span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="an-sidebar">
+            <div class="card an-sidebar-card">
+              <div class="an-sidebar-card__header">
+                <h3>Recruiter Performance</h3>
+              </div>
+              <div id="recruiter-performance-list" class="an-recruiter-performance">
+                <div class="jm-loading" id="recruiter-performance-loading">
+                  <span class="spinner spinner--dark"></span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/recruiterAnalyticsDashboard.js"></script>
+</body>
+</html>

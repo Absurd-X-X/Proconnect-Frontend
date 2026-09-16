@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Categories · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/job-categories.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="job-categories">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, or companies..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <p class="jc-breadcrumb"><a href="job-search.html">Jobs</a> / Job Categories</p>
+
+        <div class="jc-header">
+          <h1 class="jc-title">Job Categories</h1>
+          <p class="jc-subtitle">Explore jobs by categories that match your skills and interests.</p>
+        </div>
+
+        <div class="card jc-filters-card">
+          <div class="app-search jc-search">
+            <i class="ti ti-search" aria-hidden="true"></i>
+            <input type="text" id="search-input" placeholder="Search categories..." />
+          </div>
+          <select id="filter-employment-type" class="jc-select">
+            <option value="">All job types</option>
+            <option value="FullTime">Full-time</option>
+            <option value="PartTime">Part-time</option>
+            <option value="Contract">Contract</option>
+            <option value="Internship">Internship</option>
+            <option value="Freelance">Freelance</option>
+            <option value="Temporary">Temporary</option>
+            <option value="Remote">Remote</option>
+          </select>
+          <select id="filter-experience-level" class="jc-select">
+            <option value="">All experience levels</option>
+            <option value="EntryLevel">Entry Level</option>
+            <option value="Junior">Junior</option>
+            <option value="MidLevel">Mid Level</option>
+            <option value="Senior">Senior</option>
+            <option value="Lead">Lead</option>
+            <option value="Executive">Executive</option>
+          </select>
+          <select id="sort-select" class="jc-select">
+            <option value="popular">Sort by: Popular</option>
+            <option value="az">Sort by: A-Z</option>
+          </select>
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="jc-layout">
+
+          <div class="jc-main">
+
+            <div class="jc-results-header">
+              <h2>All Job Categories</h2>
+              <div class="jc-view-toggle">
+                <button type="button" class="jc-view-btn is-active" data-view="grid"><i class="ti ti-layout-grid" aria-hidden="true"></i> Grid</button>
+                <button type="button" class="jc-view-btn" data-view="list"><i class="ti ti-list" aria-hidden="true"></i> List</button>
+              </div>
+            </div>
+
+            <div class="jm-loading" id="loading">
+              <span class="spinner spinner--dark"></span>
+              <span>Loading categories...</span>
+            </div>
+
+            <div class="jm-empty" id="empty" hidden>
+              <i class="ti ti-category-off" aria-hidden="true"></i>
+              <p><strong>No categories match your search.</strong></p>
+            </div>
+
+            <div class="jc-category-grid" id="category-container" hidden></div>
+
+          </div>
+
+          <aside class="jc-sidebar">
+
+            <div class="card">
+              <div class="jc-sidebar-header">
+                <h3>Popular categories</h3>
+              </div>
+              <div id="popular-list" class="jc-popular-list"></div>
+            </div>
+
+            <div class="card" id="suggested-card" hidden>
+              <h3 class="jc-sidebar-title">Suggested for you</h3>
+              <p class="jc-suggested-sub" id="suggested-sub">Based on trending roles</p>
+              <div id="suggested-list" class="jc-suggested-list"></div>
+            </div>
+
+            <div class="card">
+              <h3 class="jc-sidebar-title">Tips to find the right job</h3>
+              <ul class="cj-tips">
+                <li><i class="ti ti-check" aria-hidden="true"></i> Complete your profile to get better matches</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Follow companies you're interested in</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Turn on job alerts for new matches</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Customize your job preferences</li>
+              </ul>
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/jobCategories.js"></script>
+</body>
+</html>

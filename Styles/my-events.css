@@ -1,0 +1,173 @@
+/* Page-specific styles for my-events.html.
+   Assumes dashboard.css and professional-events.css are already loaded
+   (tokens, .card, .btn-primary/.btn-outline/.btn-compact, .event-badge,
+   .status-chip, .card-icon-btn, .pagination, .tabs, .toast-stack,
+   .modal-overlay/.modal from event-details.css if that loaded first —
+   otherwise the modal rules below are self-contained). */
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.page-header h1 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  color: var(--pc-text-primary);
+}
+.page-header p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--pc-text-secondary);
+}
+
+.my-events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.my-event-card {
+  display: grid;
+  grid-template-columns: 130px 1fr auto auto;
+  gap: 16px;
+  align-items: center;
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius-lg);
+  padding: 14px;
+}
+
+.my-event-card__image {
+  display: block;
+  width: 130px;
+  height: 80px;
+  border-radius: var(--pc-radius);
+  background-color: var(--pc-panel-bg);
+  background-size: cover;
+  background-position: center;
+  padding: 8px;
+  position: relative;
+}
+
+.my-event-card__body a {
+  text-decoration: none;
+}
+.my-event-card__body h3 {
+  margin: 0 0 6px;
+  font-size: 13.5px;
+  color: var(--pc-text-primary);
+}
+
+.my-event-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11.5px;
+  color: var(--pc-text-secondary);
+}
+.my-event-card__meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.my-event-card__meta i {
+  color: var(--pc-text-muted);
+}
+
+.my-event-card__status {
+  white-space: nowrap;
+}
+
+.my-event-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* .btn-danger doesn't exist in dashboard.css (only .btn-primary/.btn-outline),
+   so it's defined locally here — same sizing convention as .btn-outline. */
+.btn-danger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid var(--pc-danger);
+  border-radius: var(--pc-radius);
+  background: var(--pc-surface);
+  color: var(--pc-danger);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--pc-font);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-danger:hover {
+  background: var(--pc-danger-bg);
+}
+
+/* ---- Modal (cancel registration confirm) — self-contained in case
+   event-details.css hasn't been loaded on this page ---- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 26, 46, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+.modal {
+  background: var(--pc-surface);
+  border-radius: var(--pc-radius-lg);
+  width: 100%;
+  max-width: 420px;
+}
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--pc-border);
+}
+.modal__header h3 {
+  margin: 0;
+  font-size: 15px;
+}
+.modal__close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--pc-text-muted);
+  font-size: 18px;
+}
+.modal__body {
+  padding: 20px 22px;
+  font-size: 13px;
+  color: var(--pc-text-secondary);
+  line-height: 1.6;
+}
+.modal__body strong {
+  color: var(--pc-text-primary);
+}
+.modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 22px;
+  border-top: 1px solid var(--pc-border);
+}
+
+@media (max-width: 900px) {
+  .my-event-card {
+    grid-template-columns: 1fr;
+  }
+  .page-header {
+    flex-direction: column;
+  }
+}

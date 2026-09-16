@@ -4,21 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Company Management - ProConnect</title>
-  <link rel="stylesheet" href="/Styles/company-layout.css" />
+  <link rel="stylesheet" href="Styles/dashboard.css" />
   <link rel="stylesheet" href="/Styles/company-management.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
 </head>
-<body>
+<body data-page="company-management">
 
   <div class="app-shell">
 
-    <aside class="app-sidebar" id="app-sidebar"></aside>
+    <div id="sidebar-root"></div>
 
-    <div class="app-main">
+    <main class="app-main">
 
-      <header class="app-topbar" id="app-topbar"></header>
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search candidates, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="recruiter-profile.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
 
-      <main class="app-content">
+      <div class="app-content">
 
         <div class="page-header">
           <div>
@@ -32,6 +48,14 @@
 
         <div class="loading-state" id="loading-state">Loading company management...</div>
         <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="pending-approval-banner" id="pending-approval-banner" hidden>
+          <i class="ti ti-clock-hour-4" aria-hidden="true"></i>
+          <div>
+            <h3>Your request to join is pending approval</h3>
+            <p>Once a company admin approves your request, you'll have full access to company management.</p>
+          </div>
+        </div>
 
         <div id="management-content" hidden>
 
@@ -203,8 +227,9 @@
 
         </div>
 
-      </main>
-    </div>
+      </div>
+
+    </main>
   </div>
 
   <!-- Invite Recruiter modal -->
@@ -253,7 +278,7 @@
   </div>
 
   <script src="Scripts/config.js"></script>
-  <script src="Scripts/Layouts/companyLayout.js"></script>
+  <script src="Scripts/sidebar.js"></script>
   <script src="Scripts/companyManagement.js"></script>
 </body>
 </html>

@@ -143,6 +143,31 @@ document.addEventListener("DOMContentLoaded", async () => {
   // ---------------- Load ----------------
 
   try {
+    // Check membership status first — a Pending recruiter sees an
+    // "awaiting approval" state instead of the full dashboard.
+    const profileResponse = await fetch(API_ROUTES.recruiterProfile, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const profileResult = await profileResponse.json().catch(() => ({}));
+
+    if (!profileResponse.ok || !profileResult.status) {
+      loadingState.hidden = true;
+      showAlert(profileResult.message || "Couldn't load your recruiter profile.");
+      return;
+    }
+
+    if (profileResult.data.status === "Pending") {
+      loadingState.hidden = true;
+      document.getElementById("pending-approval-banner").hidden = false;
+      return;
+    }
+
+    if (profileResult.data.status === "Suspended") {
+      loadingState.hidden = true;
+      showAlert("Your access to this company has been suspended. Contact your company admin for help.");
+      return;
+    }
+
     const response = await fetch(API_ROUTES.companyManagementOverview, {
       headers: { Authorization: `Bearer ${token}` },
     });

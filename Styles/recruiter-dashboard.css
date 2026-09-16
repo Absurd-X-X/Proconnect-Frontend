@@ -205,6 +205,39 @@
   padding: 1.5rem 0;
 }
 
+.pending-approval-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 1.5rem;
+  border-radius: var(--pc-radius-lg);
+  background: var(--pc-warning-bg);
+  margin-bottom: 1.5rem;
+}
+
+.pending-approval-banner[hidden] {
+  display: none;
+}
+
+.pending-approval-banner i {
+  font-size: 26px;
+  color: var(--pc-warning);
+  flex-shrink: 0;
+}
+
+.pending-approval-banner h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: var(--pc-text-primary);
+}
+
+.pending-approval-banner p {
+  font-size: 13px;
+  color: var(--pc-text-secondary);
+  margin: 0;
+}
+
 /* ---------- Hiring pipeline funnel ---------- */
 
 .pipeline-funnel {

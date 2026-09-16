@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saved Jobs · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/saved-jobs.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="saved-jobs">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, or companies..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <div class="sj-tabs">
+          <a href="job-search.html" class="sj-tab">All Jobs</a>
+          <a href="job-search.html?tab=recommended" class="sj-tab">Recommended</a>
+          <span class="sj-tab is-active">Saved Jobs (<span id="tab-count">0</span>)</span>
+        </div>
+
+        <div class="sj-header">
+          <div>
+            <h1 class="sj-title">Saved Jobs</h1>
+            <p class="sj-subtitle">Jobs you've saved for later.</p>
+          </div>
+          <div class="sj-header__actions">
+            <button type="button" class="btn-outline btn-compact" id="manage-alerts-btn">
+              <i class="ti ti-bell" aria-hidden="true"></i> Manage alerts
+            </button>
+            <button type="button" class="btn-outline btn-compact" id="clear-all-btn">
+              <i class="ti ti-trash" aria-hidden="true"></i> Clear all
+            </button>
+          </div>
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="sj-layout">
+
+          <div class="sj-main">
+
+            <div class="card sj-filters-card">
+              <div class="app-search sj-search">
+                <i class="ti ti-search" aria-hidden="true"></i>
+                <input type="text" id="search-input" placeholder="Search saved jobs..." />
+              </div>
+              <select id="filter-location" class="sj-select">
+                <option value="">All locations</option>
+              </select>
+              <select id="filter-type" class="sj-select">
+                <option value="">All job types</option>
+                <option value="FullTime">Full-time</option>
+                <option value="PartTime">Part-time</option>
+                <option value="Contract">Contract</option>
+                <option value="Internship">Internship</option>
+                <option value="Freelance">Freelance</option>
+                <option value="Temporary">Temporary</option>
+                <option value="Remote">Remote</option>
+              </select>
+              <select id="filter-time" class="sj-select">
+                <option value="">All time</option>
+                <option value="1">Past 24 hours</option>
+                <option value="7">Past week</option>
+                <option value="30">Past month</option>
+              </select>
+              <select id="sort-select" class="sj-select">
+                <option value="recent">Sort by: Recently saved</option>
+                <option value="oldest">Sort by: Oldest saved</option>
+                <option value="title">Sort by: Job title (A-Z)</option>
+              </select>
+            </div>
+
+            <div class="jm-loading" id="jobs-loading">
+              <span class="spinner spinner--dark"></span>
+              <span>Loading your saved jobs...</span>
+            </div>
+
+            <div class="jm-empty" id="jobs-empty" hidden>
+              <i class="ti ti-bookmark-off" aria-hidden="true"></i>
+              <p><strong>No saved jobs yet.</strong></p>
+              <p class="jm-placeholder__sub">Save jobs you're interested in to find them here later.</p>
+              <a href="job-search.html" class="btn-primary btn-compact">Browse jobs</a>
+            </div>
+
+            <div class="jm-empty" id="jobs-no-match" hidden>
+              <i class="ti ti-filter-off" aria-hidden="true"></i>
+              <p><strong>No saved jobs match your filters.</strong></p>
+            </div>
+
+            <div class="sj-job-list" id="job-list" hidden></div>
+
+            <div class="sj-pagination" id="pagination" hidden></div>
+
+          </div>
+
+          <aside class="sj-sidebar">
+
+            <div class="card">
+              <h3 class="sj-sidebar-title">Saved jobs overview</h3>
+              <div class="sj-overview-row">
+                <span class="sj-overview-icon"><i class="ti ti-briefcase" aria-hidden="true"></i></span>
+                <div><strong id="overview-total">0</strong><span>Total saved jobs</span></div>
+              </div>
+              <div class="sj-overview-row">
+                <span class="sj-overview-icon"><i class="ti ti-file-check" aria-hidden="true"></i></span>
+                <div><strong id="overview-applied">0</strong><span>Applied</span></div>
+              </div>
+              <div class="sj-overview-row">
+                <span class="sj-overview-icon"><i class="ti ti-clock" aria-hidden="true"></i></span>
+                <div><strong id="overview-progress">0</strong><span>In progress</span></div>
+              </div>
+              <a href="my-applications.html" class="btn-outline btn-compact sj-full-width">View applications</a>
+            </div>
+
+            <div class="card">
+              <h3 class="sj-sidebar-title">Recent activity</h3>
+              <div class="jm-loading" id="activity-loading">
+                <span class="spinner spinner--dark"></span>
+                <span>Loading...</span>
+              </div>
+              <p class="jm-placeholder__sub" id="activity-empty" hidden>No recent activity yet.</p>
+              <div id="activity-list" class="sj-activity-list" hidden></div>
+            </div>
+
+            <div class="card">
+              <h3 class="sj-sidebar-title">Tips to stay ahead</h3>
+              <ul class="cj-tips">
+                <li><i class="ti ti-check" aria-hidden="true"></i> Update your profile regularly</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Tailor your resume for each role</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Apply before deadlines close</li>
+              </ul>
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ---------- Row "more actions" menu ---------- -->
+  <div class="ap-row-menu" id="row-menu" hidden>
+    <a href="#" class="ap-row-menu__item" id="row-menu-view"><i class="ti ti-eye" aria-hidden="true"></i> View job</a>
+    <button type="button" class="ap-row-menu__item ap-row-menu__item--danger" id="row-menu-remove"><i class="ti ti-bookmark-off" aria-hidden="true"></i> Remove from saved</button>
+  </div>
+
+  <!-- ---------- Clear all confirm modal ---------- -->
+  <div class="jm-modal-overlay" id="clear-overlay" hidden>
+    <div class="jm-modal">
+      <h3>Clear all saved jobs?</h3>
+      <p>This removes every job from your saved list. This can't be undone.</p>
+      <div class="jm-modal__actions">
+        <button type="button" class="btn-outline btn-compact" id="clear-cancel">Cancel</button>
+        <button type="button" class="btn-primary ej-danger-btn-solid btn-compact" id="clear-confirm">Clear all</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------- Manage Alerts modal ---------- -->
+  <div class="jm-modal-overlay" id="alerts-overlay" hidden>
+    <div class="jm-modal sj-alerts-modal">
+      <div class="sj-alerts-modal__header">
+        <h3>Job Alerts</h3>
+        <button type="button" class="btn-primary btn-compact" id="new-alert-btn"><i class="ti ti-plus" aria-hidden="true"></i> New Alert</button>
+      </div>
+      <p>Get notified by email when new jobs match your criteria.</p>
+
+      <div id="alerts-list-view">
+        <div class="jm-loading" id="alerts-loading">
+          <span class="spinner spinner--dark"></span>
+          <span>Loading your alerts...</span>
+        </div>
+        <p class="jm-placeholder__sub" id="alerts-empty" hidden>You don't have any job alerts yet.</p>
+        <div id="alerts-list" class="sj-alerts-list"></div>
+      </div>
+
+      <div id="alert-form-view" hidden>
+        <div class="ep-field">
+          <label>Keyword</label>
+          <input type="text" id="alert-keyword" placeholder="e.g. Product Designer" />
+        </div>
+        <div class="ep-field-row">
+          <div class="ep-field">
+            <label>Location</label>
+            <input type="text" id="alert-location" placeholder="City or Remote" />
+          </div>
+          <div class="ep-field">
+            <label>Job Category</label>
+            <select id="alert-category">
+              <option value="">Any category</option>
+            </select>
+          </div>
+        </div>
+        <div class="ep-field-row">
+          <div class="ep-field">
+            <label>Job Type</label>
+            <select id="alert-employment-type">
+              <option value="">Any type</option>
+              <option value="FullTime">Full-time</option>
+              <option value="PartTime">Part-time</option>
+              <option value="Contract">Contract</option>
+              <option value="Internship">Internship</option>
+              <option value="Freelance">Freelance</option>
+              <option value="Temporary">Temporary</option>
+              <option value="Remote">Remote</option>
+            </select>
+          </div>
+          <div class="ep-field">
+            <label>Work Mode</label>
+            <select id="alert-workplace-type">
+              <option value="">Any mode</option>
+              <option value="Onsite">On-site</option>
+              <option value="Remote">Remote</option>
+              <option value="Hybrid">Hybrid</option>
+            </select>
+          </div>
+        </div>
+        <div class="ep-field-row">
+          <div class="ep-field">
+            <label>Experience Level</label>
+            <select id="alert-experience-level">
+              <option value="">Any level</option>
+              <option value="EntryLevel">Entry Level</option>
+              <option value="Junior">Junior</option>
+              <option value="MidLevel">Mid Level</option>
+              <option value="Senior">Senior</option>
+              <option value="Lead">Lead</option>
+              <option value="Executive">Executive</option>
+            </select>
+          </div>
+          <div class="ep-field">
+            <label>Minimum Salary</label>
+            <input type="number" id="alert-min-salary" min="0" placeholder="Optional" />
+          </div>
+        </div>
+        <div class="sj-alerts-modal__actions">
+          <button type="button" class="btn-outline btn-compact" id="alert-form-cancel">Cancel</button>
+          <button type="button" class="btn-primary btn-compact" id="alert-form-save">Create Alert</button>
+        </div>
+      </div>
+
+      <div class="jm-modal__actions">
+        <button type="button" class="btn-outline btn-compact" id="alerts-close">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/savedJobs.js"></script>
+</body>
+</html>

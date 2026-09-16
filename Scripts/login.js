@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         // Professional, or any unrecognized role — land somewhere real
         // rather than a dead link.
-        window.location.href = "profile-overview.html";
+        window.location.href = "feed.html";
       }
 
     } catch (err) {

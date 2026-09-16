@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Details · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/job-details.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="job-search">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, or companies..." />
+        </div>
+        <div class="app-topbar__icons">
+<div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <a href="job-search.html" class="jd-back-link"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back to jobs</a>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="jm-loading" id="job-loading">
+          <span class="spinner spinner--dark"></span>
+          <span>Loading job details...</span>
+        </div>
+
+        <div id="job-content" hidden>
+
+          <div class="card jd-header-card">
+            <div class="jd-header-top">
+              <div class="jd-header-logo" id="header-logo"><i class="ti ti-building" aria-hidden="true"></i></div>
+              <div class="jd-header-info">
+                <h1 id="job-title">Job Title</h1>
+                <a href="#" id="company-link" class="jd-company-link">Company Name</a>
+                <div class="jd-header-meta">
+                  <span id="meta-location"><i class="ti ti-map-pin" aria-hidden="true"></i></span>
+                  <span id="meta-workplace"><i class="ti ti-building-skyscraper" aria-hidden="true"></i></span>
+                  <span id="meta-employment"><i class="ti ti-briefcase" aria-hidden="true"></i></span>
+                  <span id="meta-experience"><i class="ti ti-award" aria-hidden="true"></i></span>
+                </div>
+                <div class="jd-header-tags" id="header-tags"></div>
+                <p class="jd-posted-info" id="posted-info"></p>
+              </div>
+              <div class="jd-header-actions">
+                <button type="button" class="btn-outline btn-compact" id="save-btn"><i class="ti ti-bookmark" aria-hidden="true"></i> Save job</button>
+                <button type="button" class="btn-outline btn-compact" id="share-btn"><i class="ti ti-share" aria-hidden="true"></i> Share</button>
+                <a href="#" class="btn-primary btn-compact" id="apply-btn">Apply now</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="jd-layout">
+
+            <div class="jd-main">
+
+              <nav class="jd-tabs" id="jd-tabs">
+                <button type="button" class="jd-tab is-active" data-tab="details">Job details</button>
+                <button type="button" class="jd-tab" data-tab="company">About company</button>
+              </nav>
+
+              <section class="jd-panel" id="panel-details">
+                <div class="card">
+                  <h3>About the role</h3>
+                  <p id="job-description"></p>
+                </div>
+
+                <div class="card">
+                  <h3>Requirements</h3>
+                  <ul id="job-requirements" class="jd-bullet-list"></ul>
+                </div>
+
+                <div class="card">
+                  <h3>Employment Details</h3>
+                  <div class="jd-details-grid">
+                    <div><span>Job type</span><strong id="detail-employment"></strong></div>
+                    <div><span>Experience level</span><strong id="detail-experience"></strong></div>
+                    <div><span>Work mode</span><strong id="detail-workplace"></strong></div>
+                    <div><span>Location</span><strong id="detail-location"></strong></div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="jd-panel" id="panel-company" hidden>
+                <div class="card">
+                  <h3>About <span id="company-name-inline"></span></h3>
+                  <p class="jm-placeholder__sub">Full company profile details aren't available from this view yet.</p>
+                  <a href="#" class="btn-outline btn-compact" id="view-full-company-btn">View company profile</a>
+                </div>
+              </section>
+
+            </div>
+
+            <aside class="jd-sidebar">
+
+              <div class="card">
+                <h3 class="jd-sidebar-title">About <span id="about-company-name"></span></h3>
+                <p id="about-company-summary" class="jm-placeholder__sub"></p>
+                <a href="#" class="btn-outline btn-compact jd-full-width" id="view-company-profile-btn">View company profile</a>
+              </div>
+
+              <div class="card" id="similar-jobs-card" hidden>
+                <h3 class="jd-sidebar-title">Similar jobs</h3>
+                <div id="similar-jobs-list"></div>
+              </div>
+
+            </aside>
+
+          </div>
+
+          <div class="jd-sticky-apply">
+            <div>
+              <strong>Ready to apply?</strong>
+              <p>Join <span id="sticky-company-name"></span> and take the next step in your career.</p>
+            </div>
+            <a href="#" class="btn-primary btn-compact" id="sticky-apply-btn">Apply now</a>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/jobDetails.js"></script>
+</body>
+</html>

@@ -441,19 +441,42 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function refreshOverview() {
     const { ok, result } = await apiFetch(API_ROUTES.companyManagementOverview);
-    if (!ok) return null;
+    if (!ok) return { overview: null, message: result.message };
     lastOverview = result.data;
     renderStatCards(result.data);
     renderCompanyInfo(result.data);
-    return result.data;
+    return { overview: result.data, message: null };
   }
 
   (async function init() {
-    const overview = await refreshOverview();
+    // Check membership status first — a Pending recruiter shouldn't see
+    // company internals until an admin approves them.
+    const { ok: profileOk, result: profileResult } = await apiFetch(API_ROUTES.recruiterProfile);
+
+    if (!profileOk) {
+      loadingState.hidden = true;
+      showAlert(profileResult.message || "Couldn't load your recruiter profile.");
+      return;
+    }
+
+    if (profileResult.data.status === "Pending") {
+      loadingState.hidden = true;
+      document.getElementById("pending-approval-banner").hidden = false;
+      document.getElementById("invite-recruiter-btn").hidden = true;
+      return;
+    }
+
+    if (profileResult.data.status === "Suspended") {
+      loadingState.hidden = true;
+      showAlert("Your access to this company has been suspended. Contact your company admin for help.");
+      return;
+    }
+
+    const { overview, message } = await refreshOverview();
 
     if (!overview) {
       loadingState.hidden = true;
-      showAlert("You're not yet linked to a company. Create or join a company to manage it here.");
+      showAlert(message || "You're not yet linked to a company. Create or join a company to manage it here.");
       return;
     }
 

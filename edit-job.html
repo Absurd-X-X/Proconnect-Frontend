@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Job · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/create-job.css" />
+  <link rel="stylesheet" href="Styles/edit-job.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="jobs">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search candidates, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="recruiter-profile.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <a href="jobs.html" class="ej-back-link"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back to My Job Posts</a>
+
+        <div class="cj-header">
+          <div>
+            <h1 class="cj-title">Edit Job</h1>
+            <p class="cj-subtitle">Update the details of your job posting.</p>
+          </div>
+          <div class="cj-header__actions">
+            <button type="button" class="btn-outline ej-danger-btn btn-compact" id="btn-close-job" hidden>
+              <i class="ti ti-player-pause" aria-hidden="true"></i> Close Job
+            </button>
+            <button type="button" class="btn-outline btn-compact" id="btn-publish" hidden>Publish</button>
+            <button type="button" class="btn-primary btn-compact" id="btn-save">Save Changes</button>
+          </div>
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="jm-loading" id="job-loading">
+          <span class="spinner spinner--dark"></span>
+          <span>Loading job details...</span>
+        </div>
+
+        <div class="cj-layout" id="edit-content" hidden>
+
+          <form id="edit-job-form" novalidate>
+
+            <section class="card">
+              <h3 class="cj-section-title">Job Details</h3>
+              <p class="cj-section-subtitle">Basic information about the job you're posting.</p>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label for="job-title">Job Title <span class="req">*</span></label>
+                  <input type="text" id="job-title" />
+                  <span class="field-error" id="err-job-title"></span>
+                </div>
+
+                <div class="ep-field">
+                  <label for="employment-type">Employment Type <span class="req">*</span></label>
+                  <select id="employment-type">
+                    <option value="" disabled>Select employment type</option>
+                    <option value="FullTime">Full-time</option>
+                    <option value="PartTime">Part-time</option>
+                    <option value="Contract">Contract</option>
+                    <option value="Internship">Internship</option>
+                    <option value="Freelance">Freelance</option>
+                    <option value="Temporary">Temporary</option>
+                    <option value="Remote">Remote</option>
+                  </select>
+                  <span class="field-error" id="err-employment-type"></span>
+                </div>
+              </div>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label for="job-category">Department <span class="req">*</span></label>
+                  <select id="job-category">
+                    <option value="" disabled>Select department</option>
+                  </select>
+                  <span class="field-error" id="err-job-category"></span>
+                </div>
+
+                <div class="ep-field">
+                  <label for="experience-level">Experience Level <span class="req">*</span></label>
+                  <select id="experience-level">
+                    <option value="" disabled>Select experience level</option>
+                    <option value="EntryLevel">Entry Level</option>
+                    <option value="Junior">Junior</option>
+                    <option value="MidLevel">Mid Level</option>
+                    <option value="Senior">Senior</option>
+                    <option value="Lead">Lead</option>
+                    <option value="Executive">Executive</option>
+                  </select>
+                  <span class="field-error" id="err-experience-level"></span>
+                </div>
+              </div>
+
+              <div class="ep-field">
+                <label for="job-location">Location <span class="req">*</span></label>
+                <input type="text" id="job-location" />
+                <span class="field-error" id="err-job-location"></span>
+              </div>
+
+              <div class="cj-radio-row">
+                <label class="cj-radio">
+                  <input type="radio" name="workplace-type" value="Onsite" />
+                  <span>On-site</span>
+                </label>
+                <label class="cj-radio">
+                  <input type="radio" name="workplace-type" value="Hybrid" />
+                  <span>Hybrid</span>
+                </label>
+                <label class="cj-radio">
+                  <input type="radio" name="workplace-type" value="Remote" />
+                  <span>Remote</span>
+                </label>
+              </div>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label for="min-salary">Minimum Salary (Optional)</label>
+                  <input type="number" id="min-salary" min="0" />
+                </div>
+                <div class="ep-field">
+                  <label for="max-salary">Maximum Salary (Optional)</label>
+                  <input type="number" id="max-salary" min="0" />
+                </div>
+              </div>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label for="currency">Currency</label>
+                  <select id="currency">
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="NGN">NGN</option>
+                  </select>
+                </div>
+                <div class="ep-field">
+                  <label for="application-deadline">Application Deadline <span class="req">*</span></label>
+                  <input type="date" id="application-deadline" />
+                  <span class="field-error" id="err-application-deadline"></span>
+                </div>
+              </div>
+
+              <div class="ep-field">
+                <label for="job-description">Job Description <span class="req">*</span></label>
+                <textarea id="job-description" rows="6" maxlength="2000"></textarea>
+                <span class="cj-char-count"><span id="description-count">0</span> / 2000</span>
+                <span class="field-error" id="err-job-description"></span>
+              </div>
+
+              <div class="ep-field">
+                <label for="job-requirement">Requirements <span class="req">*</span></label>
+                <textarea id="job-requirement" rows="6" maxlength="2000"></textarea>
+                <span class="cj-char-count"><span id="requirement-count">0</span> / 2000</span>
+                <span class="field-error" id="err-job-requirement"></span>
+              </div>
+
+              <div class="ep-field">
+                <label>Skills</label>
+                <p class="cj-field-hint-top">Search and add relevant skills — changes save immediately.</p>
+                <div class="cj-skills-input-wrap">
+                  <input type="text" id="skills-search" placeholder="Search skills..." autocomplete="off" />
+                  <div class="cj-skills-dropdown" id="skills-dropdown" hidden></div>
+                </div>
+                <div class="cj-skills-chips" id="skills-chips"></div>
+              </div>
+            </section>
+
+            <div class="cj-form-actions">
+              <a href="jobs.html" class="btn-outline btn-compact">Cancel</a>
+              <div class="cj-form-actions__right">
+                <button type="button" class="btn-outline btn-compact" id="btn-publish-bottom" hidden>Publish</button>
+                <button type="button" class="btn-primary btn-compact" id="btn-save-bottom">Save Changes</button>
+              </div>
+            </div>
+
+          </form>
+
+          <aside class="cj-sidebar">
+
+            <div class="card">
+              <h3 class="cj-section-title">Job Preview</h3>
+              <p class="cj-section-subtitle">This is how your job post appears to candidates.</p>
+
+              <div class="cj-preview">
+                <div class="cj-preview__logo"><i class="ti ti-building" aria-hidden="true"></i></div>
+                <div>
+                  <p class="cj-preview__title" id="preview-title">Job Title</p>
+                  <p class="cj-preview__company" id="preview-company">Company Name</p>
+                </div>
+              </div>
+
+              <div class="cj-preview__meta">
+                <span id="preview-location"><i class="ti ti-map-pin" aria-hidden="true"></i> Location</span>
+                <span id="preview-workplace"><i class="ti ti-building-skyscraper" aria-hidden="true"></i> On-site</span>
+                <span id="preview-employment"><i class="ti ti-briefcase" aria-hidden="true"></i> Employment type</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 class="cj-section-title">Job Status</h3>
+
+              <div class="ej-status-row">
+                <span>Current Status</span>
+                <span id="status-pill" class="jm-status-badge jm-status-badge--draft">—</span>
+              </div>
+
+              <div class="ej-status-row">
+                <span>Posted On</span>
+                <span id="status-posted-on">—</span>
+              </div>
+
+              <button type="button" class="btn-outline ej-danger-btn btn-compact ej-status-close-btn" id="btn-close-job-sidebar" hidden>
+                <i class="ti ti-player-pause" aria-hidden="true"></i> Close Job
+              </button>
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ---------- Confirm dialog (Close Job) ---------- -->
+  <div class="jm-modal-overlay" id="confirm-overlay" hidden>
+    <div class="jm-modal">
+      <h3>Close this job?</h3>
+      <p>Candidates will no longer be able to apply. You can't undo this from here.</p>
+      <div class="jm-modal__actions">
+        <button type="button" class="btn-outline btn-compact" id="confirm-cancel">Cancel</button>
+        <button type="button" class="btn-primary btn-compact" id="confirm-ok">Close Job</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/editJob.js"></script>
+</body>
+</html>

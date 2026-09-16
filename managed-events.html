@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Managed Events · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="Styles/company-events.css" />
+</head>
+<body data-page="managed-events">
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search candidates, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="recruiter-profile.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+        <a href="events-discover.html" class="back-link">
+          <i class="ti ti-arrow-left" aria-hidden="true"></i> Back to Events
+        </a>
+
+        <div class="page-header page-header--split">
+          <div>
+            <h1>Managed Events</h1>
+            <p>Create, manage and track all your events. View registrations, edit details, and monitor performance.</p>
+          </div>
+          <a href="create-event.html" class="btn btn-primary">
+            <i class="ti ti-plus" aria-hidden="true"></i> Create Event
+          </a>
+        </div>
+
+        <div class="tabs" id="status-tabs">
+          <button type="button" class="tab is-active" data-status="">All Events (<span data-count="all">0</span>)</button>
+          <button type="button" class="tab" data-status="Published">Published (<span data-count="Published">0</span>)</button>
+          <button type="button" class="tab" data-status="Draft">Drafts (<span data-count="Draft">0</span>)</button>
+          <button type="button" class="tab" data-status="Cancelled">Cancelled (<span data-count="Cancelled">0</span>)</button>
+          <button type="button" class="tab" data-status="Completed">Completed (<span data-count="Completed">0</span>)</button>
+        </div>
+
+        <div class="filter-bar">
+          <div class="search-input">
+            <i class="ti ti-search" aria-hidden="true"></i>
+            <input type="text" id="search-input" placeholder="Search events by title, location, or type..." />
+          </div>
+          <select id="event-type-filter">
+            <option value="">Event Type</option>
+            <option value="Networking">Networking</option>
+            <option value="Webinar">Webinar</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Conference">Conference</option>
+            <option value="CareerFair">Career Fair</option>
+            <option value="Social">Social</option>
+          </select>
+          <button type="button" class="btn btn-ghost btn-sm" id="clear-filters-btn">
+            <i class="ti ti-refresh" aria-hidden="true"></i> Clear Filters
+          </button>
+        </div>
+
+        <div id="events-list" class="managed-event-list"></div>
+
+        <div id="empty-state" class="empty-state empty-state--page" hidden>
+          <i class="ti ti-calendar-off" aria-hidden="true"></i>
+          <h3>No events found</h3>
+          <p>Try adjusting your filters, or create your first event.</p>
+          <a href="create-event.html" class="btn btn-primary">
+            <i class="ti ti-plus" aria-hidden="true"></i> Create Event
+          </a>
+        </div>
+
+        <div id="pagination" class="pagination"></div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="cancel-modal-overlay" hidden>
+    <div class="modal">
+      <div class="modal__header">
+        <h3>Cancel Event</h3>
+        <button type="button" class="modal__close" id="cancel-modal-close" aria-label="Close">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal__body">
+        <p class="modal__warning">
+          <i class="ti ti-alert-triangle" aria-hidden="true"></i>
+          All registered attendees will be notified that this event has been cancelled.
+        </p>
+        <label class="field-label" for="cancel-reason">Reason for cancellation <span class="required">*</span></label>
+        <textarea id="cancel-reason" rows="3" placeholder="Let attendees know why this event is being cancelled..."></textarea>
+      </div>
+      <div class="modal__footer">
+        <button type="button" class="btn btn-outline" id="cancel-modal-back">Go Back</button>
+        <button type="button" class="btn btn-danger" id="cancel-modal-confirm">Cancel Event</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/managedEvents.js"></script>
+</body>
+</html>

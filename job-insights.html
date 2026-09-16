@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Insights · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/analytics-dashboard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+</head>
+<body data-page="job-insights">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search candidates, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="recruiter-profile.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <div class="an-header">
+          <div>
+            <a href="recruiter-analytics-dashboard.html" class="link-btn" style="margin-bottom: 6px; display: inline-block;">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i> Back to Analytics
+            </a>
+            <h1 class="an-title">Job Insights</h1>
+            <p class="an-subtitle">Dig into how a specific job posting is performing, or compare across all jobs.</p>
+          </div>
+          <div class="an-header__actions">
+            <select id="job-select" class="an-select">
+              <option value="">All Jobs</option>
+            </select>
+            <select id="date-range-select" class="an-select">
+              <option value="Last7Days">Last 7 days</option>
+              <option value="Last30Days" selected>Last 30 days</option>
+              <option value="Last90Days">Last 90 days</option>
+              <option value="LastYear">Last year</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <!-- ---------- Single-job view ---------- -->
+        <div id="single-job-view" hidden>
+
+          <div class="an-kpi-row">
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-file-text" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Total Applications</div>
+              <div class="an-kpi-card__value" id="single-total">—</div>
+            </div>
+
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-user-check" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Hired</div>
+              <div class="an-kpi-card__value" id="single-hired">—</div>
+            </div>
+
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-x" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Rejected</div>
+              <div class="an-kpi-card__value" id="single-rejected">—</div>
+            </div>
+
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-calendar" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Days Open</div>
+              <div class="an-kpi-card__value" id="single-days-open">—</div>
+            </div>
+          </div>
+
+          <div class="an-chart-row an-chart-row--single">
+            <div class="card an-chart-card">
+              <div class="an-chart-card__header">
+                <h3>Application Funnel</h3>
+              </div>
+              <div id="single-funnel" class="an-funnel">
+                <div class="jm-loading" id="single-funnel-loading">
+                  <span class="spinner spinner--dark"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="an-chart-row">
+            <div class="card an-kpi-card" style="margin-bottom: 1rem;">
+              <div class="an-kpi-card__icon"><i class="ti ti-eye" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Job Views</div>
+              <div class="an-kpi-card__value" id="single-views-total">—</div>
+              <div class="an-kpi-card__delta" id="single-views-delta"></div>
+            </div>
+          </div>
+
+          <div class="an-chart-row">
+            <div class="card an-chart-card">
+              <div class="an-chart-card__header">
+                <h3>Views Trend</h3>
+              </div>
+              <canvas id="single-views-trend-chart" height="200"></canvas>
+            </div>
+
+            <aside class="an-sidebar">
+              <div class="card an-sidebar-card">
+                <div class="an-sidebar-card__header">
+                  <h3>Traffic Sources</h3>
+                </div>
+                <div id="single-views-referrer" class="an-top-posts"></div>
+              </div>
+            </aside>
+          </div>
+
+        </div>
+
+        <!-- ---------- All-jobs comparison view ---------- -->
+        <div id="all-jobs-view">
+
+          <div class="an-kpi-row" style="grid-template-columns: 1fr;">
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-eye" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Total Job Views (all jobs)</div>
+              <div class="an-kpi-card__value" id="all-views-total">—</div>
+              <div class="an-kpi-card__delta" id="all-views-delta"></div>
+            </div>
+          </div>
+
+          <div class="an-chart-row">
+            <div class="card an-chart-card">
+              <div class="an-chart-card__header">
+                <h3>Views Trend</h3>
+              </div>
+              <canvas id="all-views-trend-chart" height="200"></canvas>
+            </div>
+
+            <aside class="an-sidebar">
+              <div class="card an-sidebar-card">
+                <div class="an-sidebar-card__header">
+                  <h3>Traffic Sources</h3>
+                </div>
+                <div id="all-views-referrer" class="an-top-posts"></div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="an-chart-row an-chart-row--single">
+            <div class="card an-chart-card">
+              <div class="an-chart-card__header">
+                <h3>Views by Job (top 10)</h3>
+              </div>
+              <canvas id="views-by-job-chart" height="220"></canvas>
+            </div>
+          </div>
+
+          <div class="card an-chart-card">
+            <div class="an-chart-card__header">
+              <h3>Applications by Job</h3>
+            </div>
+
+            <div class="jm-loading" id="jobs-table-loading">
+              <span class="spinner spinner--dark"></span>
+              <span>Loading job analytics...</span>
+            </div>
+
+            <div class="jm-empty" id="jobs-table-empty" hidden>
+              <i class="ti ti-briefcase-off" aria-hidden="true"></i>
+              <p><strong>No jobs found for this date range.</strong></p>
+            </div>
+
+            <div id="jobs-table-wrap" hidden>
+              <table class="jm-table">
+                <thead>
+                  <tr>
+                    <th>Job</th>
+                    <th>Status</th>
+                    <th>Applications</th>
+                    <th>Hired</th>
+                    <th>Rejected</th>
+                    <th>Days Open</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="jobs-table-body"></tbody>
+              </table>
+            </div>
+
+            <div class="ap-pagination-row" id="pagination-row" hidden>
+              <span id="showing-info"></span>
+              <div class="jm-pagination">
+                <button type="button" class="btn-outline btn-compact" id="page-prev"><i class="ti ti-chevron-left" aria-hidden="true"></i> Previous</button>
+                <span id="page-info"></span>
+                <button type="button" class="btn-outline btn-compact" id="page-next">Next <i class="ti ti-chevron-right" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/jobInsights.js"></script>
+</body>
+</html>

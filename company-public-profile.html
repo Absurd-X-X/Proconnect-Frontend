@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Company Profile · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/company-profile-public.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body>
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, or companies..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <a href="#" class="cp-back-link" id="back-link"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back</a>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="jm-loading" id="loading">
+          <span class="spinner spinner--dark"></span>
+          <span>Loading company profile...</span>
+        </div>
+
+        <div id="company-content" hidden>
+
+          <div class="card cp-header-card">
+            <div class="cp-header-top">
+              <div class="cp-header-logo" id="header-logo"><i class="ti ti-building" aria-hidden="true"></i></div>
+              <div class="cp-header-info">
+                <div class="cp-header-name-row">
+                  <h1 id="company-name">Company</h1>
+                  <i class="ti ti-rosette-discount-check cp-verified" id="verified-badge" hidden aria-hidden="true"></i>
+                </div>
+                <a href="#" id="company-website" class="cp-website-link" target="_blank" rel="noopener" hidden></a>
+                <div class="cp-header-meta">
+                  <span id="meta-headquarters"><i class="ti ti-map-pin" aria-hidden="true"></i></span>
+                  <span id="meta-industry"><i class="ti ti-building-factory" aria-hidden="true"></i></span>
+                  <span id="meta-size"><i class="ti ti-users" aria-hidden="true"></i></span>
+                </div>
+              </div>
+              <div class="cp-header-actions">
+                <button type="button" class="btn-outline btn-compact" disabled title="Coming soon"><i class="ti ti-bookmark" aria-hidden="true"></i> Follow</button>
+                <button type="button" class="btn-outline btn-compact" id="share-btn"><i class="ti ti-share" aria-hidden="true"></i> Share</button>
+                <a href="#" class="btn-primary btn-compact" id="view-jobs-btn">View open jobs</a>
+              </div>
+            </div>
+          </div>
+
+          <nav class="cp-tabs" id="cp-tabs">
+            <button type="button" class="cp-tab is-active" data-tab="about">About company</button>
+            <button type="button" class="cp-tab" data-tab="reviews">Reviews <span id="tab-review-count"></span></button>
+            <button type="button" class="cp-tab" data-tab="jobs">Jobs <span id="tab-job-count"></span></button>
+          </nav>
+
+          <div class="cp-layout">
+
+            <div class="cp-main">
+
+              <!-- ---------- About ---------- -->
+              <section class="cp-panel" id="panel-about">
+                <div class="card">
+                  <h3>About <span id="about-company-name"></span></h3>
+                  <p id="company-description"></p>
+                </div>
+
+                <div class="card" id="strengths-card" hidden>
+                  <h3>Strengths</h3>
+                  <div class="cp-strengths-list" id="strengths-list"></div>
+                </div>
+
+                <div class="card">
+                  <h3>Company Stats</h3>
+                  <div class="cp-stats-grid">
+                    <div><span>Active Jobs</span><strong id="stat-jobs">0</strong></div>
+                    <div><span>Reviews</span><strong id="stat-reviews">0</strong></div>
+                    <div><span>Average Rating</span><strong id="stat-rating">—</strong></div>
+                    <div><span>Founded</span><strong id="stat-founded">—</strong></div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- ---------- Reviews ---------- -->
+              <section class="cp-panel" id="panel-reviews" hidden>
+                <div class="card cp-rating-summary-card">
+                  <div class="cp-rating-summary__left">
+                    <div class="cp-rating-summary__score" id="summary-score">0.0</div>
+                    <div class="cp-rating-summary__stars" id="summary-stars"></div>
+                    <div class="cp-rating-summary__count" id="summary-count">0 reviews</div>
+                  </div>
+                  <div class="cp-rating-summary__right">
+                    <div class="cp-rating-bar-row"><span>5 ★</span><div class="cp-rating-bar"><div id="bar-5"></div></div></div>
+                    <div class="cp-rating-bar-row"><span>4 ★</span><div class="cp-rating-bar"><div id="bar-4"></div></div></div>
+                    <div class="cp-rating-bar-row"><span>3 ★</span><div class="cp-rating-bar"><div id="bar-3"></div></div></div>
+                    <div class="cp-rating-bar-row"><span>2 ★</span><div class="cp-rating-bar"><div id="bar-2"></div></div></div>
+                    <div class="cp-rating-bar-row"><span>1 ★</span><div class="cp-rating-bar"><div id="bar-1"></div></div></div>
+                  </div>
+                </div>
+
+                <div class="cp-rating-highlights card">
+                  <h3>Rating Highlights</h3>
+                  <div class="cp-highlights-grid" id="highlights-grid"></div>
+                </div>
+
+                <div class="cp-reviews-actions">
+                  <button type="button" class="btn-primary btn-compact" id="write-review-btn">Write a review</button>
+                </div>
+
+                <div class="jm-loading" id="reviews-loading" hidden>
+                  <span class="spinner spinner--dark"></span>
+                  <span>Loading reviews...</span>
+                </div>
+
+                <div class="jm-empty" id="reviews-empty" hidden>
+                  <i class="ti ti-message-off" aria-hidden="true"></i>
+                  <p><strong>No reviews yet.</strong></p>
+                  <p class="jm-placeholder__sub">Be the first to share your experience.</p>
+                </div>
+
+                <div class="cp-review-list" id="review-list"></div>
+
+                <div class="jm-pagination" id="reviews-pagination" hidden>
+                  <button type="button" class="btn-outline btn-compact" id="reviews-prev"><i class="ti ti-chevron-left" aria-hidden="true"></i> Previous</button>
+                  <span id="reviews-page-info"></span>
+                  <button type="button" class="btn-outline btn-compact" id="reviews-next">Next <i class="ti ti-chevron-right" aria-hidden="true"></i></button>
+                </div>
+              </section>
+
+              <!-- ---------- Jobs ---------- -->
+              <section class="cp-panel" id="panel-jobs" hidden>
+                <div class="jm-loading" id="jobs-loading">
+                  <span class="spinner spinner--dark"></span>
+                  <span>Loading open jobs...</span>
+                </div>
+                <div class="jm-empty" id="jobs-empty" hidden>
+                  <i class="ti ti-briefcase-off" aria-hidden="true"></i>
+                  <p><strong>No open jobs right now.</strong></p>
+                </div>
+                <div class="cp-job-list" id="company-job-list" hidden></div>
+              </section>
+
+            </div>
+
+            <aside class="cp-sidebar">
+
+              <div class="card">
+                <h3 class="cp-sidebar-title">Company Highlights</h3>
+                <div class="cp-highlight-row"><i class="ti ti-building-factory" aria-hidden="true"></i><div><span>Industry</span><strong id="highlight-industry">—</strong></div></div>
+                <div class="cp-highlight-row"><i class="ti ti-users" aria-hidden="true"></i><div><span>Company size</span><strong id="highlight-size">—</strong></div></div>
+                <div class="cp-highlight-row"><i class="ti ti-map-pin" aria-hidden="true"></i><div><span>Headquarters</span><strong id="highlight-hq">—</strong></div></div>
+                <div class="cp-highlight-row"><i class="ti ti-calendar" aria-hidden="true"></i><div><span>Founded</span><strong id="highlight-founded">—</strong></div></div>
+                <div class="cp-highlight-row" id="highlight-website-row" hidden><i class="ti ti-world" aria-hidden="true"></i><div><span>Website</span><strong><a href="#" id="highlight-website" target="_blank" rel="noopener">—</a></strong></div></div>
+              </div>
+
+              <div class="card" id="people-card" hidden>
+                <h3 class="cp-sidebar-title">People you might know</h3>
+                <div id="people-list" class="cp-people-list"></div>
+              </div>
+
+            </aside>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ---------- Write Review modal ---------- -->
+  <div class="jm-modal-overlay" id="review-overlay" hidden>
+    <div class="jm-modal cp-review-modal">
+      <h3>Write a Review</h3>
+      <p>Share your honest experience — this helps other job seekers.</p>
+
+      <div class="cp-rating-input-row">
+        <label>Overall Rating <span class="req">*</span></label>
+        <div class="cp-star-input" id="rating-overall" data-rating="0"></div>
+      </div>
+
+      <div class="ep-field-row">
+        <div class="ep-field">
+          <label>Job Title <span class="req">*</span></label>
+          <input type="text" id="review-job-title" placeholder="e.g. Product Designer" />
+        </div>
+        <div class="ep-field">
+          <label>Location</label>
+          <input type="text" id="review-location" placeholder="City, State" />
+        </div>
+      </div>
+
+      <div class="ep-field">
+        <label class="ep-checkbox-field"><input type="checkbox" id="review-current-employee" /> I currently work here</label>
+      </div>
+
+      <div class="ep-field">
+        <label>Years at Company</label>
+        <input type="number" id="review-years" min="0" max="50" />
+      </div>
+
+      <div class="cp-sub-ratings">
+        <div class="cp-sub-rating-row"><span>Work-life balance</span><div class="cp-star-input cp-star-input--sm" data-key="worklife" data-rating="0"></div></div>
+        <div class="cp-sub-rating-row"><span>Compensation &amp; benefits</span><div class="cp-star-input cp-star-input--sm" data-key="compensation" data-rating="0"></div></div>
+        <div class="cp-sub-rating-row"><span>Job security &amp; growth</span><div class="cp-star-input cp-star-input--sm" data-key="jobsecurity" data-rating="0"></div></div>
+        <div class="cp-sub-rating-row"><span>Management</span><div class="cp-star-input cp-star-input--sm" data-key="management" data-rating="0"></div></div>
+        <div class="cp-sub-rating-row"><span>Culture</span><div class="cp-star-input cp-star-input--sm" data-key="culture" data-rating="0"></div></div>
+      </div>
+
+      <div class="ep-field">
+        <label>Review Title <span class="req">*</span></label>
+        <input type="text" id="review-title" placeholder="Summarize your experience" />
+      </div>
+
+      <div class="ep-field">
+        <label>Your Review <span class="req">*</span></label>
+        <textarea id="review-content" rows="5" maxlength="1500" placeholder="What's it like to work here?"></textarea>
+      </div>
+
+      <span class="field-error" id="err-review"></span>
+
+      <div class="jm-modal__actions">
+        <button type="button" class="btn-outline btn-compact" id="review-cancel">Cancel</button>
+        <button type="button" class="btn-primary btn-compact" id="review-submit">Submit Review</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/companyPublicProfile.js"></script>
+</body>
+</html>

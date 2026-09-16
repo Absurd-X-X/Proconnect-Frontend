@@ -25,18 +25,15 @@
         <div class="topbar-nav-icons" id="topbar-nav-icons"></div>
 
         <div class="app-topbar__icons">
-          <button class="icon-btn" disabled title="Notifications (coming soon)">
-            <i class="ti ti-bell" aria-hidden="true"></i>
-          </button>
-          <div class="topbar-user" id="topbar-user-toggle">
-            <img id="topbar-avatar" src="" alt="" />
+<div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
             <span id="topbar-name">—</span>
             <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
 
-            <div class="dropdown-menu" id="topbar-dropdown">
-              <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
-              <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
-            </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
           </div>
         </div>
       </header>
@@ -97,6 +94,8 @@
                   <div class="chat-menu-wrap">
                     <button type="button" class="icon-action-btn" id="chat-menu-btn" title="More"><i class="ti ti-dots-vertical" aria-hidden="true"></i></button>
                     <div class="chat-menu" id="chat-menu">
+                      <button type="button" class="chat-menu__item" data-action="view-participants" hidden>View participants</button>
+                      <button type="button" class="chat-menu__item" data-action="add-people" hidden>Add people</button>
                       <button type="button" class="chat-menu__item" data-action="pin">Pin conversation</button>
                       <button type="button" class="chat-menu__item" data-action="unpin" hidden>Unpin conversation</button>
                       <button type="button" class="chat-menu__item" data-action="mute">Mute notifications</button>
@@ -175,10 +174,35 @@
     </div>
   </div>
 
+  <!-- Group info modal: view participants + add people -->
+  <div class="modal-overlay" id="group-info-modal" hidden>
+    <div class="modal-card">
+      <div class="modal-card__header">
+        <h3 id="group-info-title">Group members</h3>
+        <button type="button" class="icon-action-btn" id="close-group-info-modal"><i class="ti ti-x" aria-hidden="true"></i></button>
+      </div>
+
+      <p class="messages-list-pane__label">Current members</p>
+      <div id="group-participants-list" class="connection-picker-list">
+        <p class="app-loading-inline">Loading...</p>
+      </div>
+
+      <p class="messages-list-pane__label" style="margin-top:14px;">Add people</p>
+      <div class="network-search">
+        <i class="ti ti-search" aria-hidden="true"></i>
+        <input type="text" id="add-people-search-input" placeholder="Search your connections to add..." />
+      </div>
+      <div id="add-people-list" class="connection-picker-list">
+        <p class="app-loading-inline">Loading your connections...</p>
+      </div>
+    </div>
+  </div>
+
   <div class="toast-stack" id="toast-stack"></div>
 
   <script src="Scripts/sidebar.js"></script>
   <script src="Scripts/config.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
   <script src="Scripts/messages.js"></script>
 </body>
 </html>

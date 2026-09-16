@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p class="network-row__name">${escapeHtml(connection.firstName)} ${escapeHtml(connection.lastName)}</p>
         </div>
         <div class="network-row__actions">
-          <button type="button" class="btn-outline-sm" disabled title="Messaging is coming soon">Message</button>
+          <button type="button" class="btn-outline-sm" data-action="message" data-user-id="${connection.userId}">Message</button>
           <div class="connection-menu-wrap">
             <button type="button" class="icon-action-btn" data-action="toggle-menu" title="More">
               <i class="ti ti-dots-vertical" aria-hidden="true"></i>
@@ -184,6 +184,26 @@ document.addEventListener("DOMContentLoaded", () => {
     container.querySelectorAll('[data-action="remove"]').forEach((btn) => {
       btn.addEventListener("click", () => handleRemoveConnection(btn));
     });
+
+    container.querySelectorAll('[data-action="message"]').forEach((btn) => {
+      btn.addEventListener("click", () => handleMessageClick(btn));
+    });
+  }
+
+  async function handleMessageClick(btn) {
+    const userId = btn.dataset.userId;
+
+    btn.disabled = true;
+    btn.textContent = "Opening...";
+
+    try {
+      const result = await apiPost(`${API_ROUTES.startConversation}?recipientId=${userId}`);
+      window.location.href = `messages.html?conversationId=${result.data.id}`;
+    } catch (err) {
+      showToast(err.message, "error");
+      btn.disabled = false;
+      btn.textContent = "Message";
+    }
   }
 
   function closeAllMenus() {

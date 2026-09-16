@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply for Job · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/apply-job.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="job-search">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, or companies..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <a href="#" class="aj-back-link" id="back-link"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back to job details</a>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="jm-loading" id="page-loading">
+          <span class="spinner spinner--dark"></span>
+          <span>Loading...</span>
+        </div>
+
+        <div class="aj-layout" id="apply-content" hidden>
+
+          <div class="card aj-main-card">
+
+            <h1 class="aj-title">Apply for <span id="job-title-heading">this role</span></h1>
+
+            <div class="aj-job-chip">
+              <span class="aj-job-chip__logo" id="chip-logo"><i class="ti ti-building" aria-hidden="true"></i></span>
+              <div>
+                <p id="chip-title"></p>
+                <p id="chip-meta"></p>
+              </div>
+            </div>
+
+            <div class="aj-stepper" id="stepper">
+              <div class="aj-step is-active" data-step="1"><span class="aj-step__num">1</span><span class="aj-step__label">Personal Info</span></div>
+              <div class="aj-step" data-step="2"><span class="aj-step__num">2</span><span class="aj-step__label">Resume</span></div>
+              <div class="aj-step" data-step="3"><span class="aj-step__num">3</span><span class="aj-step__label">Additional Info</span></div>
+              <div class="aj-step" data-step="4"><span class="aj-step__num">4</span><span class="aj-step__label">Review</span></div>
+              <div class="aj-step" data-step="5"><span class="aj-step__num">5</span><span class="aj-step__label">Submitted</span></div>
+            </div>
+
+            <!-- ---------- Step 1: Personal Information ---------- -->
+            <section class="aj-step-panel is-active" id="step-1">
+              <h2 class="aj-step-heading">Personal Information</h2>
+              <p class="aj-step-sub">Fields marked with * are required. Pre-filled from your profile where available — feel free to update anything for this application.</p>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label>Full name</label>
+                  <input type="text" id="display-name" disabled />
+                </div>
+                <div class="ep-field">
+                  <label>Email address</label>
+                  <input type="text" id="display-email" disabled />
+                </div>
+              </div>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label for="input-phone">Phone number</label>
+                  <input type="text" id="input-phone" placeholder="+1 (555) 000-0000" />
+                </div>
+                <div class="ep-field">
+                  <label for="input-location">Location</label>
+                  <input type="text" id="input-location" placeholder="City, State, Country" />
+                </div>
+              </div>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label for="input-job-title">Current job title</label>
+                  <input type="text" id="input-job-title" placeholder="e.g. Product Designer" />
+                </div>
+                <div class="ep-field">
+                  <label for="input-years-exp">Years of experience</label>
+                  <input type="number" id="input-years-exp" min="0" max="60" placeholder="e.g. 5" />
+                </div>
+              </div>
+
+              <div class="ep-field">
+                <label for="input-linkedin">LinkedIn Profile</label>
+                <input type="text" id="input-linkedin" placeholder="https://linkedin.com/in/..." />
+              </div>
+
+              <div class="ep-field">
+                <label>Are you authorized to work in this job's location? <span class="req">*</span></label>
+                <div class="aj-radio-group">
+                  <label class="aj-radio">
+                    <input type="radio" name="work-auth" value="AuthorizedNoSponsorship" />
+                    <span>Yes, I'm authorized — no sponsorship needed</span>
+                  </label>
+                  <label class="aj-radio">
+                    <input type="radio" name="work-auth" value="RequiresSponsorship" />
+                    <span>I'll need sponsorship now or in the future</span>
+                  </label>
+                  <label class="aj-radio">
+                    <input type="radio" name="work-auth" value="NotAuthorized" />
+                    <span>No, I'm not authorized</span>
+                  </label>
+                </div>
+                <span class="field-error" id="err-work-auth"></span>
+              </div>
+
+              <div class="aj-step-actions">
+                <a href="#" class="btn-outline btn-compact" id="save-exit-1">Save and exit</a>
+                <button type="button" class="btn-primary btn-compact" id="next-1">Save and continue <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+              </div>
+            </section>
+
+            <!-- ---------- Step 2: Resume ---------- -->
+            <section class="aj-step-panel" id="step-2">
+              <h2 class="aj-step-heading">Resume</h2>
+              <p class="aj-step-sub">Use the resume on your profile, or upload a different one just for this application.</p>
+
+              <div class="aj-resume-option" id="use-profile-resume-option" hidden>
+                <div class="aj-resume-option__info">
+                  <i class="ti ti-file-type-pdf" aria-hidden="true"></i>
+                  <div>
+                    <p class="aj-resume-option__title">Use resume from your profile</p>
+                    <p class="aj-resume-option__sub" id="profile-resume-name">Resume.pdf</p>
+                  </div>
+                </div>
+                <label class="aj-radio aj-radio--compact">
+                  <input type="radio" name="resume-source" value="profile" checked />
+                  <span>Use this</span>
+                </label>
+              </div>
+
+              <div class="aj-resume-option">
+                <div class="aj-resume-option__info">
+                  <i class="ti ti-upload" aria-hidden="true"></i>
+                  <div>
+                    <p class="aj-resume-option__title">Upload a different resume</p>
+                    <p class="aj-resume-option__sub">PDF, DOC, or DOCX</p>
+                  </div>
+                </div>
+                <label class="aj-radio aj-radio--compact">
+                  <input type="radio" name="resume-source" value="upload" />
+                  <span>Use this</span>
+                </label>
+              </div>
+
+              <div class="aj-upload-zone" id="upload-zone" hidden>
+                <input type="file" id="resume-file-input" accept=".pdf,.doc,.docx" hidden />
+                <button type="button" class="btn-outline btn-compact" id="choose-file-btn"><i class="ti ti-upload" aria-hidden="true"></i> Choose file</button>
+                <span id="upload-file-name" class="aj-upload-filename"></span>
+                <span class="aj-upload-status" id="upload-status"></span>
+              </div>
+
+              <span class="field-error" id="err-resume"></span>
+
+              <div class="aj-step-actions">
+                <button type="button" class="btn-outline btn-compact" id="back-2">Back</button>
+                <button type="button" class="btn-primary btn-compact" id="next-2">Save and continue <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+              </div>
+            </section>
+
+            <!-- ---------- Step 3: Additional Info ---------- -->
+            <section class="aj-step-panel" id="step-3">
+              <h2 class="aj-step-heading">Additional Information</h2>
+
+              <div class="ep-field">
+                <label for="cover-letter">Cover Letter <span class="req">*</span></label>
+                <textarea id="cover-letter" rows="8" maxlength="2000" placeholder="Tell them why you're a great fit..."></textarea>
+                <span class="cj-char-count"><span id="cover-letter-count">0</span> / 2000</span>
+                <span class="field-error" id="err-cover-letter"></span>
+              </div>
+
+              <div class="ep-field">
+                <label for="additional-info">Anything else you'd like to share? (Optional)</label>
+                <textarea id="additional-info" rows="4" maxlength="1000" placeholder="Portfolio links, availability, questions..."></textarea>
+              </div>
+
+              <div class="aj-step-actions">
+                <button type="button" class="btn-outline btn-compact" id="back-3">Back</button>
+                <button type="button" class="btn-primary btn-compact" id="next-3">Save and continue <i class="ti ti-arrow-right" aria-hidden="true"></i></button>
+              </div>
+            </section>
+
+            <!-- ---------- Step 4: Review ---------- -->
+            <section class="aj-step-panel" id="step-4">
+              <h2 class="aj-step-heading">Review your application</h2>
+              <p class="aj-step-sub">Double-check everything before submitting — you can still go back and edit.</p>
+
+              <div class="aj-review-block">
+                <h4>Personal Information</h4>
+                <p id="review-personal"></p>
+              </div>
+
+              <div class="aj-review-block">
+                <h4>Work Authorization</h4>
+                <p id="review-work-auth"></p>
+              </div>
+
+              <div class="aj-review-block">
+                <h4>Resume</h4>
+                <p id="review-resume"></p>
+              </div>
+
+              <div class="aj-review-block">
+                <h4>Cover Letter</h4>
+                <p id="review-cover-letter"></p>
+              </div>
+
+              <div class="aj-review-block" id="review-additional-block" hidden>
+                <h4>Additional Info</h4>
+                <p id="review-additional"></p>
+              </div>
+
+              <div class="aj-step-actions">
+                <button type="button" class="btn-outline btn-compact" id="back-4">Back</button>
+                <button type="button" class="btn-primary btn-compact" id="submit-application">Submit Application</button>
+              </div>
+            </section>
+
+            <!-- ---------- Step 5: Submitted ---------- -->
+            <section class="aj-step-panel" id="step-5">
+              <div class="aj-submitted">
+                <div class="aj-submitted__icon"><i class="ti ti-circle-check" aria-hidden="true"></i></div>
+                <h2>Application submitted!</h2>
+                <p>Your application for <strong id="submitted-job-title"></strong> at <strong id="submitted-company"></strong> has been sent. The company will review it and reach out if you're a match.</p>
+                <div class="aj-submitted__actions">
+                  <a href="my-applications.html" class="btn-primary btn-compact">View my applications</a>
+                  <a href="job-search.html" class="btn-outline btn-compact">Keep browsing jobs</a>
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+          <aside class="aj-sidebar">
+
+            <div class="card">
+              <h3 class="aj-sidebar-title">Job summary</h3>
+              <div class="aj-job-chip">
+                <span class="aj-job-chip__logo" id="summary-logo"><i class="ti ti-building" aria-hidden="true"></i></span>
+                <div>
+                  <p id="summary-title"></p>
+                  <p id="summary-company"></p>
+                </div>
+              </div>
+              <div class="aj-summary-meta">
+                <span id="summary-location"><i class="ti ti-map-pin" aria-hidden="true"></i></span>
+                <span id="summary-workplace"><i class="ti ti-building-skyscraper" aria-hidden="true"></i></span>
+                <span id="summary-employment"><i class="ti ti-briefcase" aria-hidden="true"></i></span>
+                <span id="summary-salary" hidden><i class="ti ti-cash" aria-hidden="true"></i></span>
+              </div>
+              <a href="#" class="link-btn" id="view-job-details-link">View job details →</a>
+            </div>
+
+            <div class="card">
+              <h3 class="aj-sidebar-title">Application progress</h3>
+              <div class="aj-progress-row">
+                <span id="progress-step-label">Step 1 of 5</span>
+                <span id="progress-pct">20% complete</span>
+              </div>
+              <div class="progress-track"><div class="progress-fill" id="progress-bar"></div></div>
+              <p class="jm-placeholder__sub aj-progress-note">Take your time — your answers stay on this page until you submit.</p>
+            </div>
+
+            <div class="card">
+              <h3 class="aj-sidebar-title">Your application</h3>
+              <div class="aj-checklist">
+                <div class="aj-checklist__item" id="checklist-resume"><i class="ti ti-file-text" aria-hidden="true"></i> Resume <span>Not added</span></div>
+                <div class="aj-checklist__item" id="checklist-cover"><i class="ti ti-mail" aria-hidden="true"></i> Cover letter <span>Not added</span></div>
+                <div class="aj-checklist__item" id="checklist-auth"><i class="ti ti-shield-check" aria-hidden="true"></i> Work authorization <span>Pending</span></div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 class="aj-sidebar-title">Tips to stand out</h3>
+              <ul class="cj-tips">
+                <li><i class="ti ti-check" aria-hidden="true"></i> Tailor your resume to the role</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Write a specific, genuine cover letter</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Double-check details before submitting</li>
+              </ul>
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/applyJob.js"></script>
+</body>
+</html>

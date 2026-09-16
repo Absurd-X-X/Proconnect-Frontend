@@ -4,23 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Company Profile - ProConnect</title>
-  <link rel="stylesheet" href="/Styles/company-layout.css" />
+  <link rel="stylesheet" href="Styles/dashboard.css" />
   <link rel="stylesheet" href="/Styles/company-profile.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
 </head>
-<body>
+<body data-page="company-profile">
 
   <div class="app-shell">
 
-    <!-- Sidebar (shared shell — reuse your existing dashboard sidebar include/partial here) -->
-    <aside class="app-sidebar" id="app-sidebar"></aside>
+    <div id="sidebar-root"></div>
 
-    <div class="app-main">
+    <main class="app-main">
 
-      <!-- Topbar (shared shell) -->
-      <header class="app-topbar" id="app-topbar"></header>
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search candidates, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="recruiter-profile.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
 
-      <main class="app-content">
+      <div class="app-content">
 
         <div class="page-header">
           <div>
@@ -185,12 +199,13 @@
 
         </div>
 
-      </main>
-    </div>
+      </div>
+
+    </main>
   </div>
 
   <script src="Scripts/config.js"></script>
-  <script src="Scripts/Layouts/companyLayout.js"></script>
+  <script src="Scripts/sidebar.js"></script>
   <script src="Scripts/companyProfile.js"></script>
 </body>
 </html>

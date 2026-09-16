@@ -4,127 +4,271 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Recruiter Profile - ProConnect</title>
-  <link rel="stylesheet" href="/Styles/company-layout.css" />
+  <link rel="stylesheet" href="Styles/dashboard.css" />
   <link rel="stylesheet" href="/Styles/recruiter-profile.css" />
+  <link rel="stylesheet" href="/Styles/recruiter-profile-edit.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
 </head>
-<body>
+<body data-page="recruiter-profile">
 
   <div class="app-shell">
 
-    <aside class="app-sidebar" id="app-sidebar"></aside>
+    <div id="sidebar-root"></div>
 
-    <div class="app-main">
+    <main class="app-main">
 
-      <header class="app-topbar" id="app-topbar"></header>
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search candidates, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="recruiter-profile.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
 
-      <main class="app-content">
+      <div class="app-content">
 
         <div class="page-header">
           <div>
             <h1>Recruiter Profile</h1>
             <p>Manage your professional information and preferences.</p>
           </div>
-          <a href="edit-recruiter-profile.html" class="btn-primary btn-inline">
+          <button type="button" class="btn-primary btn-inline" id="header-edit-profile-btn">
             <i class="ti ti-pencil" aria-hidden="true"></i> Edit Profile
-          </a>
+          </button>
         </div>
+
+        <!-- Sub tabs: Overview / Edit Profile -->
+        <nav class="profile-toplevel-tabs" id="profile-toplevel-tabs">
+          <button type="button" class="toplevel-tab is-active" data-toplevel-tab="overview">
+            <i class="ti ti-eye" aria-hidden="true"></i> Overview
+          </button>
+          <button type="button" class="toplevel-tab" data-toplevel-tab="edit">
+            <i class="ti ti-pencil" aria-hidden="true"></i> Edit Profile
+          </button>
+        </nav>
 
         <div class="loading-state" id="loading-state">Loading profile...</div>
         <div class="form-alert" id="form-alert" role="alert" hidden></div>
 
-        <div class="profile-layout" id="profile-layout" hidden>
+        <!-- ============ OVERVIEW TAB ============ -->
+        <div class="toplevel-panel is-active" data-toplevel-panel="overview">
+          <div class="profile-layout" id="profile-layout" hidden>
 
-          <div class="profile-main">
+            <div class="profile-main">
 
-            <div class="content-card profile-header-card">
-              <div class="profile-avatar" id="profile-avatar"></div>
-              <div class="profile-header-info">
-                <div class="profile-header-info__name-row">
-                  <h2 id="recruiter-name"></h2>
-                  <span class="role-badge" id="role-badge"></span>
+              <div class="content-card profile-header-card">
+                <div class="profile-avatar" id="profile-avatar"></div>
+                <div class="profile-header-info">
+                  <div class="profile-header-info__name-row">
+                    <h2 id="recruiter-name"></h2>
+                    <span class="role-badge" id="role-badge"></span>
+                  </div>
+                  <p class="profile-header-info__meta" id="recruiter-meta"></p>
+                  <div class="contact-row" id="contact-row"></div>
                 </div>
-                <p class="profile-header-info__meta" id="recruiter-meta"></p>
-                <div class="contact-row" id="contact-row"></div>
               </div>
+
+              <div class="content-card">
+                <div class="stats-grid" id="stats-grid"></div>
+              </div>
+
+              <div class="content-card">
+                <nav class="profile-tabs">
+                  <button class="profile-tab is-active" data-tab="about">About</button>
+                  <button class="profile-tab" data-tab="experience">Experience</button>
+                  <button class="profile-tab" data-tab="skills">Skills</button>
+                  <button class="profile-tab" data-tab="certifications">Certifications</button>
+                </nav>
+
+                <section class="tab-panel is-active" data-tab-panel="about">
+                  <h3>Professional Summary</h3>
+                  <p id="recruiter-bio"></p>
+                </section>
+
+                <section class="tab-panel" data-tab-panel="experience">
+                  <div class="placeholder-block">
+                    <i class="ti ti-briefcase" aria-hidden="true"></i>
+                    <p>Work experience history isn't available yet for recruiter profiles.</p>
+                  </div>
+                </section>
+
+                <section class="tab-panel" data-tab-panel="skills">
+                  <div class="placeholder-block">
+                    <i class="ti ti-tools" aria-hidden="true"></i>
+                    <p>Skills aren't available yet for recruiter profiles.</p>
+                  </div>
+                </section>
+
+                <section class="tab-panel" data-tab-panel="certifications">
+                  <div class="placeholder-block">
+                    <i class="ti ti-certificate" aria-hidden="true"></i>
+                    <p>Certifications aren't available yet for recruiter profiles.</p>
+                  </div>
+                </section>
+              </div>
+
             </div>
 
-            <div class="content-card">
-              <div class="stats-grid" id="stats-grid"></div>
-            </div>
+            <aside class="profile-sidebar">
 
-            <div class="content-card">
-              <nav class="profile-tabs">
-                <button class="profile-tab is-active" data-tab="about">About</button>
-                <button class="profile-tab" data-tab="experience">Experience</button>
-                <button class="profile-tab" data-tab="skills">Skills</button>
-                <button class="profile-tab" data-tab="certifications">Certifications</button>
-              </nav>
-
-              <section class="tab-panel is-active" data-tab-panel="about">
-                <h3>Professional Summary</h3>
-                <p id="recruiter-bio"></p>
-              </section>
-
-              <section class="tab-panel" data-tab-panel="experience">
-                <div class="placeholder-block">
-                  <i class="ti ti-briefcase" aria-hidden="true"></i>
-                  <p>Work experience history isn't available yet for recruiter profiles.</p>
+              <div class="content-card">
+                <h3>Recruitment Preferences</h3>
+                <div class="placeholder-block placeholder-block--sm">
+                  <p>Recruitment preferences aren't available yet.</p>
                 </div>
-              </section>
+              </div>
 
-              <section class="tab-panel" data-tab-panel="skills">
-                <div class="placeholder-block">
-                  <i class="ti ti-tools" aria-hidden="true"></i>
-                  <p>Skills aren't available yet for recruiter profiles.</p>
-                </div>
-              </section>
+              <div class="content-card" id="connected-company-card" hidden>
+                <h3>Connected Company</h3>
+                <div class="connected-company" id="connected-company"></div>
+                <a href="company-profile.html" class="btn-secondary btn-block btn-inline">
+                  View Company Profile <i class="ti ti-external-link" aria-hidden="true"></i>
+                </a>
+              </div>
 
-              <section class="tab-panel" data-tab-panel="certifications">
-                <div class="placeholder-block">
-                  <i class="ti ti-certificate" aria-hidden="true"></i>
-                  <p>Certifications aren't available yet for recruiter profiles.</p>
-                </div>
-              </section>
-            </div>
+              <div class="content-card" id="no-company-card" hidden>
+                <h3>No Company Yet</h3>
+                <p class="empty-hint">You're not linked to a company yet.</p>
+                <a href="company-onboarding.html" class="btn-primary btn-block btn-inline">
+                  Create or Join a Company
+                </a>
+              </div>
+
+            </aside>
 
           </div>
-
-          <aside class="profile-sidebar">
-
-            <div class="content-card">
-              <h3>Recruitment Preferences</h3>
-              <div class="placeholder-block placeholder-block--sm">
-                <p>Recruitment preferences aren't available yet.</p>
-              </div>
-            </div>
-
-            <div class="content-card" id="connected-company-card" hidden>
-              <h3>Connected Company</h3>
-              <div class="connected-company" id="connected-company"></div>
-              <a href="company-profile.html" class="btn-secondary btn-block btn-inline">
-                View Company Profile <i class="ti ti-external-link" aria-hidden="true"></i>
-              </a>
-            </div>
-
-            <div class="content-card" id="no-company-card" hidden>
-              <h3>No Company Yet</h3>
-              <p class="empty-hint">You're not linked to a company yet.</p>
-              <a href="company-onboarding.html" class="btn-primary btn-block btn-inline">
-                Create or Join a Company
-              </a>
-            </div>
-
-          </aside>
-
         </div>
 
-      </main>
-    </div>
+        <!-- ============ EDIT PROFILE TAB ============ -->
+        <div class="toplevel-panel" data-toplevel-panel="edit" hidden>
+          <div class="edit-layout">
+
+            <div class="edit-main">
+
+              <div class="content-card">
+                <h3 class="edit-card__heading">Basic Information</h3>
+
+                <div class="edit-field-row">
+                  <div class="edit-field">
+                    <label for="edit-first-name">First Name <span class="required">*</span></label>
+                    <input type="text" id="edit-first-name" placeholder="First name" />
+                  </div>
+                  <div class="edit-field">
+                    <label for="edit-last-name">Last Name <span class="required">*</span></label>
+                    <input type="text" id="edit-last-name" placeholder="Last name" />
+                  </div>
+                </div>
+
+                <div class="edit-field-row">
+                  <div class="edit-field">
+                    <label for="edit-job-title">Job Title</label>
+                    <input type="text" id="edit-job-title" placeholder="e.g. Senior Technical Recruiter" />
+                  </div>
+                  <div class="edit-field">
+                    <label for="edit-department">Department</label>
+                    <input type="text" id="edit-department" placeholder="e.g. Talent Acquisition" />
+                  </div>
+                </div>
+
+                <div class="edit-field-row">
+                  <div class="edit-field">
+                    <label for="edit-email">Email</label>
+                    <input type="email" id="edit-email" disabled />
+                    <span class="edit-field__hint">Contact support to change your email address.</span>
+                  </div>
+                  <div class="edit-field">
+                    <label for="edit-tel">Phone</label>
+                    <input type="tel" id="edit-tel" placeholder="+1 (555) 000-0000" />
+                  </div>
+                </div>
+
+                <div class="edit-field-row edit-field-row--single">
+                  <div class="edit-field">
+                    <label for="edit-location">Location</label>
+                    <input type="text" id="edit-location" placeholder="City, State, Country" />
+                  </div>
+                </div>
+
+                <div class="edit-field edit-field--photo">
+                  <label>Profile Photo</label>
+                  <div class="edit-photo-row">
+                    <div class="edit-photo-avatar" id="edit-avatar-preview"></div>
+                    <div>
+                      <button type="button" class="btn-outline btn-compact" id="edit-photo-upload-btn">
+                        <i class="ti ti-camera" aria-hidden="true"></i> Change Photo
+                      </button>
+                      <p class="edit-field__hint">JPG, PNG or GIF (Max 2MB)</p>
+                    </div>
+                    <input type="file" id="edit-photo-input" accept="image/png, image/jpeg, image/webp" hidden />
+                  </div>
+                </div>
+              </div>
+
+              <div class="content-card">
+                <h3 class="edit-card__heading">About</h3>
+                <div class="edit-field">
+                  <label for="edit-bio">Professional Summary</label>
+                  <textarea id="edit-bio" maxlength="2000" rows="6" placeholder="Tell candidates and companies about your background and specialties..."></textarea>
+                  <span class="edit-char-count"><span id="edit-bio-count">0</span>/2000</span>
+                </div>
+              </div>
+
+              <div class="edit-actions">
+                <button type="button" class="btn-text" id="edit-cancel-btn">Cancel</button>
+                <button type="button" class="btn-primary" id="edit-save-btn">
+                  <i class="ti ti-device-floppy" aria-hidden="true"></i> Save Changes
+                </button>
+              </div>
+
+            </div>
+
+            <aside class="edit-sidebar">
+
+              <div class="content-card preview-card">
+                <h3 class="edit-card__heading">Profile Preview</h3>
+                <div class="preview-avatar" id="preview-avatar"></div>
+                <h2 class="preview-name" id="preview-name">—</h2>
+                <p class="preview-meta" id="preview-meta">—</p>
+                <div class="preview-contact" id="preview-contact"></div>
+                <p class="preview-bio" id="preview-bio">—</p>
+              </div>
+
+              <div class="content-card tips-card">
+                <h3 class="tips-card__heading"><i class="ti ti-bulb" aria-hidden="true"></i> Profile Tips</h3>
+                <ul class="tips-list">
+                  <li><i class="ti ti-check" aria-hidden="true"></i> Keep your summary clear and concise</li>
+                  <li><i class="ti ti-check" aria-hidden="true"></i> Add your job title and department</li>
+                  <li><i class="ti ti-check" aria-hidden="true"></i> Use a professional profile photo</li>
+                  <li><i class="ti ti-check" aria-hidden="true"></i> Keep your contact info up to date</li>
+                </ul>
+              </div>
+
+              <div class="content-card important-card">
+                <h3 class="important-card__heading"><i class="ti ti-info-circle" aria-hidden="true"></i> Important</h3>
+                <p>Changes to your recruiter profile will be visible to candidates, colleagues and other users on ProConnect.</p>
+              </div>
+
+            </aside>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
   </div>
 
   <script src="Scripts/config.js"></script>
-  <script src="Scripts/Layouts/companyLayout.js"></script>
+  <script src="Scripts/sidebar.js"></script>
   <script src="Scripts/recruiterProfile.js"></script>
 </body>
 </html>

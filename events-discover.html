@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discover Events · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/professional-events.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="events-discover">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, skills..." />
+        </div>
+
+        <div class="topbar-nav-icons" id="topbar-nav-icons"></div>
+
+        <div class="app-topbar__icons">
+<div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <a href="#" class="dropdown-menu__item"><i class="ti ti-settings" aria-hidden="true"></i> Settings</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <section class="card discover-hero">
+          <div class="discover-hero__icon"><i class="ti ti-calendar" aria-hidden="true"></i></div>
+          <div class="discover-hero__text">
+            <h1>Discover Events</h1>
+            <p>Find industry events, webinars, workshops, and networking opportunities to grow your skills and expand your network.</p>
+          </div>
+          <div class="discover-hero__art" aria-hidden="true">
+            <i class="ti ti-presentation"></i>
+          </div>
+        </section>
+
+        <div class="search-bar-row">
+          <div class="search-input">
+            <i class="ti ti-search" aria-hidden="true"></i>
+            <input type="text" id="search-input" placeholder="Search events by title, topic, company, or speaker..." />
+          </div>
+          <button type="button" class="btn-primary btn-compact" id="search-btn">Search</button>
+        </div>
+
+        <div class="discover-layout">
+          <div class="discover-main">
+            <section class="discover-section" id="featured-section">
+              <div class="card-header">
+                <h3>Featured Events</h3>
+                <span class="section-subtitle">Don't miss these popular and upcoming events</span>
+              </div>
+              <div id="featured-list" class="featured-grid"></div>
+            </section>
+
+            <section class="discover-section">
+              <div class="card-header">
+                <h3>Upcoming Events</h3>
+                <span class="section-subtitle">More great events happening soon</span>
+              </div>
+              <div id="upcoming-list" class="upcoming-list"></div>
+              <div id="empty-state" class="card empty-state" hidden>
+                <i class="ti ti-calendar-off" aria-hidden="true"></i>
+                <h3>No events found</h3>
+                <p>Try adjusting your search or filters.</p>
+              </div>
+              <div id="pagination" class="pagination"></div>
+            </section>
+          </div>
+
+          <aside class="discover-sidebar">
+            <div class="card filter-card">
+              <div class="card-header">
+                <h3>Filter Events</h3>
+                <button type="button" class="link-btn" id="clear-filters-btn">Clear All</button>
+              </div>
+
+              <div class="filter-group">
+                <span class="filter-group__label">Event Type</span>
+                <label class="checkbox-option"><input type="checkbox" name="event-type" value="Networking" /> Networking</label>
+                <label class="checkbox-option"><input type="checkbox" name="event-type" value="Webinar" /> Webinar</label>
+                <label class="checkbox-option"><input type="checkbox" name="event-type" value="Workshop" /> Workshop</label>
+                <label class="checkbox-option"><input type="checkbox" name="event-type" value="Conference" /> Conference</label>
+                <label class="checkbox-option"><input type="checkbox" name="event-type" value="CareerFair" /> Career Fair</label>
+                <label class="checkbox-option"><input type="checkbox" name="event-type" value="Social" /> Social</label>
+              </div>
+
+              <div class="filter-group">
+                <span class="filter-group__label">Date Range</span>
+                <label class="radio-option"><input type="radio" name="date-range" value="" checked /> All Dates</label>
+                <label class="radio-option"><input type="radio" name="date-range" value="7" /> Next 7 Days</label>
+                <label class="radio-option"><input type="radio" name="date-range" value="30" /> Next 30 Days</label>
+                <label class="radio-option"><input type="radio" name="date-range" value="90" /> Next 90 Days</label>
+              </div>
+
+              <div class="filter-group">
+                <span class="filter-group__label">Location Type</span>
+                <label class="radio-option"><input type="radio" name="location-type" value="" checked /> All</label>
+                <label class="radio-option"><input type="radio" name="location-type" value="Online" /> Online Only</label>
+                <label class="radio-option"><input type="radio" name="location-type" value="InPerson" /> In-Person</label>
+                <label class="radio-option"><input type="radio" name="location-type" value="Hybrid" /> Hybrid</label>
+              </div>
+
+              <button type="button" class="btn-primary" id="apply-filters-btn">Apply Filters</button>
+            </div>
+          </aside>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/eventsDiscover.js"></script>
+</body>
+</html>

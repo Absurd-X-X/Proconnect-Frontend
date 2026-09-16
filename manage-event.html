@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Event · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="Styles/company-events.css" />
+  <link rel="stylesheet" href="Styles/manage-event.css" />
+</head>
+<body data-page="managed-events">
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search candidates, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="recruiter-profile.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+        <a href="managed-events.html" class="back-link">
+          <i class="ti ti-arrow-left" aria-hidden="true"></i> Back to Managed Events
+        </a>
+
+        <div class="manage-hero" id="manage-hero">
+          <div class="manage-hero__image" id="hero-image"></div>
+          <div class="manage-hero__overlay">
+            <span class="pill" id="hero-status-pill"></span>
+            <h1 id="hero-title"></h1>
+            <div class="manage-hero__meta">
+              <span id="hero-date"><i class="ti ti-calendar" aria-hidden="true"></i></span>
+              <span id="hero-location"><i class="ti ti-map-pin" aria-hidden="true"></i></span>
+            </div>
+          </div>
+          <div class="manage-hero__actions" id="hero-actions"></div>
+        </div>
+
+        <div class="stat-row">
+          <div class="stat-card">
+            <span class="stat-card__value" id="stat-registered">0</span>
+            <span class="stat-card__label">Registered</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__value" id="stat-attended">0</span>
+            <span class="stat-card__label">Attended</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__value" id="stat-limit">—</span>
+            <span class="stat-card__label">Attendee Limit</span>
+          </div>
+        </div>
+
+        <div class="tabs" id="manage-tabs">
+          <button type="button" class="tab is-active" data-tab="overview">Overview</button>
+          <button type="button" class="tab" data-tab="speakers">Speakers</button>
+          <button type="button" class="tab" data-tab="agenda">Agenda</button>
+          <button type="button" class="tab" data-tab="registrations">Registrations</button>
+        </div>
+
+        <section id="tab-overview" class="tab-panel">
+          <div class="form-card">
+            <h3>About This Event</h3>
+            <p id="overview-description"></p>
+          </div>
+          <div class="form-card">
+            <h3>Event Details</h3>
+            <div class="detail-grid">
+              <div><span class="detail-label">Event Type</span><span id="detail-type"></span></div>
+              <div><span class="detail-label">Category</span><span id="detail-category"></span></div>
+              <div><span class="detail-label">Visibility</span><span id="detail-visibility"></span></div>
+              <div><span class="detail-label">Registration</span><span id="detail-registration"></span></div>
+              <div><span class="detail-label">Online Link</span><span id="detail-link"></span></div>
+              <div><span class="detail-label">Company</span><span id="detail-company"></span></div>
+            </div>
+          </div>
+          <div class="form-card" id="cancellation-card" hidden>
+            <h3><i class="ti ti-alert-triangle" aria-hidden="true"></i> Cancellation Reason</h3>
+            <p id="cancellation-reason"></p>
+          </div>
+        </section>
+
+        <section id="tab-speakers" class="tab-panel" hidden>
+          <div class="section-header">
+            <h3>Speakers</h3>
+            <button type="button" class="btn btn-outline btn-sm" id="manage-add-speaker-btn">
+              <i class="ti ti-plus" aria-hidden="true"></i> Add Speaker
+            </button>
+          </div>
+          <div id="manage-speaker-list" class="speaker-manage-list"></div>
+        </section>
+
+        <section id="tab-agenda" class="tab-panel" hidden>
+          <div class="section-header">
+            <h3>Agenda</h3>
+            <button type="button" class="btn btn-outline btn-sm" id="add-agenda-btn">
+              <i class="ti ti-plus" aria-hidden="true"></i> Add Agenda Item
+            </button>
+          </div>
+          <div id="agenda-list" class="agenda-manage-list"></div>
+        </section>
+
+        <section id="tab-registrations" class="tab-panel" hidden>
+          <div class="filter-bar">
+            <select id="registration-status-filter">
+              <option value="">All Statuses</option>
+              <option value="Registered">Registered</option>
+              <option value="Attended">Attended</option>
+              <option value="NoShow">No Show</option>
+              <option value="CancelledByUser">Cancelled</option>
+            </select>
+          </div>
+          <table class="registrations-table">
+            <thead>
+              <tr>
+                <th>Attendee</th>
+                <th>Contact</th>
+                <th>Organization</th>
+                <th>Registered</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="registrations-body"></tbody>
+          </table>
+          <div id="registrations-pagination" class="pagination"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="speaker-modal-overlay" hidden>
+    <div class="modal">
+      <div class="modal__header">
+        <h3>Add Speaker</h3>
+        <button type="button" class="modal__close" id="speaker-modal-close" aria-label="Close">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal__body">
+        <label class="field-label" for="speaker-name">Full Name <span class="required">*</span></label>
+        <input type="text" id="speaker-name" required />
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="speaker-title">Title</label>
+            <input type="text" id="speaker-title" />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="speaker-company">Company</label>
+            <input type="text" id="speaker-company" />
+          </div>
+        </div>
+        <label class="field-label" for="speaker-linkedin">LinkedIn URL</label>
+        <input type="url" id="speaker-linkedin" />
+        <label class="field-label">Photo</label>
+        <input type="file" id="speaker-photo-input" accept="image/png,image/jpeg" />
+      </div>
+      <div class="modal__footer">
+        <button type="button" class="btn btn-outline" id="speaker-modal-cancel">Cancel</button>
+        <button type="button" class="btn btn-primary" id="speaker-modal-save">Save Speaker</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="agenda-modal-overlay" hidden>
+    <div class="modal">
+      <div class="modal__header">
+        <h3 id="agenda-modal-title">Add Agenda Item</h3>
+        <button type="button" class="modal__close" id="agenda-modal-close" aria-label="Close">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal__body">
+        <label class="field-label" for="agenda-title">Title <span class="required">*</span></label>
+        <input type="text" id="agenda-title" required />
+        <label class="field-label" for="agenda-description">Description</label>
+        <textarea id="agenda-description" rows="2"></textarea>
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="agenda-start">Start Time <span class="required">*</span></label>
+            <input type="datetime-local" id="agenda-start" required />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="agenda-end">End Time <span class="required">*</span></label>
+            <input type="datetime-local" id="agenda-end" required />
+          </div>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button type="button" class="btn btn-outline" id="agenda-modal-cancel">Cancel</button>
+        <button type="button" class="btn btn-primary" id="agenda-modal-save">Save Item</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="cancel-modal-overlay" hidden>
+    <div class="modal">
+      <div class="modal__header">
+        <h3>Cancel Event</h3>
+        <button type="button" class="modal__close" id="cancel-modal-close" aria-label="Close">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal__body">
+        <p class="modal__warning">
+          <i class="ti ti-alert-triangle" aria-hidden="true"></i>
+          All registered attendees will be notified that this event has been cancelled.
+        </p>
+        <label class="field-label" for="cancel-reason">Reason for cancellation <span class="required">*</span></label>
+        <textarea id="cancel-reason" rows="3" placeholder="Let attendees know why this event is being cancelled..."></textarea>
+      </div>
+      <div class="modal__footer">
+        <button type="button" class="btn btn-outline" id="cancel-modal-back">Go Back</button>
+        <button type="button" class="btn btn-danger" id="cancel-modal-confirm">Cancel Event</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/manageEvent.js"></script>
+</body>
+</html>

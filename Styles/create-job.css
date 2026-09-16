@@ -1,0 +1,387 @@
+/* ---------- Header ---------- */
+
+.cj-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.cj-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.cj-subtitle {
+  font-size: 13px;
+  color: var(--pc-text-secondary);
+  margin: 0;
+}
+
+.cj-header__actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ---------- Alert (mirrors auth pages' form-alert) ---------- */
+
+.form-alert {
+  font-size: 13px;
+  padding: 10px 12px;
+  border-radius: var(--pc-radius);
+  background: var(--pc-danger-bg);
+  color: var(--pc-danger);
+  margin-bottom: 1rem;
+}
+
+.form-alert[hidden] {
+  display: none;
+}
+
+.form-alert--success {
+  background: var(--pc-success-bg);
+  color: var(--pc-success);
+}
+
+/* ---------- Layout: form + sidebar ---------- */
+
+.cj-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.cj-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: sticky;
+  top: calc(var(--pc-topbar-height) + 1.25rem);
+}
+
+/* ---------- Section headings inside cards ---------- */
+
+.cj-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 2px;
+}
+
+.cj-section-subtitle {
+  font-size: 12px;
+  color: var(--pc-text-secondary);
+  margin: 0 0 1rem;
+}
+
+#create-job-form .card {
+  margin-bottom: 1.25rem;
+}
+
+.field-error {
+  display: block;
+  font-size: 11px;
+  color: var(--pc-danger);
+  margin-top: 3px;
+  min-height: 13px;
+}
+
+/* ---------- Work arrangement radio row ---------- */
+
+.cj-radio-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 14px;
+}
+
+.cj-radio {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--pc-text-primary);
+  cursor: pointer;
+}
+
+.cj-radio input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--pc-purple);
+  cursor: pointer;
+}
+
+/* ---------- Textareas with char count ---------- */
+
+.cj-field-hint-top {
+  font-size: 11.5px;
+  color: var(--pc-text-muted);
+  margin: 0 0 6px;
+}
+
+.cj-char-count {
+  display: block;
+  text-align: right;
+  font-size: 11px;
+  color: var(--pc-text-muted);
+  margin-top: 4px;
+}
+
+/* ---------- Bottom form actions ---------- */
+
+.cj-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.25rem;
+}
+
+.cj-form-actions__right {
+  display: flex;
+  gap: 10px;
+}
+
+/* ---------- Job preview card ---------- */
+
+.cj-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.cj-preview__logo {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 10px;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.cj-preview__title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.cj-preview__company {
+  font-size: 12px;
+  color: var(--pc-text-secondary);
+  margin: 2px 0 0;
+}
+
+.cj-preview__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cj-preview__meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--pc-text-secondary);
+}
+
+.cj-preview__meta i {
+  color: var(--pc-text-muted);
+  font-size: 14px;
+}
+
+/* ---------- Publishing options ---------- */
+
+.cj-publish-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
+  border: 1.5px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.cj-publish-option:hover {
+  border-color: var(--pc-purple);
+  background: var(--pc-panel-bg);
+}
+
+.cj-publish-option:has(input:checked) {
+  border-color: var(--pc-purple);
+  background: var(--pc-purple-light);
+}
+
+.cj-publish-option input {
+  margin-top: 2px;
+  width: 15px;
+  height: 15px;
+  accent-color: var(--pc-purple);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.cj-publish-option__text strong {
+  display: block;
+  font-size: 13px;
+  color: var(--pc-text-primary);
+  margin-bottom: 2px;
+}
+
+.cj-publish-option__text small {
+  font-size: 11.5px;
+  color: var(--pc-text-secondary);
+  line-height: 1.4;
+}
+
+.cj-schedule-field {
+  margin: -2px 0 10px 26px;
+}
+
+.cj-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--pc-text-secondary);
+  background: var(--pc-panel-bg);
+  border-radius: var(--pc-radius);
+  padding: 8px 10px;
+  margin: 4px 0 0;
+}
+
+.cj-note i {
+  color: var(--pc-purple);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* ---------- Tips list ---------- */
+
+.cj-tips {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cj-tips li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--pc-text-secondary);
+}
+
+.cj-tips i {
+  color: var(--pc-success);
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+/* ---------- Skills picker ---------- */
+
+.cj-skills-input-wrap {
+  position: relative;
+}
+
+.cj-skills-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  box-shadow: 0 12px 30px -10px rgba(30, 20, 80, 0.2);
+  z-index: 30;
+}
+
+.cj-skills-dropdown__item {
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.cj-skills-dropdown__item:hover {
+  background: var(--pc-panel-bg);
+}
+
+.cj-skills-dropdown__empty {
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--pc-text-muted);
+}
+
+.cj-skills-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.cj-skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 8px 5px 12px;
+  border-radius: 999px;
+}
+
+.cj-skill-chip button {
+  border: none;
+  background: none;
+  color: var(--pc-purple);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding: 0;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1100px) {
+  .cj-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cj-sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .cj-header {
+    flex-direction: column;
+  }
+
+  .ep-field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .cj-form-actions {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .cj-form-actions__right {
+    flex-direction: column;
+  }
+}

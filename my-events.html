@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Events · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/professional-events.css" />
+  <link rel="stylesheet" href="Styles/my-events.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="my-events">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, skills..." />
+        </div>
+
+        <div class="topbar-nav-icons" id="topbar-nav-icons"></div>
+
+        <div class="app-topbar__icons">
+<div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <a href="#" class="dropdown-menu__item"><i class="ti ti-settings" aria-hidden="true"></i> Settings</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <a href="events-discover.html" class="back-link">
+          <i class="ti ti-arrow-left" aria-hidden="true"></i> Back to Discover
+        </a>
+
+        <div class="page-header">
+          <div>
+            <h1>My Events</h1>
+            <p>Track the events you've registered for, saved, and attended.</p>
+          </div>
+          <a href="events-discover.html" class="btn-primary btn-compact">
+            <i class="ti ti-calendar-search" aria-hidden="true"></i> Discover Events
+          </a>
+        </div>
+
+        <div class="tabs" id="my-events-tabs">
+          <button type="button" class="tab is-active" data-tab="Registered">Registered</button>
+          <button type="button" class="tab" data-tab="Upcoming">Upcoming</button>
+          <button type="button" class="tab" data-tab="Past">Past</button>
+          <button type="button" class="tab" data-tab="Saved">Saved</button>
+        </div>
+
+        <div id="my-events-list" class="my-events-list"></div>
+
+        <div id="empty-state" class="card empty-state" hidden>
+          <i class="ti ti-calendar-off" aria-hidden="true"></i>
+          <h3 id="empty-title">No events here yet</h3>
+          <p id="empty-subtitle">Browse Discover Events to find something to attend.</p>
+          <a href="events-discover.html" class="btn-primary btn-compact">Discover Events</a>
+        </div>
+
+        <div id="pagination" class="pagination"></div>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="cancel-modal-overlay" hidden>
+    <div class="modal">
+      <div class="modal__header">
+        <h3>Cancel Registration</h3>
+        <button type="button" class="modal__close" id="cancel-modal-close" aria-label="Close">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal__body">
+        <p>Are you sure you want to cancel your registration for <strong id="cancel-event-title"></strong>?</p>
+      </div>
+      <div class="modal__footer">
+        <button type="button" class="btn-outline btn-compact" id="cancel-modal-back">Go Back</button>
+        <button type="button" class="btn-danger btn-compact" id="cancel-modal-confirm">Cancel Registration</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/myEvents.js"></script>
+</body>
+</html>

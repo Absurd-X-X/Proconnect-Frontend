@@ -1,0 +1,437 @@
+/* Analytics Dashboard — shared styles for both the Professional and
+   Recruiter dashboards. Uses the same --pc-* design tokens and `card`
+   base class as the rest of ProConnect (see job-search.css), not a
+   separate palette. Uses the `an-` prefix, consistent with existing
+   `js-`/`ap-`/`ma-`/`jm-` page prefixes. */
+
+.an-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.an-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--pc-text-primary);
+  margin: 0 0 4px;
+}
+
+.an-subtitle {
+  font-size: 13px;
+  color: var(--pc-text-secondary);
+  margin: 0;
+}
+
+.an-header__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.an-select {
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius);
+  font-size: 12.5px;
+  font-family: var(--pc-font);
+  background: var(--pc-surface);
+  color: var(--pc-text-primary);
+  cursor: pointer;
+}
+
+/* ---------- KPI row ---------- */
+
+.an-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 1050px) {
+  .an-kpi-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .an-kpi-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.an-kpi-card {
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius-lg);
+  padding: 1rem 1.25rem;
+}
+
+.an-kpi-card--muted {
+  background: var(--pc-panel-bg);
+}
+
+.an-kpi-card__icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--pc-radius);
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.an-kpi-card__label {
+  font-size: 12.5px;
+  color: var(--pc-text-secondary);
+  margin-bottom: 6px;
+}
+
+.an-kpi-card__value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--pc-text-primary);
+  margin-bottom: 6px;
+}
+
+.an-kpi-card__value--muted {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--pc-text-muted);
+}
+
+.an-kpi-card__delta {
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.an-kpi-card__delta--up {
+  color: var(--pc-success);
+}
+
+.an-kpi-card__delta--down {
+  color: var(--pc-danger);
+}
+
+.an-kpi-card__delta--muted {
+  color: var(--pc-text-muted);
+  font-weight: 500;
+}
+
+/* ---------- Chart rows ---------- */
+
+.an-chart-row {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+  align-items: start;
+}
+
+.an-chart-row--single {
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 1050px) {
+  .an-chart-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.an-chart-card {
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius-lg);
+  padding: 1rem 1.25rem;
+}
+
+.an-chart-card__header {
+  margin-bottom: 1rem;
+}
+
+.an-chart-card__header h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--pc-text-primary);
+  margin: 0;
+}
+
+/* ---------- Sidebar cards (Top Posts / Top Roles / Recruiter Performance) ---------- */
+
+.an-sidebar-card {
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: var(--pc-radius-lg);
+  padding: 1rem 1.25rem;
+  height: 100%;
+}
+
+.an-sidebar-card__header {
+  margin-bottom: 10px;
+}
+
+.an-sidebar-card__header h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--pc-text-primary);
+  margin: 0;
+}
+
+/* ---------- Top Performing Posts (Professional dashboard) ---------- */
+
+.an-top-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.an-top-post-row {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--pc-border);
+}
+
+.an-top-post-row:last-child {
+  border-bottom: none;
+}
+
+.an-top-post-row__content {
+  font-size: 12.5px;
+  color: var(--pc-text-primary);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.an-top-post-row__stats {
+  display: flex;
+  gap: 12px;
+  font-size: 11.5px;
+  color: var(--pc-text-secondary);
+}
+
+.an-top-post-row__stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---------- Application Funnel (Recruiter dashboard) ---------- */
+
+.an-funnel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.an-funnel-row__label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12.5px;
+  margin-bottom: 6px;
+}
+
+.an-funnel-row__label span:first-child {
+  font-weight: 700;
+  color: var(--pc-text-primary);
+}
+
+.an-funnel-row__count {
+  color: var(--pc-text-secondary);
+}
+
+.an-funnel-row__bar-track {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--pc-panel-bg);
+  overflow: hidden;
+}
+
+.an-funnel-row__bar {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--pc-purple);
+}
+
+.an-funnel-footnote {
+  margin-top: 6px;
+  font-size: 11.5px;
+  color: var(--pc-text-muted);
+  border-top: 1px solid var(--pc-border);
+  padding-top: 10px;
+}
+
+/* ---------- Top Job Roles (Recruiter dashboard) ---------- */
+
+.an-role-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.an-role-row__rank {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.an-role-row__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.an-role-row__title {
+  font-size: 12.5px;
+  color: var(--pc-text-primary);
+  font-weight: 600;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.an-role-row__bar-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--pc-panel-bg);
+  overflow: hidden;
+}
+
+.an-role-row__bar {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--pc-purple);
+}
+
+.an-role-row__count {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--pc-text-secondary);
+  flex-shrink: 0;
+}
+
+/* ---------- Recruiter Performance (Recruiter dashboard) ---------- */
+
+.an-recruiter-performance {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.an-recruiter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pc-border);
+}
+
+.an-recruiter-row:last-child {
+  border-bottom: none;
+}
+
+.an-recruiter-row__avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--pc-purple-light);
+  color: var(--pc-purple);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.an-recruiter-row__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.an-recruiter-row__name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--pc-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.an-recruiter-row__stats {
+  display: flex;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.an-recruiter-row__stats div {
+  text-align: center;
+}
+
+.an-recruiter-row__stats strong {
+  display: block;
+  font-size: 13px;
+  color: var(--pc-text-primary);
+}
+
+.an-recruiter-row__stats span {
+  font-size: 10px;
+  color: var(--pc-text-muted);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 640px) {
+  .an-header { flex-direction: column; align-items: stretch; }
+  .an-header__actions { width: 100%; }
+  .an-select { width: 100%; }
+}
+
+/* ---------- Profile Insights tab panels ---------- */
+
+.pi-tab-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.js-mode-tab:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.js-mode-tab:disabled:hover {
+  color: var(--pc-text-secondary);
+}
+
+.pi-placeholder {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.pi-placeholder i {
+  font-size: 34px;
+  color: var(--pc-text-muted);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.pi-placeholder p {
+  margin: 4px 0;
+  font-size: 13.5px;
+  color: var(--pc-text-secondary);
+}

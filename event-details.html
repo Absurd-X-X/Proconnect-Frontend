@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Details · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/professional-events.css" />
+  <link rel="stylesheet" href="Styles/event-details.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="event-details">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, skills..." />
+        </div>
+
+        <div class="topbar-nav-icons" id="topbar-nav-icons"></div>
+
+        <div class="app-topbar__icons">
+<div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <a href="#" class="dropdown-menu__item"><i class="ti ti-settings" aria-hidden="true"></i> Settings</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <a href="javascript:history.back()" class="back-link">
+          <i class="ti ti-arrow-left" aria-hidden="true"></i> Back to Events
+        </a>
+
+        <div class="event-banner" id="event-banner">
+          <span class="event-badge" id="banner-badge"></span>
+          <button type="button" class="save-btn" id="banner-save-btn">
+            <i class="ti ti-bookmark" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <div class="event-title-row">
+          <div class="event-title-row__text">
+            <h1 id="event-title"></h1>
+            <p id="event-description-short"></p>
+          </div>
+          <div class="event-title-row__actions" id="header-actions"></div>
+        </div>
+
+        <div class="event-meta-row card">
+          <span id="meta-date"><i class="ti ti-calendar" aria-hidden="true"></i></span>
+          <span id="meta-location"><i class="ti ti-map-pin" aria-hidden="true"></i></span>
+          <span class="event-meta-row__going" id="meta-going">
+            <span class="avatar-stack" id="avatar-stack"></span>
+            <span id="going-count-text"></span>
+          </span>
+        </div>
+
+        <div class="details-layout">
+          <div class="details-main">
+            <div class="tabs" id="detail-tabs">
+              <button type="button" class="tab is-active" data-tab="overview">Overview</button>
+              <button type="button" class="tab" data-tab="speakers">Speakers</button>
+              <button type="button" class="tab" data-tab="agenda">Agenda</button>
+              <button type="button" class="tab" data-tab="attendees">Attendees</button>
+            </div>
+
+            <section id="tab-overview" class="tab-panel">
+              <div class="card">
+                <h3><i class="ti ti-info-circle" aria-hidden="true"></i> About This Event</h3>
+                <p id="overview-description"></p>
+                <div class="feature-chips" id="feature-chips"></div>
+              </div>
+
+              <div class="card" id="overview-speakers-card" hidden>
+                <div class="card-header">
+                  <h3>Featured Speakers</h3>
+                  <button type="button" class="link-btn" data-goto-tab="speakers">View All</button>
+                </div>
+                <div id="overview-speaker-grid" class="speaker-grid"></div>
+              </div>
+
+              <div class="card" id="overview-agenda-card" hidden>
+                <div class="card-header">
+                  <h3>Event Agenda</h3>
+                  <button type="button" class="link-btn" data-goto-tab="agenda">View All</button>
+                </div>
+                <div id="overview-agenda-list" class="agenda-list"></div>
+              </div>
+            </section>
+
+            <section id="tab-speakers" class="tab-panel" hidden>
+              <div class="card">
+                <h3>Speakers</h3>
+                <div id="full-speaker-grid" class="speaker-grid"></div>
+              </div>
+            </section>
+
+            <section id="tab-agenda" class="tab-panel" hidden>
+              <div class="card">
+                <h3>Event Agenda</h3>
+                <div id="full-agenda-list" class="agenda-list"></div>
+              </div>
+            </section>
+
+            <section id="tab-attendees" class="tab-panel" hidden>
+              <div class="card">
+                <h3 id="attendees-heading">Attendees</h3>
+                <div id="attendees-grid" class="attendees-grid"></div>
+                <div id="attendees-pagination" class="pagination"></div>
+              </div>
+            </section>
+          </div>
+
+          <aside class="details-sidebar">
+            <div class="card actions-card">
+              <div class="card-header" id="actions-card-header" hidden>
+                <h3>Event Actions</h3>
+                <div class="dropdown">
+                  <button type="button" class="icon-btn-dropdown" id="actions-dropdown-toggle">
+                    <i class="ti ti-dots" aria-hidden="true"></i>
+                  </button>
+                  <div class="dropdown-menu" id="actions-dropdown-menu">
+                    <button type="button" class="dropdown-menu__item" id="dropdown-share-btn">
+                      <i class="ti ti-share-2" aria-hidden="true"></i> Share
+                    </button>
+                    <button type="button" class="dropdown-menu__item" id="dropdown-save-btn">
+                      <i class="ti ti-bookmark" aria-hidden="true"></i> <span id="dropdown-save-label">Save</span>
+                    </button>
+                    <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="dropdown-cancel-btn" hidden>
+                      <i class="ti ti-circle-minus" aria-hidden="true"></i> Cancel registration
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="actions-card__buttons" id="sidebar-actions"></div>
+            </div>
+
+            <div class="card details-card">
+              <h3>Event Details</h3>
+              <div class="detail-row">
+                <span class="detail-label"><i class="ti ti-calendar" aria-hidden="true"></i> Date & Time</span>
+                <span id="detail-date"></span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label"><i class="ti ti-map-pin" aria-hidden="true"></i> Location</span>
+                <span id="detail-location"></span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label"><i class="ti ti-tag" aria-hidden="true"></i> Event Type</span>
+                <span id="detail-type"></span>
+              </div>
+              <div class="detail-row">
+                <span class="detail-label"><i class="ti ti-world" aria-hidden="true"></i> Visibility</span>
+                <span id="detail-visibility"></span>
+              </div>
+              <div class="detail-row" id="detail-limit-row">
+                <span class="detail-label"><i class="ti ti-users" aria-hidden="true"></i> Capacity</span>
+                <span id="detail-limit"></span>
+              </div>
+            </div>
+
+            <div class="card organized-card">
+              <h3>Organized By</h3>
+              <div class="organized-row">
+                <div class="organized-row__logo" id="organizer-logo"></div>
+                <div>
+                  <strong id="organizer-name"></strong>
+                  <p>Hosting this event</p>
+                </div>
+                <a href="#" class="link-btn" id="organizer-link">View Company</a>
+              </div>
+            </div>
+
+            <div class="card similar-card" id="similar-card" hidden>
+              <div class="card-header">
+                <h3>Similar Events</h3>
+              </div>
+              <div id="similar-list" class="similar-list"></div>
+            </div>
+          </aside>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="register-modal-overlay" hidden>
+    <div class="modal">
+      <div class="modal__header">
+        <div>
+          <h3><i class="ti ti-calendar-plus" aria-hidden="true"></i> Event Registration</h3>
+          <p class="modal__subtitle">Fill in your details to register for this event. You'll receive a confirmation email with all the event information.</p>
+        </div>
+        <button type="button" class="modal__close" id="register-modal-close" aria-label="Close">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal__body">
+        <div class="modal-event-preview" id="modal-event-preview"></div>
+
+        <h4 class="modal-section-title">Registration Details</h4>
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="reg-full-name">Full Name <span class="required">*</span></label>
+            <input type="text" id="reg-full-name" required />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="reg-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="reg-email" required />
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="reg-phone">Phone Number <span class="required">*</span></label>
+            <input type="tel" id="reg-phone" required />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="reg-company">Company / Organization</label>
+            <input type="text" id="reg-company" />
+          </div>
+        </div>
+        <label class="field-label" for="reg-job-title">Job Title</label>
+        <input type="text" id="reg-job-title" />
+
+        <label class="field-label" for="reg-goals">Goals for Attending (Optional)</label>
+        <textarea id="reg-goals" rows="3" maxlength="250" placeholder="e.g. Looking to network, explore opportunities, learn about new trends..."></textarea>
+        <span class="field-counter"><span id="goals-count">0</span>/250</span>
+
+        <label class="field-label">Additional Information (Optional)</label>
+        <div class="resume-upload" id="resume-dropzone">
+          <input type="file" id="reg-resume-input" accept=".pdf,.doc,.docx" hidden />
+          <i class="ti ti-upload" aria-hidden="true"></i>
+          <span>Upload your resume (PDF, DOC, DOCX) <em>or drag and drop here</em></span>
+          <button type="button" class="btn-outline btn-compact" id="resume-choose-btn">Choose File</button>
+        </div>
+        <div class="resume-uploaded" id="resume-uploaded-row" hidden>
+          <i class="ti ti-file-text" aria-hidden="true"></i>
+          <span id="resume-file-name"></span>
+          <button type="button" class="icon-btn-x" id="resume-remove-btn"><i class="ti ti-x" aria-hidden="true"></i></button>
+        </div>
+
+        <label class="checkbox-option modal-terms">
+          <input type="checkbox" id="reg-terms" checked />
+          I agree to the event terms and conditions and privacy policy.
+        </label>
+      </div>
+      <div class="modal__footer">
+        <button type="button" class="btn-outline btn-compact" id="register-modal-cancel">Cancel</button>
+        <button type="button" class="btn-primary btn-compact" id="register-modal-submit">
+          <i class="ti ti-send" aria-hidden="true"></i> Register Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/eventDetails.js"></script>
+</body>
+</html>

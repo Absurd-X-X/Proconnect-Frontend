@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notifications · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/notifications.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="notifications">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, or companies..." />
+        </div>
+
+        <div class="topbar-nav-icons" id="topbar-nav-icons"></div>
+
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <div class="ma-header nf-header">
+          <div>
+            <h1 class="ma-title">Notification Center</h1>
+            <p class="ma-subtitle">Stay updated with everything happening on ProConnect.</p>
+          </div>
+          <div class="nf-header__actions">
+            <button type="button" class="btn-outline btn-compact" id="btn-mark-all-read">
+              <i class="ti ti-check" aria-hidden="true"></i> Mark all as read
+            </button>
+          </div>
+        </div>
+
+        <div class="ma-status-tabs" id="status-tabs">
+          <button type="button" class="ma-status-tab is-active" data-status="">All (<span id="tab-count-all">0</span>)</button>
+          <button type="button" class="ma-status-tab" data-status="Unread">Unread (<span id="tab-count-unread">0</span>)</button>
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="ma-layout nf-layout">
+
+          <div class="ma-main">
+
+            <div class="jm-loading" id="loading">
+              <span class="spinner spinner--dark"></span>
+              <span>Loading notifications...</span>
+            </div>
+
+            <div class="jm-empty" id="empty" hidden>
+              <i class="ti ti-bell-off" aria-hidden="true"></i>
+              <p><strong>No notifications yet.</strong></p>
+              <p class="jm-placeholder__sub">We'll let you know when something happens.</p>
+            </div>
+
+            <div id="notification-groups"></div>
+
+            <div class="nf-pagination" id="pagination" hidden>
+              <button type="button" class="icon-action-btn" id="page-prev"><i class="ti ti-chevron-left" aria-hidden="true"></i></button>
+              <span id="page-info">Page 1</span>
+              <button type="button" class="icon-action-btn" id="page-next"><i class="ti ti-chevron-right" aria-hidden="true"></i></button>
+            </div>
+
+          </div>
+
+          <aside class="ma-sidebar">
+
+            <div class="card">
+              <h3 class="ma-sidebar-title">Filters</h3>
+              <div class="nf-filter-list" id="filter-list">
+                <button type="button" class="nf-filter-row is-active" data-filter="all">
+                  <span><i class="ti ti-bell" aria-hidden="true"></i> All Notifications</span>
+                  <span class="nf-filter-count" id="filter-count-all">0</span>
+                </button>
+                <button type="button" class="nf-filter-row" data-filter="unread">
+                  <span><i class="ti ti-circle-dot" aria-hidden="true"></i> Unread</span>
+                  <span class="nf-filter-count" id="filter-count-unread">0</span>
+                </button>
+                <button type="button" class="nf-filter-row" data-filter="connections">
+                  <span><i class="ti ti-users" aria-hidden="true"></i> Connections</span>
+                  <span class="nf-filter-count" id="filter-count-connections">0</span>
+                </button>
+                <button type="button" class="nf-filter-row" data-filter="messages">
+                  <span><i class="ti ti-message-2" aria-hidden="true"></i> Messages</span>
+                  <span class="nf-filter-count" id="filter-count-messages">0</span>
+                </button>
+                <button type="button" class="nf-filter-row" data-filter="jobs">
+                  <span><i class="ti ti-briefcase" aria-hidden="true"></i> Jobs &amp; Applications</span>
+                  <span class="nf-filter-count" id="filter-count-jobs">0</span>
+                </button>
+                <button type="button" class="nf-filter-row" data-filter="company">
+                  <span><i class="ti ti-building" aria-hidden="true"></i> Company</span>
+                  <span class="nf-filter-count" id="filter-count-company">0</span>
+                </button>
+                <button type="button" class="nf-filter-row" data-filter="other">
+                  <span><i class="ti ti-dots" aria-hidden="true"></i> Other</span>
+                  <span class="nf-filter-count" id="filter-count-other">0</span>
+                </button>
+              </div>
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+  <script src="Scripts/notificationsRealtime.js"></script>
+  <script src="Scripts/notifications.js"></script>
+</body>
+</html>

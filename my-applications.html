@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Applications · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/my-applications.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="my-applications">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, or companies..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <div class="ma-header">
+          <div>
+            <h1 class="ma-title">My Applications</h1>
+            <p class="ma-subtitle">Track the jobs you've applied to and where each one stands.</p>
+          </div>
+        </div>
+
+        <div class="ma-status-tabs" id="status-tabs">
+          <button type="button" class="ma-status-tab is-active" data-status="">All</button>
+          <button type="button" class="ma-status-tab" data-status="New">New</button>
+          <button type="button" class="ma-status-tab" data-status="Screening">Screening</button>
+          <button type="button" class="ma-status-tab" data-status="Shortlisted">Shortlisted</button>
+          <button type="button" class="ma-status-tab" data-status="Interview">Interview</button>
+          <button type="button" class="ma-status-tab" data-status="Offered">Offered</button>
+          <button type="button" class="ma-status-tab" data-status="Hired">Hired</button>
+          <button type="button" class="ma-status-tab" data-status="Rejected">Rejected</button>
+          <button type="button" class="ma-status-tab" data-status="Withdrawn">Withdrawn</button>
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="ma-layout">
+
+          <div class="ma-main">
+
+            <div class="card ma-toolbar-card">
+              <div class="app-search ma-search">
+                <i class="ti ti-search" aria-hidden="true"></i>
+                <input type="text" id="search-input" placeholder="Search by job title or company..." />
+              </div>
+              <select id="sort-select" class="ma-select">
+                <option value="recent">Sort by: Most recent</option>
+                <option value="oldest">Sort by: Oldest</option>
+              </select>
+            </div>
+
+            <div class="jm-loading" id="loading">
+              <span class="spinner spinner--dark"></span>
+              <span>Loading your applications...</span>
+            </div>
+
+            <div class="jm-empty" id="empty" hidden>
+              <i class="ti ti-file-off" aria-hidden="true"></i>
+              <p><strong>No applications yet.</strong></p>
+              <p class="jm-placeholder__sub">Once you apply to jobs, they'll show up here.</p>
+              <a href="job-search.html" class="btn-primary btn-compact">Browse jobs</a>
+            </div>
+
+            <div class="jm-empty" id="no-match" hidden>
+              <i class="ti ti-filter-off" aria-hidden="true"></i>
+              <p><strong>No applications match your filters.</strong></p>
+            </div>
+
+            <div class="ma-list" id="application-list" hidden></div>
+
+          </div>
+
+          <aside class="ma-sidebar">
+
+            <div class="card">
+              <h3 class="ma-sidebar-title">Overview</h3>
+              <div class="ma-overview-row">
+                <span class="ma-overview-icon"><i class="ti ti-send" aria-hidden="true"></i></span>
+                <div><strong id="overview-total">0</strong><span>Total applications</span></div>
+              </div>
+              <div class="ma-overview-row">
+                <span class="ma-overview-icon"><i class="ti ti-calendar-event" aria-hidden="true"></i></span>
+                <div><strong id="overview-interviews">0</strong><span>Interviews scheduled</span></div>
+              </div>
+              <div class="ma-overview-row">
+                <span class="ma-overview-icon"><i class="ti ti-award" aria-hidden="true"></i></span>
+                <div><strong id="overview-offers">0</strong><span>Offers</span></div>
+              </div>
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ---------- Detail panel ---------- -->
+  <aside class="ma-detail-panel" id="detail-panel" hidden>
+    <div class="ma-detail-panel__header">
+      <button type="button" class="ma-detail-panel__close" id="detail-close"><i class="ti ti-x" aria-hidden="true"></i></button>
+    </div>
+    <div class="ma-detail-panel__body" id="detail-body"></div>
+  </aside>
+
+  <!-- ---------- Withdraw confirm modal ---------- -->
+  <div class="jm-modal-overlay" id="withdraw-overlay" hidden>
+    <div class="jm-modal">
+      <h3>Withdraw this application?</h3>
+      <p>This moves your application status to Withdrawn. This can't be undone from here.</p>
+      <div class="jm-modal__actions">
+        <button type="button" class="btn-outline btn-compact" id="withdraw-cancel">Cancel</button>
+        <button type="button" class="btn-primary ej-danger-btn-solid btn-compact" id="withdraw-confirm">Withdraw</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/myApplications.js"></script>
+</body>
+</html>

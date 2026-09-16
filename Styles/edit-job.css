@@ -1,0 +1,132 @@
+.ej-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--pc-text-secondary);
+  text-decoration: none;
+  margin-bottom: 12px;
+}
+
+.ej-back-link:hover {
+  color: var(--pc-purple);
+}
+
+.ej-danger-btn {
+  color: var(--pc-danger);
+  border-color: var(--pc-danger-bg);
+}
+
+.ej-danger-btn:hover {
+  background: var(--pc-danger-bg);
+  border-color: var(--pc-danger);
+}
+
+.ej-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pc-border);
+  font-size: 12.5px;
+}
+
+.ej-status-row:last-of-type {
+  border-bottom: none;
+}
+
+.ej-status-row > span:first-child {
+  color: var(--pc-text-secondary);
+}
+
+.ej-status-row > span:last-child {
+  font-weight: 600;
+  color: var(--pc-text-primary);
+}
+
+.ej-status-close-btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+/* Reused from jobs.css's status badge styling, duplicated minimally here
+   in case edit-job.html is used without jobs.css loaded. */
+
+.jm-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+.jm-status-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.jm-status-badge--active { background: var(--pc-success-bg); color: var(--pc-success); }
+.jm-status-badge--active::before { background: var(--pc-success); }
+
+.jm-status-badge--draft { background: var(--pc-panel-bg); color: var(--pc-text-secondary); }
+.jm-status-badge--draft::before { background: var(--pc-text-muted); }
+
+.jm-status-badge--scheduled { background: var(--pc-purple-light); color: var(--pc-purple); }
+.jm-status-badge--scheduled::before { background: var(--pc-purple); }
+
+.jm-status-badge--closed { background: var(--pc-danger-bg); color: var(--pc-danger); }
+.jm-status-badge--closed::before { background: var(--pc-danger); }
+
+/* ---------- Confirm modal (shared shape with jobs.css) ---------- */
+
+.jm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 26, 46, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.jm-modal {
+  background: var(--pc-surface);
+  border-radius: var(--pc-radius-lg);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.jm-modal h3 {
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+.jm-modal p {
+  font-size: 13px;
+  color: var(--pc-text-secondary);
+  margin: 0 0 1.25rem;
+  line-height: 1.5;
+}
+
+.jm-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.jm-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--pc-text-secondary);
+  font-size: 13.5px;
+  padding: 3rem 0;
+}

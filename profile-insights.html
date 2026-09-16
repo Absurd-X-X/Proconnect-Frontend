@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile Insights · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/analytics-dashboard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+</head>
+<body data-page="profile-insights">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, or companies..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <div class="an-header">
+          <div>
+            <a href="analytics-dashboard.html" class="link-btn" style="margin-bottom: 6px; display: inline-block;">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i> Back to Analytics
+            </a>
+            <h1 class="an-title">Profile Insights</h1>
+            <p class="an-subtitle">Understand how your profile is performing and get insights to grow your professional presence.</p>
+          </div>
+          <div class="an-header__actions">
+            <select id="date-range-select" class="an-select">
+              <option value="Last7Days">Last 7 days</option>
+              <option value="Last30Days" selected>Last 30 days</option>
+              <option value="Last90Days">Last 90 days</option>
+              <option value="LastYear">Last year</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="js-mode-tabs" id="insights-tabs">
+          <button type="button" class="js-mode-tab is-active" data-tab="overview">Overview</button>
+          <button type="button" class="js-mode-tab" data-tab="views">Views &amp; Reach</button>
+          <button type="button" class="js-mode-tab" data-tab="engagement">Engagement</button>
+          <button type="button" class="js-mode-tab" data-tab="network">Network Growth</button>
+          <button type="button" class="js-mode-tab" data-tab="demographics">Demographics</button>
+        </div>
+
+        <!-- ---------- Overview tab ---------- -->
+        <div class="pi-tab-panel" id="tab-overview">
+
+          <div class="an-kpi-row">
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-users" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">New Connections</div>
+              <div class="an-kpi-card__value" id="ov-connections">—</div>
+              <div class="an-kpi-card__delta" id="ov-connections-delta"></div>
+            </div>
+
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-user-plus" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">New Followers</div>
+              <div class="an-kpi-card__value" id="ov-followers">—</div>
+              <div class="an-kpi-card__delta" id="ov-followers-delta"></div>
+            </div>
+
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-message-2" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Post Engagements</div>
+              <div class="an-kpi-card__value" id="ov-engagements">—</div>
+              <div class="an-kpi-card__delta" id="ov-engagements-delta"></div>
+            </div>
+
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-briefcase" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Job Applications</div>
+              <div class="an-kpi-card__value" id="ov-applications">—</div>
+              <div class="an-kpi-card__delta" id="ov-applications-delta"></div>
+            </div>
+          </div>
+
+          <div class="an-chart-row">
+            <div class="card an-chart-card">
+              <div class="an-chart-card__header">
+                <h3>Network Growth Comparison</h3>
+              </div>
+              <canvas id="overview-growth-chart" height="220"></canvas>
+            </div>
+
+            <aside class="an-sidebar">
+              <div class="card an-sidebar-card">
+                <div class="an-sidebar-card__header">
+                  <h3>Top Performing Posts</h3>
+                </div>
+                <div id="ov-top-posts" class="an-top-posts">
+                  <div class="jm-loading" id="ov-top-posts-loading">
+                    <span class="spinner spinner--dark"></span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+        </div>
+
+        <!-- ---------- Views & Reach tab ---------- -->
+        <div class="pi-tab-panel" id="tab-views" hidden>
+
+          <div class="an-kpi-row">
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-eye" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Profile Views</div>
+              <div class="an-kpi-card__value" id="views-total">—</div>
+              <div class="an-kpi-card__delta" id="views-total-delta"></div>
+            </div>
+          </div>
+
+          <div class="an-chart-row">
+            <div class="card an-chart-card">
+              <div class="an-chart-card__header">
+                <h3>Profile Views Trend</h3>
+              </div>
+              <canvas id="views-trend-chart" height="220"></canvas>
+            </div>
+
+            <aside class="an-sidebar">
+              <div class="card an-sidebar-card">
+                <div class="an-sidebar-card__header">
+                  <h3>Traffic Sources</h3>
+                </div>
+                <div id="views-referrer-breakdown" class="an-top-posts"></div>
+              </div>
+            </aside>
+          </div>
+
+        </div>
+
+        <!-- ---------- Engagement tab ---------- -->
+        <div class="pi-tab-panel" id="tab-engagement" hidden>
+
+          <div class="an-kpi-row">
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-file-text" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Total Posts</div>
+              <div class="an-kpi-card__value" id="eng-posts">—</div>
+            </div>
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-heart" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Reactions</div>
+              <div class="an-kpi-card__value" id="eng-reactions">—</div>
+            </div>
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-message-circle" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Comments</div>
+              <div class="an-kpi-card__value" id="eng-comments">—</div>
+            </div>
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-share" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Shares</div>
+              <div class="an-kpi-card__value" id="eng-shares">—</div>
+            </div>
+          </div>
+
+          <div class="an-kpi-row" style="grid-template-columns: 1fr;">
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-eye" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Post Impressions (from post detail views)</div>
+              <div class="an-kpi-card__value" id="eng-impressions">—</div>
+              <div class="an-kpi-card__delta" id="eng-impressions-delta"></div>
+            </div>
+          </div>
+
+          <div class="an-chart-row">
+            <div class="card an-chart-card">
+              <div class="an-chart-card__header">
+                <h3>Posts Over Time</h3>
+              </div>
+              <canvas id="post-trend-chart" height="220"></canvas>
+            </div>
+
+            <aside class="an-sidebar">
+              <div class="card an-sidebar-card">
+                <div class="an-sidebar-card__header">
+                  <h3>Reactions by Type</h3>
+                </div>
+                <div id="reaction-breakdown" class="an-top-posts">
+                  <div class="jm-loading" id="reaction-breakdown-loading">
+                    <span class="spinner spinner--dark"></span>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="an-chart-row">
+            <div class="card an-chart-card">
+              <div class="an-chart-card__header">
+                <h3>Impressions Trend</h3>
+              </div>
+              <canvas id="impressions-trend-chart" height="200"></canvas>
+            </div>
+
+            <aside class="an-sidebar">
+              <div class="card an-sidebar-card">
+                <div class="an-sidebar-card__header">
+                  <h3>Impression Sources</h3>
+                </div>
+                <div id="impressions-referrer" class="an-top-posts"></div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="card an-chart-card">
+            <div class="an-chart-card__header">
+              <h3>All Posts (this period)</h3>
+            </div>
+            <div id="eng-post-list" class="an-top-posts">
+              <div class="jm-loading" id="eng-post-list-loading">
+                <span class="spinner spinner--dark"></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ---------- Network Growth tab ---------- -->
+        <div class="pi-tab-panel" id="tab-network" hidden>
+
+          <div class="an-kpi-row">
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-users" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Total Connections</div>
+              <div class="an-kpi-card__value" id="net-total-connections">—</div>
+            </div>
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-user-plus" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Total Followers</div>
+              <div class="an-kpi-card__value" id="net-total-followers">—</div>
+            </div>
+          </div>
+
+          <div class="an-chart-row an-chart-row--single">
+            <div class="card an-chart-card">
+              <div class="an-chart-card__header">
+                <h3>Connections &amp; Followers Growth</h3>
+              </div>
+              <canvas id="network-growth-chart" height="240"></canvas>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ---------- Demographics tab ---------- -->
+        <div class="pi-tab-panel" id="tab-demographics" hidden>
+
+          <div class="an-kpi-row" style="grid-template-columns: 1fr;">
+            <div class="card an-kpi-card">
+              <div class="an-kpi-card__icon"><i class="ti ti-users-group" aria-hidden="true"></i></div>
+              <div class="an-kpi-card__label">Profile Views Analyzed (this period)</div>
+              <div class="an-kpi-card__value" id="demo-total-views">—</div>
+            </div>
+          </div>
+
+          <div class="an-chart-row">
+            <div class="card an-chart-card">
+              <div class="an-chart-card__header">
+                <h3>Who's Viewing You</h3>
+              </div>
+              <canvas id="viewer-type-chart" height="220"></canvas>
+            </div>
+
+            <aside class="an-sidebar">
+              <div class="card an-sidebar-card">
+                <div class="an-sidebar-card__header">
+                  <h3>Seniority</h3>
+                </div>
+                <div class="pi-placeholder" style="padding: 1.5rem 0.5rem;">
+                  <i class="ti ti-chart-bar-off" aria-hidden="true"></i>
+                  <p class="jm-placeholder__sub">Seniority isn't tracked on professional profiles yet, so this breakdown isn't available.</p>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="an-chart-row">
+            <div class="card an-chart-card">
+              <div class="an-chart-card__header">
+                <h3>Viewer Industry</h3>
+              </div>
+              <canvas id="industry-chart" height="220"></canvas>
+              <p class="jm-placeholder__sub" style="margin-top: 8px;">Only recruiter viewers have an industry on file — everyone else is grouped as "Individual / Unknown."</p>
+            </div>
+
+            <div class="card an-chart-card">
+              <div class="an-chart-card__header">
+                <h3>Viewer Company Size</h3>
+              </div>
+              <canvas id="company-size-chart" height="220"></canvas>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/profileInsights.js"></script>
+</body>
+</html>

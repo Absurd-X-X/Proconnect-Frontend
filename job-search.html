@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Find Jobs · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/job-search.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="job-search">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search posts, people, jobs, or companies..." />
+        </div>
+        <div class="app-topbar__icons">
+<div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="profile-overview.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <div class="js-mode-tabs">
+          <button type="button" class="js-mode-tab is-active" data-mode="all">All Jobs</button>
+          <button type="button" class="js-mode-tab" data-mode="recommended">Recommended</button>
+        </div>
+
+        <div class="js-header">
+          <h1 class="js-title" id="page-title">Find your next opportunity</h1>
+          <p class="js-subtitle" id="page-subtitle">Search thousands of jobs and connect with top companies.</p>
+        </div>
+
+        <div class="card js-search-card" id="search-card">
+          <div class="js-search-row">
+            <div class="js-search-field">
+              <i class="ti ti-search" aria-hidden="true"></i>
+              <input type="text" id="keyword-input" placeholder="Search job title, skills, or company" />
+            </div>
+            <div class="js-search-field">
+              <i class="ti ti-map-pin" aria-hidden="true"></i>
+              <input type="text" id="location-input" placeholder="Location or remote" />
+            </div>
+            <button type="button" class="btn-primary js-search-btn" id="search-btn">Search jobs</button>
+          </div>
+
+          <div class="js-popular-searches">
+            <span>Popular searches:</span>
+            <button type="button" class="js-chip" data-keyword="Product Designer">Product Designer</button>
+            <button type="button" class="js-chip" data-keyword="UI/UX Designer">UI/UX Designer</button>
+            <button type="button" class="js-chip" data-keyword="Frontend Developer">Frontend Developer</button>
+            <button type="button" class="js-chip" data-keyword="Project Manager">Project Manager</button>
+            <button type="button" class="js-chip" data-keyword="Data Analyst">Data Analyst</button>
+          </div>
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+        <div class="js-recommend-banner" id="recommend-banner" hidden></div>
+
+        <div class="js-work-tabs" id="work-tabs">
+          <button type="button" class="js-work-tab is-active" data-worktype="">All Jobs</button>
+          <button type="button" class="js-work-tab" data-worktype="Remote">Remote <span class="js-work-tab__count" id="count-remote"></span></button>
+          <button type="button" class="js-work-tab" data-worktype="Onsite">On-site <span class="js-work-tab__count" id="count-onsite"></span></button>
+          <button type="button" class="js-work-tab" data-worktype="Hybrid">Hybrid <span class="js-work-tab__count" id="count-hybrid"></span></button>
+        </div>
+
+        <div class="js-layout" id="js-layout">
+
+          <div class="js-results">
+
+            <div class="js-results-toolbar">
+              <span id="results-count">Searching...</span>
+              <select id="sort-select" class="js-sort-select">
+                <option value="Newest">Sort by: Newest</option>
+                <option value="SalaryHighToLow">Sort by: Salary (High to Low)</option>
+              </select>
+            </div>
+
+            <div class="jm-loading" id="jobs-loading">
+              <span class="spinner spinner--dark"></span>
+              <span>Finding jobs for you...</span>
+            </div>
+
+            <div class="jm-empty" id="jobs-empty" hidden>
+              <i class="ti ti-briefcase-off" aria-hidden="true"></i>
+              <p><strong>No jobs match your search.</strong></p>
+              <p class="jm-placeholder__sub">Try different keywords or clear some filters.</p>
+            </div>
+
+            <div class="js-job-list" id="job-list" hidden></div>
+
+            <button type="button" class="btn-outline js-load-more" id="load-more-btn" hidden>Load more jobs</button>
+
+            <div class="js-category-strip" id="category-strip">
+              <div class="js-category-strip__header">
+                <h3>Browse by category</h3>
+                <a href="job-categories.html">View all categories</a>
+              </div>
+              <div class="js-category-chips" id="category-chips"></div>
+            </div>
+
+          </div>
+
+          <aside class="js-filters card" id="filters-sidebar">
+            <div class="js-filters__header">
+              <h3>Filters</h3>
+              <button type="button" class="link-btn" id="clear-filters">Clear all</button>
+            </div>
+
+            <div class="ep-field">
+              <label>Job Type</label>
+              <select id="filter-employment-type">
+                <option value="">All job types</option>
+                <option value="FullTime">Full-time</option>
+                <option value="PartTime">Part-time</option>
+                <option value="Contract">Contract</option>
+                <option value="Internship">Internship</option>
+                <option value="Freelance">Freelance</option>
+                <option value="Temporary">Temporary</option>
+                <option value="Remote">Remote</option>
+              </select>
+            </div>
+
+            <div class="ep-field">
+              <label>Experience Level</label>
+              <select id="filter-experience-level">
+                <option value="">All experience levels</option>
+                <option value="EntryLevel">Entry Level</option>
+                <option value="Junior">Junior</option>
+                <option value="MidLevel">Mid Level</option>
+                <option value="Senior">Senior</option>
+                <option value="Lead">Lead</option>
+                <option value="Executive">Executive</option>
+              </select>
+            </div>
+
+            <div class="ep-field-row">
+              <div class="ep-field">
+                <label>Min Salary</label>
+                <input type="number" id="filter-min-salary" min="0" placeholder="$0" />
+              </div>
+              <div class="ep-field">
+                <label>Max Salary</label>
+                <input type="number" id="filter-max-salary" min="0" placeholder="No max" />
+              </div>
+            </div>
+
+            <div class="ep-field">
+              <label>Job Category</label>
+              <select id="filter-category">
+                <option value="">All categories</option>
+              </select>
+            </div>
+
+            <div class="ep-field">
+              <label>Posted Within</label>
+              <select id="filter-posted-within">
+                <option value="">Anytime</option>
+                <option value="1">Past 24 hours</option>
+                <option value="7">Past week</option>
+                <option value="30">Past month</option>
+              </select>
+            </div>
+
+            <button type="button" class="btn-primary js-apply-filters-btn" id="apply-filters-btn">Apply Filters</button>
+          </aside>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/jobSearch.js"></script>
+</body>
+</html>

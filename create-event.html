@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Event · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="Styles/create-event.css" />
+  <link rel="stylesheet" href="Styles/company-events.css" />
+</head>
+<body data-page="create-event">
+  <div class="app-shell">
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search candidates, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="recruiter-profile.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+        <a href="managed-events.html" class="back-link">
+          <i class="ti ti-arrow-left" aria-hidden="true"></i> Back to Events
+        </a>
+
+        <div class="page-header">
+          <h1 id="page-title">Create Event</h1>
+          <p id="page-subtitle">Host an event to connect with talent, share knowledge, and build your professional community.</p>
+        </div>
+
+        <div class="create-event-layout">
+          <form id="event-form" class="event-form" novalidate>
+            <section class="form-card">
+              <label class="field-label">Event Cover Image <span class="required">*</span></label>
+              <div class="cover-upload" id="cover-upload">
+                <input type="file" id="cover-image-input" accept="image/png,image/jpeg,image/gif" hidden />
+                <div class="cover-upload__dropzone" id="cover-dropzone">
+                  <i class="ti ti-photo" aria-hidden="true"></i>
+                  <span><strong>Click to upload</strong> or drag and drop</span>
+                  <span class="cover-upload__hint">PNG, JPG or GIF (Max 5MB)</span>
+                </div>
+                <img id="cover-preview" class="cover-upload__preview" hidden alt="Event cover preview" />
+              </div>
+            </section>
+
+            <section class="form-card">
+              <label class="field-label" for="event-title">Event Title <span class="required">*</span></label>
+              <input type="text" id="event-title" maxlength="100" placeholder="e.g. Product Design Career Fair" required />
+              <span class="field-counter"><span id="title-count">0</span>/100</span>
+
+              <div class="field-row">
+                <div class="field-group">
+                  <label class="field-label" for="event-type">Event Type <span class="required">*</span></label>
+                  <select id="event-type" required>
+                    <option value="" disabled selected>Select event type</option>
+                    <option value="Networking">Networking</option>
+                    <option value="Webinar">Webinar</option>
+                    <option value="Workshop">Workshop</option>
+                    <option value="Conference">Conference</option>
+                    <option value="CareerFair">Career Fair</option>
+                    <option value="Social">Social</option>
+                  </select>
+                </div>
+
+                <div class="field-group">
+                  <label class="field-label" for="event-date">Date & Time <span class="required">*</span></label>
+                  <input type="datetime-local" id="event-date" required />
+                </div>
+
+                <div class="field-group">
+                  <label class="field-label" for="event-duration">Duration</label>
+                  <select id="event-duration">
+                    <option value="30">30 minutes</option>
+                    <option value="60" selected>1 hour</option>
+                    <option value="90">1.5 hours</option>
+                    <option value="120">2 hours</option>
+                    <option value="180">3 hours</option>
+                    <option value="240">4 hours</option>
+                    <option value="custom">Custom end time</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field-row" id="custom-end-row" hidden>
+                <div class="field-group">
+                  <label class="field-label" for="event-end-date">End Date & Time <span class="required">*</span></label>
+                  <input type="datetime-local" id="event-end-date" />
+                </div>
+              </div>
+
+              <div class="field-row">
+                <div class="field-group">
+                  <label class="field-label" for="location-type">Location <span class="required">*</span></label>
+                  <select id="location-type" required>
+                    <option value="" disabled selected>Select location type</option>
+                    <option value="InPerson">In-person</option>
+                    <option value="Online">Online</option>
+                    <option value="Hybrid">Hybrid</option>
+                  </select>
+                </div>
+
+                <div class="field-group" id="location-field" hidden>
+                  <label class="field-label" for="event-location">Venue / City <span class="required">*</span></label>
+                  <input type="text" id="event-location" placeholder="e.g. Acme Inc. - New York, NY" />
+                </div>
+
+                <div class="field-group" id="meeting-link-field" hidden>
+                  <label class="field-label" for="meeting-link">Online Meeting Link <span class="required">*</span></label>
+                  <input type="url" id="meeting-link" placeholder="e.g. https://zoom.us/j/123456" />
+                </div>
+              </div>
+
+              <label class="field-label" for="event-category">Category</label>
+              <input type="text" id="event-category" placeholder="e.g. Product Design" maxlength="50" />
+
+              <label class="field-label" for="event-description">Description <span class="required">*</span></label>
+              <textarea id="event-description" maxlength="2000" rows="6" placeholder="Tell people what your event is about, what they'll learn, and why they should attend..." required></textarea>
+              <span class="field-counter"><span id="description-count">0</span>/2000</span>
+            </section>
+
+            <section class="form-card">
+              <div class="section-header">
+                <label class="field-label">Speakers</label>
+                <button type="button" class="btn btn-outline btn-sm" id="add-speaker-btn">
+                  <i class="ti ti-plus" aria-hidden="true"></i> Add Speaker
+                </button>
+              </div>
+              <p class="field-hint">Add speakers who will be presenting at this event.</p>
+              <div id="speaker-list" class="speaker-list">
+                <div class="empty-state" id="speaker-empty">
+                  <i class="ti ti-users" aria-hidden="true"></i>
+                  <span>No speakers added yet</span>
+                  <span class="empty-state__hint">Click "Add Speaker" to include event speakers.</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="form-card">
+              <div class="field-row">
+                <div class="field-group">
+                  <label class="field-label" for="visibility">Visibility <span class="required">*</span></label>
+                  <select id="visibility" required>
+                    <option value="Public" selected>Public — visible to all users</option>
+                    <option value="Private">Private — invite only visibility</option>
+                  </select>
+                </div>
+
+                <div class="field-group">
+                  <label class="field-label" for="attendee-limit">Attendee Limit (optional)</label>
+                  <input type="number" id="attendee-limit" min="1" placeholder="e.g. 100" />
+                  <span class="field-hint">Leave empty for no limit.</span>
+                </div>
+              </div>
+
+              <label class="field-label">Registration Settings</label>
+              <div class="radio-row">
+                <label class="radio-option">
+                  <input type="radio" name="registration-type" value="Open" checked />
+                  <span>Open registration (anyone can register)</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="registration-type" value="InviteOnly" />
+                  <span>Invite only (send invitations)</span>
+                </label>
+              </div>
+            </section>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-outline" id="save-draft-btn">Save Draft</button>
+              <button type="submit" class="btn btn-primary" id="submit-btn">Create Event</button>
+            </div>
+          </form>
+
+          <aside class="event-preview-panel">
+            <h3>Event Preview</h3>
+            <div class="preview-card">
+              <img id="preview-image" class="preview-card__image" hidden alt="" />
+              <div class="preview-card__image-placeholder" id="preview-image-placeholder">
+                <i class="ti ti-photo" aria-hidden="true"></i>
+              </div>
+              <div class="preview-card__body">
+                <h4 id="preview-title">Your event title</h4>
+                <div class="preview-card__meta">
+                  <span id="preview-date"><i class="ti ti-calendar" aria-hidden="true"></i> Select date & time</span>
+                  <span id="preview-location"><i class="ti ti-map-pin" aria-hidden="true"></i> Select location</span>
+                </div>
+                <p id="preview-description" class="preview-card__description">Your description will appear here.</p>
+              </div>
+            </div>
+
+            <div class="tips-card">
+              <h4><i class="ti ti-bulb" aria-hidden="true"></i> Event Tips</h4>
+              <ul>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Use a clear and compelling title</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Add a high-quality cover image</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Include key details (date, time, location)</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Mention what attendees will gain</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Choose the right visibility settings</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="speaker-modal-overlay" hidden>
+    <div class="modal">
+      <div class="modal__header">
+        <h3 id="speaker-modal-title">Add Speaker</h3>
+        <button type="button" class="modal__close" id="speaker-modal-close" aria-label="Close">
+          <i class="ti ti-x" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal__body">
+        <label class="field-label" for="speaker-name">Full Name <span class="required">*</span></label>
+        <input type="text" id="speaker-name" required />
+
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="speaker-title">Title</label>
+            <input type="text" id="speaker-title" placeholder="e.g. Senior Product Designer" />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="speaker-company">Company</label>
+            <input type="text" id="speaker-company" placeholder="e.g. Google" />
+          </div>
+        </div>
+
+        <label class="field-label" for="speaker-linkedin">LinkedIn URL</label>
+        <input type="url" id="speaker-linkedin" placeholder="https://linkedin.com/in/..." />
+
+        <label class="field-label">Photo</label>
+        <input type="file" id="speaker-photo-input" accept="image/png,image/jpeg" />
+      </div>
+      <div class="modal__footer">
+        <button type="button" class="btn btn-outline" id="speaker-modal-cancel">Cancel</button>
+        <button type="button" class="btn btn-primary" id="speaker-modal-save">Save Speaker</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/createEvent.js"></script>
+</body>
+</html>

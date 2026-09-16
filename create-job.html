@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Job · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/create-job.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="jobs">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search candidates, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="recruiter-profile.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <div class="cj-header">
+          <div>
+            <h1 class="cj-title">Create Job</h1>
+            <p class="cj-subtitle">Fill in the details below to create a new job posting.</p>
+          </div>
+          <div class="cj-header__actions">
+            <button type="button" class="btn-outline btn-compact" id="btn-save-draft">Save as Draft</button>
+            <button type="button" class="btn-primary btn-compact" id="btn-publish">Review &amp; Publish</button>
+          </div>
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="cj-layout">
+
+          <form id="create-job-form" novalidate>
+
+            <section class="card">
+              <h3 class="cj-section-title">Job Details</h3>
+              <p class="cj-section-subtitle">Basic information about the job you're posting.</p>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label for="job-title">Job Title <span class="req">*</span></label>
+                  <input type="text" id="job-title" placeholder="e.g. Senior Product Designer" />
+                  <span class="field-error" id="err-job-title"></span>
+                </div>
+
+                <div class="ep-field">
+                  <label for="employment-type">Employment Type <span class="req">*</span></label>
+                  <select id="employment-type">
+                    <option value="" disabled selected>Select employment type</option>
+                    <option value="FullTime">Full-time</option>
+                    <option value="PartTime">Part-time</option>
+                    <option value="Contract">Contract</option>
+                    <option value="Internship">Internship</option>
+                    <option value="Freelance">Freelance</option>
+                    <option value="Temporary">Temporary</option>
+                    <option value="Remote">Remote</option>
+                  </select>
+                  <span class="field-error" id="err-employment-type"></span>
+                </div>
+              </div>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label for="job-category">Department <span class="req">*</span></label>
+                  <select id="job-category">
+                    <option value="" disabled selected>Select department</option>
+                  </select>
+                  <span class="field-error" id="err-job-category"></span>
+                </div>
+
+                <div class="ep-field">
+                  <label for="experience-level">Experience Level <span class="req">*</span></label>
+                  <select id="experience-level">
+                    <option value="" disabled selected>Select experience level</option>
+                    <option value="EntryLevel">Entry Level</option>
+                    <option value="Junior">Junior</option>
+                    <option value="MidLevel">Mid Level</option>
+                    <option value="Senior">Senior</option>
+                    <option value="Lead">Lead</option>
+                    <option value="Executive">Executive</option>
+                  </select>
+                  <span class="field-error" id="err-experience-level"></span>
+                </div>
+              </div>
+
+              <div class="ep-field">
+                <label for="job-location">Location <span class="req">*</span></label>
+                <input type="text" id="job-location" placeholder="Enter location" />
+                <span class="field-error" id="err-job-location"></span>
+              </div>
+
+              <div class="cj-radio-row">
+                <label class="cj-radio">
+                  <input type="radio" name="workplace-type" value="Onsite" checked />
+                  <span>On-site</span>
+                </label>
+                <label class="cj-radio">
+                  <input type="radio" name="workplace-type" value="Hybrid" />
+                  <span>Hybrid</span>
+                </label>
+                <label class="cj-radio">
+                  <input type="radio" name="workplace-type" value="Remote" />
+                  <span>Remote</span>
+                </label>
+              </div>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label for="min-salary">Minimum Salary (Optional)</label>
+                  <input type="number" id="min-salary" min="0" placeholder="e.g. 90000" />
+                </div>
+                <div class="ep-field">
+                  <label for="max-salary">Maximum Salary (Optional)</label>
+                  <input type="number" id="max-salary" min="0" placeholder="e.g. 130000" />
+                </div>
+              </div>
+
+              <div class="ep-field-row">
+                <div class="ep-field">
+                  <label for="currency">Currency</label>
+                  <select id="currency">
+                    <option value="USD" selected>USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="GBP">GBP</option>
+                    <option value="NGN">NGN</option>
+                  </select>
+                </div>
+                <div class="ep-field">
+                  <label for="application-deadline">Application Deadline <span class="req">*</span></label>
+                  <input type="date" id="application-deadline" />
+                  <span class="field-error" id="err-application-deadline"></span>
+                </div>
+              </div>
+
+              <div class="ep-field">
+                <label for="job-description">Job Description <span class="req">*</span></label>
+                <p class="cj-field-hint-top">Describe the role, responsibilities, and what makes this opportunity great.</p>
+                <textarea id="job-description" rows="6" maxlength="2000" placeholder="We are looking for a talented..."></textarea>
+                <span class="cj-char-count"><span id="description-count">0</span> / 2000</span>
+                <span class="field-error" id="err-job-description"></span>
+              </div>
+
+              <div class="ep-field">
+                <label for="job-requirement">Requirements <span class="req">*</span></label>
+                <p class="cj-field-hint-top">List the must-have and nice-to-have qualifications.</p>
+                <textarea id="job-requirement" rows="6" maxlength="2000" placeholder="5+ years of experience in..."></textarea>
+                <span class="cj-char-count"><span id="requirement-count">0</span> / 2000</span>
+                <span class="field-error" id="err-job-requirement"></span>
+              </div>
+
+              <div class="ep-field">
+                <label>Skills (Optional)</label>
+                <p class="cj-field-hint-top">Search and add relevant skills for this role.</p>
+                <div class="cj-skills-input-wrap">
+                  <input type="text" id="skills-search" placeholder="Search skills..." autocomplete="off" />
+                  <div class="cj-skills-dropdown" id="skills-dropdown" hidden></div>
+                </div>
+                <div class="cj-skills-chips" id="skills-chips"></div>
+              </div>
+            </section>
+
+            <div class="cj-form-actions">
+              <a href="jobs.html" class="btn-outline btn-compact">Cancel</a>
+              <div class="cj-form-actions__right">
+                <button type="button" class="btn-outline btn-compact" id="btn-save-draft-bottom">Save as Draft</button>
+                <button type="button" class="btn-primary btn-compact" id="btn-publish-bottom">Review &amp; Publish</button>
+              </div>
+            </div>
+
+          </form>
+
+          <aside class="cj-sidebar">
+
+            <div class="card">
+              <h3 class="cj-section-title">Job Preview</h3>
+              <p class="cj-section-subtitle">This is how your job post will appear to candidates.</p>
+
+              <div class="cj-preview">
+                <div class="cj-preview__logo"><i class="ti ti-building" aria-hidden="true"></i></div>
+                <div>
+                  <p class="cj-preview__title" id="preview-title">Job Title</p>
+                  <p class="cj-preview__company" id="preview-company">Company Name</p>
+                </div>
+              </div>
+
+              <div class="cj-preview__meta">
+                <span id="preview-location"><i class="ti ti-map-pin" aria-hidden="true"></i> Location</span>
+                <span id="preview-workplace"><i class="ti ti-building-skyscraper" aria-hidden="true"></i> On-site</span>
+                <span id="preview-employment"><i class="ti ti-briefcase" aria-hidden="true"></i> Employment type</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 class="cj-section-title">Publishing Options</h3>
+              <p class="cj-section-subtitle">Choose when and how you want to publish this job.</p>
+
+              <label class="cj-publish-option">
+                <input type="radio" name="publish-option" value="publish" checked />
+                <span class="cj-publish-option__text">
+                  <strong>Publish Immediately</strong>
+                  <small>Your job post will go live right away.</small>
+                </span>
+              </label>
+
+              <label class="cj-publish-option">
+                <input type="radio" name="publish-option" value="schedule" />
+                <span class="cj-publish-option__text">
+                  <strong>Schedule for Later</strong>
+                  <small>Choose a future date and time to publish.</small>
+                </span>
+              </label>
+
+              <div class="ep-field cj-schedule-field" id="schedule-field" hidden>
+                <label for="scheduled-publish-at">Publish date &amp; time</label>
+                <input type="datetime-local" id="scheduled-publish-at" />
+                <span class="field-error" id="err-scheduled-publish-at"></span>
+              </div>
+
+              <label class="cj-publish-option">
+                <input type="radio" name="publish-option" value="draft" />
+                <span class="cj-publish-option__text">
+                  <strong>Save as Draft</strong>
+                  <small>Finish later. Only you can see this draft.</small>
+                </span>
+              </label>
+
+              <p class="cj-note"><i class="ti ti-info-circle" aria-hidden="true"></i> Drafts are not visible to candidates.</p>
+            </div>
+
+            <div class="card">
+              <h3 class="cj-section-title">Tips for a Great Job Post</h3>
+              <ul class="cj-tips">
+                <li><i class="ti ti-check" aria-hidden="true"></i> Use a clear and specific job title</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Write a detailed job description</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Highlight must-have skills</li>
+                <li><i class="ti ti-check" aria-hidden="true"></i> Add salary range to attract more applicants</li>
+              </ul>
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/createJob.js"></script>
+</body>
+</html>

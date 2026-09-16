@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Applications · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/applications.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="applications">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search candidates, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="recruiter-profile.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <div class="jm-header">
+          <div>
+            <h1 class="jm-title">Applications</h1>
+            <p class="jm-subtitle">Review and manage candidates who applied to your jobs.</p>
+          </div>
+          <div class="jm-header__actions">
+            <button type="button" class="btn-outline btn-compact" disabled title="Coming soon">
+              <i class="ti ti-upload" aria-hidden="true"></i> Export
+            </button>
+          </div>
+        </div>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <div class="ap-status-tabs" id="status-tabs">
+          <button type="button" class="ap-status-tab is-active" data-status="">All <span class="ap-status-tab__count" id="count-all"></span></button>
+          <button type="button" class="ap-status-tab" data-status="New">New <span class="ap-status-tab__count" id="count-new"></span></button>
+          <button type="button" class="ap-status-tab" data-status="Screening">Screening <span class="ap-status-tab__count" id="count-screening"></span></button>
+          <button type="button" class="ap-status-tab" data-status="Shortlisted">Shortlisted <span class="ap-status-tab__count" id="count-shortlisted"></span></button>
+          <button type="button" class="ap-status-tab" data-status="Interview">Interview <span class="ap-status-tab__count" id="count-interview"></span></button>
+          <button type="button" class="ap-status-tab" data-status="Offered">Offered <span class="ap-status-tab__count" id="count-offered"></span></button>
+          <button type="button" class="ap-status-tab" data-status="Hired">Hired <span class="ap-status-tab__count" id="count-hired"></span></button>
+          <button type="button" class="ap-status-tab" data-status="Rejected">Rejected <span class="ap-status-tab__count" id="count-rejected"></span></button>
+        </div>
+
+        <div class="card ap-table-card">
+
+          <div class="ap-toolbar">
+            <div class="app-search ap-search">
+              <i class="ti ti-search" aria-hidden="true"></i>
+              <input type="text" id="search-input" placeholder="Search by name, email or job title..." />
+            </div>
+
+            <div class="ap-filters-wrap">
+              <button type="button" class="btn-outline btn-compact" id="filters-toggle">
+                <i class="ti ti-adjustments-horizontal" aria-hidden="true"></i> Filters
+                <span class="ap-filters-badge" id="filters-badge" hidden></span>
+              </button>
+
+              <div class="ap-filters-panel" id="filters-panel" hidden>
+                <div class="ep-field">
+                  <label>Applied After</label>
+                  <input type="date" id="filter-applied-after" />
+                </div>
+                <div class="ep-field">
+                  <label>Applied Before</label>
+                  <input type="date" id="filter-applied-before" />
+                </div>
+                <div class="ep-field">
+                  <label>Work Authorization</label>
+                  <select id="filter-work-auth">
+                    <option value="">Any</option>
+                    <option value="AuthorizedNoSponsorship">Authorized, no sponsorship needed</option>
+                    <option value="RequiresSponsorship">Requires sponsorship</option>
+                    <option value="NotAuthorized">Not authorized</option>
+                  </select>
+                </div>
+                <div class="ap-filters-panel__actions">
+                  <button type="button" class="btn-outline btn-compact" id="filters-clear">Clear</button>
+                  <button type="button" class="btn-primary btn-compact" id="filters-apply">Apply Filters</button>
+                </div>
+              </div>
+            </div>
+
+            <select id="job-filter" class="ap-job-filter">
+              <option value="">All Jobs</option>
+            </select>
+          </div>
+
+          <div class="jm-loading" id="applications-loading">
+            <span class="spinner spinner--dark"></span>
+            <span>Loading applications...</span>
+          </div>
+
+          <div class="jm-empty" id="applications-empty" hidden>
+            <i class="ti ti-file-off" aria-hidden="true"></i>
+            <p><strong>No applications found.</strong></p>
+            <p class="jm-placeholder__sub">Try a different filter or check back once candidates start applying.</p>
+          </div>
+
+          <div class="ap-table-wrap" id="applications-table-wrap" hidden>
+            <table class="jm-table">
+              <thead>
+                <tr>
+                  <th>Candidate</th>
+                  <th>Job</th>
+                  <th>Status</th>
+                  <th>Applied On</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="applications-table-body"></tbody>
+            </table>
+          </div>
+
+          <div class="ap-pagination-row" id="pagination-row" hidden>
+            <span id="showing-info"></span>
+            <div class="jm-pagination">
+              <button type="button" class="btn-outline btn-compact" id="page-prev"><i class="ti ti-chevron-left" aria-hidden="true"></i> Previous</button>
+              <span id="page-info"></span>
+              <button type="button" class="btn-outline btn-compact" id="page-next">Next <i class="ti ti-chevron-right" aria-hidden="true"></i></button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- ---------- Candidate detail panel ---------- -->
+    <aside class="ap-detail-panel" id="detail-panel" hidden>
+      <div class="ap-detail-panel__header">
+        <button type="button" class="ap-detail-panel__close" id="detail-close"><i class="ti ti-x" aria-hidden="true"></i></button>
+      </div>
+
+      <div class="ap-detail-panel__body" id="detail-body">
+        <!-- populated by JS -->
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ---------- Row "more actions" menu (positioned via JS) ---------- -->
+  <div class="ap-row-menu" id="row-menu" hidden>
+    <button type="button" class="ap-row-menu__item" data-menu-action="move-stage"><i class="ti ti-arrow-right" aria-hidden="true"></i> Move to another stage</button>
+    <a href="#" class="ap-row-menu__item" id="row-menu-resume" target="_blank" rel="noopener"><i class="ti ti-download" aria-hidden="true"></i> Download/view resume</a>
+    <button type="button" class="ap-row-menu__item" data-menu-action="contact"><i class="ti ti-message-circle" aria-hidden="true"></i> Contact candidate</button>
+    <button type="button" class="ap-row-menu__item ap-row-menu__item--danger" data-menu-action="reject"><i class="ti ti-x" aria-hidden="true"></i> Reject application</button>
+  </div>
+
+  <!-- ---------- Schedule Interview modal ---------- -->
+  <div class="jm-modal-overlay" id="interview-overlay" hidden>
+    <div class="jm-modal ap-interview-modal">
+      <h3>Schedule Interview</h3>
+      <p>An email will be sent to the candidate with these details.</p>
+
+      <div class="ep-field">
+        <label for="interview-datetime">Date &amp; Time <span class="req">*</span></label>
+        <input type="datetime-local" id="interview-datetime" />
+        <span class="field-error" id="err-interview-datetime"></span>
+      </div>
+
+      <div class="ep-field">
+        <label for="interview-type">Interview Type <span class="req">*</span></label>
+        <select id="interview-type">
+          <option value="Video Interview">Video Interview</option>
+          <option value="Technical Interview">Technical Interview</option>
+          <option value="HR Interview">HR Interview</option>
+          <option value="Final Round">Final Round</option>
+          <option value="In-person Interview">In-person Interview</option>
+        </select>
+      </div>
+
+      <div class="ep-field">
+        <label for="interview-location">Location / Meeting Link <span class="req">*</span></label>
+        <input type="text" id="interview-location" placeholder="e.g. Zoom link or office address" />
+        <span class="field-error" id="err-interview-location"></span>
+      </div>
+
+      <div class="jm-modal__actions">
+        <button type="button" class="btn-outline btn-compact" id="interview-cancel">Cancel</button>
+        <button type="button" class="btn-primary btn-compact" id="interview-confirm">Schedule &amp; Notify</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------- Move stage modal (row-level) ---------- -->
+  <div class="jm-modal-overlay" id="stage-overlay" hidden>
+    <div class="jm-modal">
+      <h3>Move to another stage</h3>
+      <p>Choose the candidate's new stage in the hiring pipeline.</p>
+      <div class="ep-field">
+        <label for="stage-modal-select">New Stage</label>
+        <select id="stage-modal-select">
+          <option value="New">New</option>
+          <option value="Screening">Screening</option>
+          <option value="Shortlisted">Shortlisted</option>
+          <option value="Interview">Interview</option>
+          <option value="Offered">Offered</option>
+          <option value="Hired">Hired</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+      <div class="jm-modal__actions">
+        <button type="button" class="btn-outline btn-compact" id="stage-modal-cancel">Cancel</button>
+        <button type="button" class="btn-primary btn-compact" id="stage-modal-confirm">Move</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------- Reject confirm modal ---------- -->
+  <div class="jm-modal-overlay" id="reject-overlay" hidden>
+    <div class="jm-modal">
+      <h3>Reject this candidate?</h3>
+      <p>This moves their application status to Rejected. This can't be undone from here.</p>
+      <div class="jm-modal__actions">
+        <button type="button" class="btn-outline btn-compact" id="reject-cancel">Cancel</button>
+        <button type="button" class="btn-primary ej-danger-btn-solid btn-compact" id="reject-confirm">Reject</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/applications.js"></script>
+</body>
+</html>

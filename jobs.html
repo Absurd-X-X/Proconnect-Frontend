@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Management Dashboard · ProConnect</title>
+  <link rel="stylesheet" href="Styles/dashboard.css" />
+  <link rel="stylesheet" href="Styles/jobs.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css" />
+</head>
+<body data-page="jobs">
+
+  <div class="app-shell">
+
+    <div id="sidebar-root"></div>
+
+    <main class="app-main">
+
+      <header class="app-topbar">
+        <div class="app-search">
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input type="text" placeholder="Search candidates, jobs, skills..." />
+        </div>
+        <div class="app-topbar__icons">
+          <div class="topbar-user" id="topbar-user-toggle">
+            <img id="topbar-avatar" hidden alt="" />
+            <span id="topbar-name">—</span>
+            <i class="ti ti-chevron-down" aria-hidden="true"></i>
+          </div>
+          <div class="dropdown-menu" id="topbar-dropdown">
+            <a href="recruiter-profile.html" class="dropdown-menu__item"><i class="ti ti-user" aria-hidden="true"></i> View Profile</a>
+            <button type="button" class="dropdown-menu__item dropdown-menu__item--danger" id="topbar-logout"><i class="ti ti-logout" aria-hidden="true"></i> Log out</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="app-content">
+
+        <div class="jm-header">
+          <div>
+            <h1 class="jm-title">Job Management Dashboard</h1>
+            <p class="jm-subtitle">Manage your job posts, track applications, and hire top talent.</p>
+          </div>
+          <div class="jm-header__actions">
+            <button type="button" class="btn-outline btn-compact" disabled title="Coming soon">
+              <i class="ti ti-upload" aria-hidden="true"></i> Export
+            </button>
+            <a href="create-job.html" class="btn-primary btn-compact">
+              <i class="ti ti-plus" aria-hidden="true"></i> Create Job
+            </a>
+          </div>
+        </div>
+
+        <nav class="jm-tabs" id="jm-tabs">
+          <button type="button" class="jm-tab is-active" data-tab="overview">Overview</button>
+          <button type="button" class="jm-tab" data-tab="my-job-posts">My Job Posts</button>
+          <button type="button" class="jm-tab" data-tab="candidates">Candidates</button>
+          <button type="button" class="jm-tab" data-tab="interviews">Interviews</button>
+          <button type="button" class="jm-tab" data-tab="offers">Offers</button>
+          <button type="button" class="jm-tab" data-tab="analytics">Analytics</button>
+        </nav>
+
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+        <!-- ---------- Overview (placeholder — deferred until stats template is provided) ---------- -->
+        <section class="jm-panel" id="panel-overview">
+          <div class="card jm-placeholder">
+            <i class="ti ti-chart-bar" aria-hidden="true"></i>
+            <p><strong>Overview coming soon.</strong></p>
+            <p class="jm-placeholder__sub">This tab will show your dashboard stats once the analytics template is wired up.</p>
+          </div>
+        </section>
+
+        <!-- ---------- My Job Posts ---------- -->
+        <section class="jm-panel" id="panel-my-job-posts" hidden>
+
+          <div class="jm-status-tabs" id="status-tabs">
+            <button type="button" class="jm-status-tab is-active" data-status="">All Jobs</button>
+            <button type="button" class="jm-status-tab" data-status="Active">Active</button>
+            <button type="button" class="jm-status-tab" data-status="Draft">Draft</button>
+            <button type="button" class="jm-status-tab" data-status="Scheduled">Scheduled</button>
+            <button type="button" class="jm-status-tab" data-status="Closed">Closed</button>
+          </div>
+
+          <div class="card jm-table-card">
+
+            <div class="jm-table-toolbar">
+              <div class="app-search jm-search">
+                <i class="ti ti-search" aria-hidden="true"></i>
+                <input type="text" id="job-search-input" placeholder="Search job title..." />
+              </div>
+            </div>
+
+            <div class="jm-loading" id="jobs-loading">
+              <span class="spinner spinner--dark"></span>
+              <span>Loading your job posts...</span>
+            </div>
+
+            <div class="jm-empty" id="jobs-empty" hidden>
+              <i class="ti ti-briefcase-off" aria-hidden="true"></i>
+              <p><strong>No job posts yet.</strong></p>
+              <p class="jm-placeholder__sub">Create your first job posting to start receiving applications.</p>
+              <a href="create-job.html" class="btn-primary btn-compact">
+                <i class="ti ti-plus" aria-hidden="true"></i> Create Job
+              </a>
+            </div>
+
+            <div class="jm-table-wrap" id="jobs-table-wrap" hidden>
+              <table class="jm-table">
+                <thead>
+                  <tr>
+                    <th>Job Title</th>
+                    <th>Location</th>
+                    <th>Job Type</th>
+                    <th>Status</th>
+                    <th>Applicants</th>
+                    <th>Posted On</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="jobs-table-body"></tbody>
+              </table>
+            </div>
+
+            <div class="jm-pagination" id="jobs-pagination" hidden>
+              <button type="button" class="btn-outline btn-compact" id="page-prev"><i class="ti ti-chevron-left" aria-hidden="true"></i> Previous</button>
+              <span id="page-info"></span>
+              <button type="button" class="btn-outline btn-compact" id="page-next">Next <i class="ti ti-chevron-right" aria-hidden="true"></i></button>
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- ---------- Placeholder tabs ---------- -->
+        <section class="jm-panel" id="panel-candidates" hidden>
+          <div class="card jm-placeholder">
+            <i class="ti ti-users" aria-hidden="true"></i>
+            <p><strong>Candidates coming soon.</strong></p>
+            <p class="jm-placeholder__sub">A company-wide candidates view across all your job posts isn't built yet.</p>
+          </div>
+        </section>
+
+        <section class="jm-panel" id="panel-interviews" hidden>
+          <div class="card jm-placeholder">
+            <i class="ti ti-calendar-event" aria-hidden="true"></i>
+            <p><strong>Interviews coming soon.</strong></p>
+            <p class="jm-placeholder__sub">Interview scheduling is a separate module, not yet built.</p>
+          </div>
+        </section>
+
+        <section class="jm-panel" id="panel-offers" hidden>
+          <div class="card jm-placeholder">
+            <i class="ti ti-file-check" aria-hidden="true"></i>
+            <p><strong>Offers coming soon.</strong></p>
+            <p class="jm-placeholder__sub">Offer management is a separate module, not yet built.</p>
+          </div>
+        </section>
+
+        <section class="jm-panel" id="panel-analytics" hidden>
+          <div class="card jm-placeholder">
+            <i class="ti ti-chart-dots" aria-hidden="true"></i>
+            <p><strong>Analytics coming soon.</strong></p>
+            <p class="jm-placeholder__sub">Deferred until the analytics template is ready.</p>
+          </div>
+        </section>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ---------- Confirm dialog (Close / Delete) ---------- -->
+  <div class="jm-modal-overlay" id="confirm-overlay" hidden>
+    <div class="jm-modal">
+      <h3 id="confirm-title">Are you sure?</h3>
+      <p id="confirm-message"></p>
+      <div class="jm-modal__actions">
+        <button type="button" class="btn-outline btn-compact" id="confirm-cancel">Cancel</button>
+        <button type="button" class="btn-primary btn-compact" id="confirm-ok">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="Scripts/config.js"></script>
+  <script src="Scripts/sidebar.js"></script>
+  <script src="Scripts/jobs.js"></script>
+</body>
+</html>
